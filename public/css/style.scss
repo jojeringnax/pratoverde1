@@ -1,0 +1,429 @@
+$mainColorText : #2b2a29;
+$mainFontSize: 16px;
+* {
+  font-size: $mainFontSize;
+  color: $mainColorText;
+}
+
+.banner {
+  min-height: 73vh;
+  position: relative;
+
+  .img-banner {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-image: url("../img/pic-hotel.png");
+    background-position: center bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    z-index: 9;
+  }
+  .logo {
+    position: absolute;
+    right: 4%;
+    top: 4%;
+    height: 20%;
+    z-index: 10;
+    img {
+      height: 100%;
+    }
+  }
+  .go-rooms-banner {
+    padding: 0 20px 0 20px;
+    font-size: 26px;
+    color: $mainColorText;
+    font-weight: bold;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    border: 2px solid $mainColorText;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.7s;
+    &:hover {
+      background-color: $mainColorText;
+      color: white;
+    }
+  }
+}
+.hide {
+  display: none !important;
+}
+.fixed-nav {
+  position: fixed !important;
+  top: 0;
+  z-index: 11;
+  width: 100%;
+  background-color: white;
+  #navbarNav {
+    ul {
+      li {
+        a {
+          //transition: 1.2s;
+          //color: white;
+        }
+      }
+    }
+  }
+}
+
+nav {
+  min-height: 7vh;
+  box-shadow: none !important;
+  border: 2px solid $mainColorText;
+  border-right: 0;
+  border-left: 0;
+  position: relative;
+  .arr-up {
+    position: absolute;
+    right: 20px;
+    height: 80%;
+    width: 50px;
+    cursor: pointer;
+    img {
+      height: 100%;
+    }
+  }
+  .navbar-collapse {
+    ul {
+      li {
+        margin-right: 100px;
+        &:last-child {
+          margin-right: 0 !important;
+        }
+        a {
+          font-size: 25px;
+          font-weight: bold;
+          color: $mainColorText;
+        }
+      }
+    }
+  }
+}
+
+#description {
+  min-height: 100vh;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 100vh;
+  .text-description {
+    span {
+      display: block;
+      font-weight: 400 !important;
+      font-size: 18px;
+    }
+  }
+  .pic-description {
+    text-align: center;
+    img {
+      width: 60%;
+
+    }
+  }
+}
+
+#rooms {
+  min-height: 100vh;
+  //background-color: #989a9b;
+  background-image: url("../img/background-rooms.png");
+  background-size: cover;
+  background-position: center center;
+  .container {
+    .row {
+      min-height: 100vh;
+      .go-rooms {
+        height: 30vh;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-shadow:  0 10px 15px rgba(0, 0, 0, 0.1);
+        .text-rooms {
+          font-size: 44px;
+          font-weight: bold;
+        }
+        .additional-text-rooms {
+          font-size: 22px;
+        }
+        .btn-go-rooms {
+          margin-top: 20px;
+          padding: 0 30px 0 30px;
+          text-align: center;
+          color: $mainColorText;
+          font-size: 30px;
+          font-weight: bold;
+          border: 3px solid $mainColorText;
+          display: flex;
+          align-items: center;
+          transition: 0.1s;
+          &:hover {
+            background-color: $mainColorText;
+            color: white !important;
+
+          }
+          img {
+            width: 28px;
+            margin-left: 10px;
+            transition: 1s;
+          }
+        }
+      }
+    }
+  }
+}
+
+#restaurant {
+  min-height: 100vh;
+}
+
+.item-restaurant {
+  min-height: 50vh;
+  padding: 0 !important;
+  cursor: pointer;
+}
+
+#pizza {
+  background-image: url('../img/slide-pizza.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#eat {
+  background-image: url('../img/slide-eat.png');
+  background-size: 170%;
+  background-position: center center;
+}
+
+.item-rest-hover {
+  position: relative;
+  .layout-item-rest {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: $mainColorText;
+    opacity: 0.7;
+  }
+  &:hover {
+    .layout-item-rest {
+      display: flex;
+      z-index: 9;
+    }
+    .text-rest {
+      display: flex;
+    }
+  }
+
+  .text-rest {
+    display: none;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    span {
+      border: 3px solid white;
+      z-index: 10;
+      font-size: 60px;
+      color: white;
+      padding: 0 25px 0 25px;
+      font-weight: bold;
+    }
+  }
+}
+
+#chief {
+  .desc-chief {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px 0 20px;
+    .title-desc-chief {
+      display: block;
+      background-color: $mainColorText;
+      text-transform: uppercase;
+      color: white;
+      font-size: 38px;
+      padding: 0 20px 0 20px;
+      font-weight: bold;
+    }
+    .text-desc-chief {
+      margin-top: 20px;
+      text-align: center;
+      display: block;
+      color: $mainColorText;
+      font-size: 16px;
+
+    }
+  }
+}
+
+#menu {
+  .desc-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px 0 20px;
+    .title-desc-menu {
+      display: block;
+      background-color: $mainColorText;
+      text-transform: uppercase;
+      color: white;
+      font-size: 38px;
+      padding: 0 20px 0 20px;
+      font-weight: bold;
+    }
+  }
+  .time-work {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 400 !important;
+    .main-time-work {
+      //margin-top: 10px;
+      font-weight: 400 !important;
+      .dayswork {
+        margin-top: 10px;
+      }
+      .clock-work {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+#card-section {
+ // height: 100vh;
+  margin-top: 100px;
+}
+
+.cards {
+ // height: 100vh;
+  width: 100%;
+  align-items: flex-start;
+  padding-bottom: 120px;
+  .card-item {
+    border: 2px solid #c6c6c6;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 30px 0 30px;
+    transition: 0.5s;
+    &:hover {
+      border: 2px solid white;
+      box-shadow:  0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    .card-top {
+      //margin-top: 20px;
+      height: 200px;
+      width: 100%;
+    }
+    .card-body {
+      height: 50%;
+      width: 100%;
+      .title-card-body {
+        text-align: center;
+        span {
+          font-size: 34px;
+          font-weight: bold;
+        }
+      }
+      .text-card-body {
+        font-weight: 400 !important;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.card-top {
+  &#card-1 {
+    background-image: url("../img/card-img/card-1.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+  &#card-2 {
+    background-image: url("../img/card-img/card-2.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+  &#card-3 {
+    background-image: url("../img/card-img/card-3.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.btn-look-more {
+  border: 2px solid $mainColorText;
+  padding: 0 40px 0 40px;
+  color: $mainColorText;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 50px;
+  &:hover {
+    background-color: $mainColorText;
+    color: white;
+  }
+}
+
+#contacts {
+  height: 100vh;
+  background-color: $mainColorText;
+}
+
+.contacts {
+  margin-top: 100px;
+  width: 100%;
+  .wrapper-soc-net {
+    .social-net {
+      width: 100%;
+      .item-soc-icon {
+        cursor: pointer;
+        img {
+          height: 60px;
+        }
+      }
+    }
+  }
+  .contats-info {
+    margin-top: 100px;
+    height: 30vh;
+    justify-content: space-around;
+    span {
+      color: white !important;
+    }
+    .item-cont-info {
+      img {
+        height: 25px;
+        margin-right: 25px;
+      }
+    }
+  }
+
+}
+
+@media screen and(max-width: 992px) {
+  nav {
+    .navbar-collapse {
+      ul {
+        li {
+          margin: 0 !important;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
