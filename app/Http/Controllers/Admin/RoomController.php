@@ -19,11 +19,19 @@ class RoomController extends Controller
 
     /**
      * @param Request $request
+     * @param Room $room
+     * @return Room
      */
-    public function store(Request $request, $id = null)
+    public function store(Request $request, Room $room)
     {
-        $room = Room::findOrNew($id);
         $room->fill($request);
         return $room;
+    }
+
+    public function create(Request $request)
+    {
+        $this->store($request, new Room);
+        return 'Loh';
+
     }
 }
