@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
-import {NavLink} from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom'
+import {HashRouter, BrowserRouter, Route, Switch } from 'react-router-dom'
+import Main from './Main';
+import Rooms from './Rooms';
+import { Link } from 'react-router-dom'
+import Ristorante from "./Ristorante";
 
-class NavBar extends React.Component {
+class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,19 +20,25 @@ class NavBar extends React.Component {
     }
 
     componentDidMount() {
-        //let links = document.querySelectorAll("a");
-        // for (let index = 0; index < links.length; ++index) {
-        //     links[index].addEventListener('click', e => {
-        //         for (let i = 0; i < links.length; ++i) {
-        //             links[i].classList.remove('active-nav')
-        //         }
-        //         window.scrollTo({
-        //             top: 1000,
-        //             behavior: "smooth"
-        //         });
-        //         links[index].classList.add('active-nav')
-        //     });
-        // }
+        let links = document.querySelectorAll(".nav-top-a");
+        let url = '';
+        for (let index = 0; index < links.length; ++index) {
+            //console.log(links[index])
+            links[index].addEventListener('click', e => {
+                e.preventDefault();
+                url = links[index].getAttribute('href');
+                console.log(url);
+                console.log(document.querySelector(url).offsetTop);
+                for (let i = 0; i < links.length; ++i) {
+                    links[i].classList.remove('active-nav')
+                }
+                window.scrollTo({
+                    top: document.querySelector(url).offsetTop -70,
+                    behavior: "smooth"
+                });
+                links[index].classList.add('active-nav')
+            });
+        }
         let nav = document.querySelector('nav');
         let oldOffsetNav = nav.offsetTop;
         window.onscroll = function() {
@@ -54,7 +65,7 @@ class NavBar extends React.Component {
         return (
             <section id="banner">
                 <div className="banner">
-                    <a href="" className="go-rooms-banner">book room</a>
+                    <a href="rooms" className="go-rooms-banner">book room</a>
                     <a href="" className="logo"><img src="img/logo.png" alt=""/></a>
                     <div className="img-banner"></div>
                 </div>
@@ -65,16 +76,16 @@ class NavBar extends React.Component {
                     <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item ">
-                                <a className="nav-link active-nav" href="#">rooms <span className="sr-only">(current)</span></a>
+                                <a className="nav-link nav-top-a active-nav" href="#rooms">rooms <span className="sr-only">(current)</span></a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">ristorante</a>
+                                <a className="nav-link nav-top-a" href="#restaurant">ristorante</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">blog</a>
+                                <a className="nav-link nav-top-a" href="#card-section">blog</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">location</a>
+                                <a className="nav-link nav-top-a" href="#contacts">location</a>
                             </li>
                         </ul>
                     </div>
@@ -82,6 +93,19 @@ class NavBar extends React.Component {
                 </nav>
             </section>
         );
+    }
+}
+
+class NavBar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render () {
+        return (
+            <div>
+                <Header />
+            </div>
+        )
     }
 }
 

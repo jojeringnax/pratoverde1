@@ -5,10 +5,6 @@ class Ristorante extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <section id="restaurant">

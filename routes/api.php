@@ -17,6 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('admin/rooms', 'Admin/RoomController@index');
-Route::post('admin/rooms/create', 'Admin/RoomController@create');
-Route::post('admin/rooms/update/{id}', 'Admin/RoomController@update');
+Route::get('admin/rooms', 'Admin\RoomController@index');
+Route::post('admin/rooms/create', 'Admin\RoomController@create');
+Route::post('admin/rooms/update/{id}', 'Admin\RoomController@update');

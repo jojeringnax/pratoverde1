@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Desctription extends React.Component {
     constructor(props) {
@@ -23,8 +24,8 @@ class Desctription extends React.Component {
                             <span className="text-rooms">
                                 ROOMs<br />
                             </span>
-                           <span className="additional-text-rooms">Lorem ipsum dolor sit amet.</span>
-                            <a className="btn-go-rooms" href="">la <img src="img/right-arrow.svg" alt=""/></a>
+                            <span className="additional-text-rooms">Lorem ipsum dolor sit amet.</span>
+                            <Link className="btn-go-rooms" to="/public/rooms">la <img src="img/right-arrow.svg" alt=""/></Link>
                         </div>
                     </div>
                 </div>
