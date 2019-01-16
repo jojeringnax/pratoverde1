@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class CreateRooms extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div id="create-rooms" className="section">

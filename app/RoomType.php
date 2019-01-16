@@ -10,5 +10,4 @@ class RoomType extends Model
 
     public $timestamps = false;
 
-
 }
