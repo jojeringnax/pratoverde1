@@ -14,7 +14,7 @@ class CreateRoomsTable extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedInteger('id');
             $table->tinyInteger('floor');
             $table->tinyInteger('status');
             $table->unsignedInteger('type_id')->nullable();
@@ -22,6 +22,7 @@ class CreateRoomsTable extends Migration
             $table->boolean('need_wash');
             $table->tinyInteger('number_of_beds')->default(2);
             $table->foreign('type_id')->references('id')->on('room_types')->onDelete('SET NULL');
+            $table->primary('id');
         });
     }
 
