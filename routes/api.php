@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('admin/rooms', 'Admin\RoomController@index');
 Route::post('admin/rooms/create', 'Admin\RoomController@create');
+Route::get('admin/rooms/update/{id}', 'Admin\RoomController@update');
 Route::post('admin/rooms/update/{id}', 'Admin\RoomController@update');

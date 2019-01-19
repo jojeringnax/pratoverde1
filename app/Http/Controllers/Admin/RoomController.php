@@ -53,6 +53,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->isMethod('get')) {
+            return Room::findOrFail($id);
+        }
         $room = Room::findOrFail($id);
         return $this->store($request, $room);
     }
