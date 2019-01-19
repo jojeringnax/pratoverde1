@@ -14,3 +14,4 @@ yarn-error.log
 /.npm
 /.nano
 /.config
+package-lock.json
