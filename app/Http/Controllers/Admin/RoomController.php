@@ -25,6 +25,7 @@ class RoomController extends Controller
     public function store(Request $request, Room $room)
     {
         $room->fill($request->post());
+        $room->save();
         return $room;
     }
 
