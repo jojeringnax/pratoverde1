@@ -30,7 +30,7 @@ class RoomController extends Controller
 
     public function create(Request $request)
     {
-        return var_dump($request);
-
+        $room = new Room();
+        return $this->store($request, $room);
     }
 }
