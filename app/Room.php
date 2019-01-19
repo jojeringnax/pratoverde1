@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Room
+ * @package App
+ */
 class Room extends Model
 {
     const STATUSES = [
@@ -11,8 +15,14 @@ class Room extends Model
         1 => ''
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'rooms';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'id',
         'floor',
@@ -23,10 +33,17 @@ class Room extends Model
         'number_of_beds',
     ];
 
+    /**
+     * @var array
+     */
     public $rules = [
         'floor' => 'required|integer|max:1',
         'status' => 'required|integer|max:1'
     ];
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
+
 }
