@@ -41,7 +41,7 @@ class RoomController extends Controller
         $room = new Room();
         $id = $request->post('id');
         if (Room::findOrFail($id) !== null) {
-            return response()->setStatusCode(500)->setContent(json_encode(['id' => $id, 'message' => 'Room already exists']));
+            return response()->setContent(json_encode(['id' => $id, 'message' => 'Room already exists']));
         }
         return $this->store($request, $room);
     }
