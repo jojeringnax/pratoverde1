@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Room;
+use App\RoomType;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -25,7 +26,7 @@ class RoomController extends Controller
     public function store(Request $request, Room $room)
     {
         if ($room === null) {
-            return response()->setStatusCode(500)->setContent(json_encode(['id' => null, 'message' => 'Room not found']));
+            return response(json_encode(['id' => null, 'message' => 'Room not found', 'code' => 1]), 500);
         }
         $room->fill($request->post());
         $room->save();
@@ -38,10 +39,13 @@ class RoomController extends Controller
      */
     public function create(Request $request)
     {
+        if ($request->isMethod('get')) {
+            return json_encode(['types' => RoomType::all()]);
+        };
         $room = new Room();
         $id = $request->post('id');
         if (Room::findOrFail($id) !== null) {
-            return response(json_encode(['id' => $id, 'message' => 'Room already exists']), 500);
+            return response(json_encode(['id' => $id, 'message' => 'Room already exists', 'code' => 2]), 500);
         }
         return $this->store($request, $room);
     }
@@ -54,7 +58,7 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->isMethod('get')) {
-            return Room::findOrFail($id);
+            return json_encode(['room' => Room::findOrFail($id), 'types' => RoomType::all()]);
         }
         $room = Room::findOrFail($id);
         return $this->store($request, $room);
