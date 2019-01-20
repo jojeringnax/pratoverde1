@@ -17,7 +17,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * Room routes
+ */
 Route::get('admin/rooms', 'Admin\RoomController@index');
 Route::post('admin/rooms/create', 'Admin\RoomController@create');
 Route::get('admin/rooms/update/{id}', 'Admin\RoomController@update');
 Route::post('admin/rooms/update/{id}', 'Admin\RoomController@update');
+Route::delete('admin/rooms/delete/{id}', 'Admin\RoomController@delete');
+
+
+/**
+ * RoomType routes
+ */
+Route::get('admin/room_types', 'Admin\RoomTypeController@index');
+Route::post('admin/room_types/create', 'Admin\RoomTypeController@create');
+Route::post('admin/room_types/update/{id}', 'Admin\RoomTypeController@update');
+Route::delete('admin/room_types/delete/{id}', 'Admin\RoomTypeController@delete');

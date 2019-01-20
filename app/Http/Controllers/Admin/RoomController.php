@@ -14,8 +14,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
-        return $rooms->toJson();
+        return Room::all()->toJson();
     }
 
     /**
@@ -62,5 +61,14 @@ class RoomController extends Controller
         }
         $room = Room::findOrFail($id);
         return $this->store($request, $room);
+    }
+
+    /**
+     * @param $id
+     * @return boolean
+     */
+    public function delete($id)
+    {
+        return Room::findOrFail($id)->delete();
     }
 }

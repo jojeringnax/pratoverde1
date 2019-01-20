@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class RoomTypeController extends Controller
 {
+
+    /**
+     * @return string
+     */
+    public function index()
+    {
+        return RoomType::all()->toJson();
+    }
+
     /**
      * @param Request $request
      * @param RoomType $roomType
@@ -46,5 +55,14 @@ class RoomTypeController extends Controller
         }
         $roomType = RoomType::findOrFail($id);
         return $this->store($request, $roomType);
+    }
+
+    /**
+     * @param $id
+     * @return boolean
+     */
+    public function delete($id)
+    {
+        return RoomType::findOrFail($id)->delete();
     }
 } 
