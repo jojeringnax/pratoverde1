@@ -38,9 +38,6 @@ class RoomController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->isMethod('get')) {
-            return json_encode(['types' => RoomType::all()]);
-        };
         $room = new Room();
         $id = $request->post('id');
         if (Room::findOrFail($id) !== null) {
@@ -56,9 +53,6 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->isMethod('get')) {
-            return json_encode(['room' => Room::findOrFail($id), 'types' => RoomType::all()]);
-        }
         $room = Room::findOrFail($id);
         return $this->store($request, $room);
     }
