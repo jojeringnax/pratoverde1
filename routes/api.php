@@ -34,3 +34,21 @@ Route::get('admin/room_types', 'Admin\RoomTypeController@index');
 Route::post('admin/room_types/create', 'Admin\RoomTypeController@create');
 Route::post('admin/room_types/update/{id}', 'Admin\RoomTypeController@update');
 Route::delete('admin/room_types/delete/{id}', 'Admin\RoomTypeController@delete');
+
+
+/**
+ * Problem routes
+ */
+Route::get('admin/problems', 'Admin\ProblemCotroller@index');
+Route::post('admin/problems/create', 'Admin\ProblemCotroller@create');
+Route::get('admin/problems/update/{id}', 'Admin\ProblemCotroller@update');
+Route::post('admin/problems/update/{id}', 'Admin\ProblemCotroller@update');
+Route::delete('admin/problems/delete/{id}', 'Admin\ProblemCotroller@delete');
+
+/**
+ * ProblemCategory routes
+ */
+Route::get('admin/problem_categories', 'Admin\ProblemCategoryController@index');
+Route::post('admin/problem_categories/create', 'Admin\ProblemCategoryController@create');
+Route::post('admin/problem_categories/update/{id}', 'Admin\ProblemCategoryController@update');
+Route::delete('admin/problem_categories/delete/{id}', 'Admin\ProblemCategoryController@delete');
