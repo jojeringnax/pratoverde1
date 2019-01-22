@@ -26,7 +26,7 @@ class RoomTypeController extends Controller
     public function store(Request $request, RoomType $roomType)
     {
         if ($roomType === null) {
-            return response(json_encode(['id' => null, 'message' => 'Type of room not found', 'code' => 1]), 500);
+            return response(json_encode(['category' => 'roomTypes', 'id' => null, 'message' => 'Type of room not found', 'code' => 1]), 500);
         }
         $roomType->fill($request->post());
         $roomType->save();

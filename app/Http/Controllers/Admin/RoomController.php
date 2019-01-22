@@ -25,7 +25,7 @@ class RoomController extends Controller
     public function store(Request $request, Room $room)
     {
         if ($room === null) {
-            return response(json_encode(['id' => null, 'message' => 'Room not found', 'code' => 1]), 500);
+            return response(json_encode(['category' => 'rooms', 'id' => null, 'message' => 'Room not found', 'code' => 1]), 500);
         }
         $room->fill($request->post());
         $room->save();
@@ -41,7 +41,7 @@ class RoomController extends Controller
         $room = new Room();
         $id = $request->post('id');
         if (Room::find($id) !== null) {
-            return response(json_encode(['id' => $id, 'message' => 'Room already exists', 'code' => 2]), 500);
+            return response(json_encode(['category' => 'rooms', 'id' => $id, 'message' => 'Room already exists', 'code' => 2]), 500);
         }
         return $this->store($request, $room);
     }
