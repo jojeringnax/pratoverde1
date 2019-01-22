@@ -69,6 +69,6 @@ class RoomController extends Controller
      */
     public function delete($id)
     {
-        return Room::findOrFail($id)->delete();
+        return (string) Room::findOrFail($id)->delete();
     }
 }

@@ -1754,647 +1754,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/history/DOMUtils.js":
-/*!******************************************!*\
-  !*** ./node_modules/history/DOMUtils.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-var canUseDOM = exports.canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-var addEventListener = exports.addEventListener = function addEventListener(node, event, listener) {
-  return node.addEventListener ? node.addEventListener(event, listener, false) : node.attachEvent('on' + event, listener);
-};
-
-var removeEventListener = exports.removeEventListener = function removeEventListener(node, event, listener) {
-  return node.removeEventListener ? node.removeEventListener(event, listener, false) : node.detachEvent('on' + event, listener);
-};
-
-var getConfirmation = exports.getConfirmation = function getConfirmation(message, callback) {
-  return callback(window.confirm(message));
-}; // eslint-disable-line no-alert
-
-/**
- * Returns true if the HTML5 history API is supported. Taken from Modernizr.
- *
- * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
- * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
- * changed to avoid false negatives for Windows Phones: https://github.com/reactjs/react-router/issues/586
- */
-var supportsHistory = exports.supportsHistory = function supportsHistory() {
-  var ua = window.navigator.userAgent;
-
-  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) return false;
-
-  return window.history && 'pushState' in window.history;
-};
-
-/**
- * Returns true if browser fires popstate on hash change.
- * IE10 and IE11 do not.
- */
-var supportsPopStateOnHashChange = exports.supportsPopStateOnHashChange = function supportsPopStateOnHashChange() {
-  return window.navigator.userAgent.indexOf('Trident') === -1;
-};
-
-/**
- * Returns false if using go(n) with hash history causes a full page reload.
- */
-var supportsGoWithoutReloadUsingHash = exports.supportsGoWithoutReloadUsingHash = function supportsGoWithoutReloadUsingHash() {
-  return window.navigator.userAgent.indexOf('Firefox') === -1;
-};
-
-/**
- * Returns true if a given popstate event is an extraneous WebKit event.
- * Accounts for the fact that Chrome on iOS fires real popstate events
- * containing undefined state when pressing the back button.
- */
-var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
-  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
-};
-
-/***/ }),
-
-/***/ "./node_modules/history/LocationUtils.js":
-/*!***********************************************!*\
-  !*** ./node_modules/history/LocationUtils.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-exports.locationsAreEqual = exports.createLocation = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _resolvePathname = __webpack_require__(/*! resolve-pathname */ "./node_modules/resolve-pathname/index.js");
-
-var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
-
-var _valueEqual = __webpack_require__(/*! value-equal */ "./node_modules/value-equal/index.js");
-
-var _valueEqual2 = _interopRequireDefault(_valueEqual);
-
-var _PathUtils = __webpack_require__(/*! ./PathUtils */ "./node_modules/history/PathUtils.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var createLocation = exports.createLocation = function createLocation(path, state, key, currentLocation) {
-  var location = void 0;
-  if (typeof path === 'string') {
-    // Two-arg form: push(path, state)
-    location = (0, _PathUtils.parsePath)(path);
-    location.state = state;
-  } else {
-    // One-arg form: push(location)
-    location = _extends({}, path);
-
-    if (location.pathname === undefined) location.pathname = '';
-
-    if (location.search) {
-      if (location.search.charAt(0) !== '?') location.search = '?' + location.search;
-    } else {
-      location.search = '';
-    }
-
-    if (location.hash) {
-      if (location.hash.charAt(0) !== '#') location.hash = '#' + location.hash;
-    } else {
-      location.hash = '';
-    }
-
-    if (state !== undefined && location.state === undefined) location.state = state;
-  }
-
-  try {
-    location.pathname = decodeURI(location.pathname);
-  } catch (e) {
-    if (e instanceof URIError) {
-      throw new URIError('Pathname "' + location.pathname + '" could not be decoded. ' + 'This is likely caused by an invalid percent-encoding.');
-    } else {
-      throw e;
-    }
-  }
-
-  if (key) location.key = key;
-
-  if (currentLocation) {
-    // Resolve incomplete/relative pathname relative to current location.
-    if (!location.pathname) {
-      location.pathname = currentLocation.pathname;
-    } else if (location.pathname.charAt(0) !== '/') {
-      location.pathname = (0, _resolvePathname2.default)(location.pathname, currentLocation.pathname);
-    }
-  } else {
-    // When there is no prior location and pathname is empty, set it to /
-    if (!location.pathname) {
-      location.pathname = '/';
-    }
-  }
-
-  return location;
-};
-
-var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a, b) {
-  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0, _valueEqual2.default)(a.state, b.state);
-};
-
-/***/ }),
-
-/***/ "./node_modules/history/PathUtils.js":
-/*!*******************************************!*\
-  !*** ./node_modules/history/PathUtils.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-var addLeadingSlash = exports.addLeadingSlash = function addLeadingSlash(path) {
-  return path.charAt(0) === '/' ? path : '/' + path;
-};
-
-var stripLeadingSlash = exports.stripLeadingSlash = function stripLeadingSlash(path) {
-  return path.charAt(0) === '/' ? path.substr(1) : path;
-};
-
-var hasBasename = exports.hasBasename = function hasBasename(path, prefix) {
-  return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
-};
-
-var stripBasename = exports.stripBasename = function stripBasename(path, prefix) {
-  return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
-};
-
-var stripTrailingSlash = exports.stripTrailingSlash = function stripTrailingSlash(path) {
-  return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path;
-};
-
-var parsePath = exports.parsePath = function parsePath(path) {
-  var pathname = path || '/';
-  var search = '';
-  var hash = '';
-
-  var hashIndex = pathname.indexOf('#');
-  if (hashIndex !== -1) {
-    hash = pathname.substr(hashIndex);
-    pathname = pathname.substr(0, hashIndex);
-  }
-
-  var searchIndex = pathname.indexOf('?');
-  if (searchIndex !== -1) {
-    search = pathname.substr(searchIndex);
-    pathname = pathname.substr(0, searchIndex);
-  }
-
-  return {
-    pathname: pathname,
-    search: search === '?' ? '' : search,
-    hash: hash === '#' ? '' : hash
-  };
-};
-
-var createPath = exports.createPath = function createPath(location) {
-  var pathname = location.pathname,
-      search = location.search,
-      hash = location.hash;
-
-
-  var path = pathname || '/';
-
-  if (search && search !== '?') path += search.charAt(0) === '?' ? search : '?' + search;
-
-  if (hash && hash !== '#') path += hash.charAt(0) === '#' ? hash : '#' + hash;
-
-  return path;
-};
-
-/***/ }),
-
-/***/ "./node_modules/history/createBrowserHistory.js":
-/*!******************************************************!*\
-  !*** ./node_modules/history/createBrowserHistory.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _warning = __webpack_require__(/*! warning */ "./node_modules/history/node_modules/warning/browser.js");
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var _invariant = __webpack_require__(/*! invariant */ "./node_modules/invariant/browser.js");
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-var _LocationUtils = __webpack_require__(/*! ./LocationUtils */ "./node_modules/history/LocationUtils.js");
-
-var _PathUtils = __webpack_require__(/*! ./PathUtils */ "./node_modules/history/PathUtils.js");
-
-var _createTransitionManager = __webpack_require__(/*! ./createTransitionManager */ "./node_modules/history/createTransitionManager.js");
-
-var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-
-var _DOMUtils = __webpack_require__(/*! ./DOMUtils */ "./node_modules/history/DOMUtils.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PopStateEvent = 'popstate';
-var HashChangeEvent = 'hashchange';
-
-var getHistoryState = function getHistoryState() {
-  try {
-    return window.history.state || {};
-  } catch (e) {
-    // IE 11 sometimes throws when accessing window.history.state
-    // See https://github.com/ReactTraining/history/pull/289
-    return {};
-  }
-};
-
-/**
- * Creates a history object that uses the HTML5 history API including
- * pushState, replaceState, and the popstate event.
- */
-var createBrowserHistory = function createBrowserHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
-
-  var globalHistory = window.history;
-  var canUseHistory = (0, _DOMUtils.supportsHistory)();
-  var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
-
-  var _props$forceRefresh = props.forceRefresh,
-      forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
-      _props$getUserConfirm = props.getUserConfirmation,
-      getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
-      _props$keyLength = props.keyLength,
-      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-  var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
-
-  var getDOMLocation = function getDOMLocation(historyState) {
-    var _ref = historyState || {},
-        key = _ref.key,
-        state = _ref.state;
-
-    var _window$location = window.location,
-        pathname = _window$location.pathname,
-        search = _window$location.search,
-        hash = _window$location.hash;
-
-
-    var path = pathname + search + hash;
-
-    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
-
-    return (0, _LocationUtils.createLocation)(path, state, key);
-  };
-
-  var createKey = function createKey() {
-    return Math.random().toString(36).substr(2, keyLength);
-  };
-
-  var transitionManager = (0, _createTransitionManager2.default)();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = globalHistory.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var handlePopState = function handlePopState(event) {
-    // Ignore extraneous popstate events in WebKit.
-    if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
-
-    handlePop(getDOMLocation(event.state));
-  };
-
-  var handleHashChange = function handleHashChange() {
-    handlePop(getDOMLocation(getHistoryState()));
-  };
-
-  var forceNextPop = false;
-
-  var handlePop = function handlePop(location) {
-    if (forceNextPop) {
-      forceNextPop = false;
-      setState();
-    } else {
-      var action = 'POP';
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (ok) {
-          setState({ action: action, location: location });
-        } else {
-          revertPop(location);
-        }
-      });
-    }
-  };
-
-  var revertPop = function revertPop(fromLocation) {
-    var toLocation = history.location;
-
-    // TODO: We could probably make this more reliable by
-    // keeping a list of keys we've seen in sessionStorage.
-    // Instead, we just default to 0 for keys we don't know.
-
-    var toIndex = allKeys.indexOf(toLocation.key);
-
-    if (toIndex === -1) toIndex = 0;
-
-    var fromIndex = allKeys.indexOf(fromLocation.key);
-
-    if (fromIndex === -1) fromIndex = 0;
-
-    var delta = toIndex - fromIndex;
-
-    if (delta) {
-      forceNextPop = true;
-      go(delta);
-    }
-  };
-
-  var initialLocation = getDOMLocation(getHistoryState());
-  var allKeys = [initialLocation.key];
-
-  // Public interface
-
-  var createHref = function createHref(location) {
-    return basename + (0, _PathUtils.createPath)(location);
-  };
-
-  var push = function push(path, state) {
-    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'PUSH';
-    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var href = createHref(location);
-      var key = location.key,
-          state = location.state;
-
-
-      if (canUseHistory) {
-        globalHistory.pushState({ key: key, state: state }, null, href);
-
-        if (forceRefresh) {
-          window.location.href = href;
-        } else {
-          var prevIndex = allKeys.indexOf(history.location.key);
-          var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-          nextKeys.push(location.key);
-          allKeys = nextKeys;
-
-          setState({ action: action, location: location });
-        }
-      } else {
-        (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
-
-        window.location.href = href;
-      }
-    });
-  };
-
-  var replace = function replace(path, state) {
-    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var href = createHref(location);
-      var key = location.key,
-          state = location.state;
-
-
-      if (canUseHistory) {
-        globalHistory.replaceState({ key: key, state: state }, null, href);
-
-        if (forceRefresh) {
-          window.location.replace(href);
-        } else {
-          var prevIndex = allKeys.indexOf(history.location.key);
-
-          if (prevIndex !== -1) allKeys[prevIndex] = location.key;
-
-          setState({ action: action, location: location });
-        }
-      } else {
-        (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
-
-        window.location.replace(href);
-      }
-    });
-  };
-
-  var go = function go(n) {
-    globalHistory.go(n);
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var listenerCount = 0;
-
-  var checkDOMListeners = function checkDOMListeners(delta) {
-    listenerCount += delta;
-
-    if (listenerCount === 1) {
-      (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
-
-      if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
-    } else if (listenerCount === 0) {
-      (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
-
-      if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
-    }
-  };
-
-  var isBlocked = false;
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-    var unblock = transitionManager.setPrompt(prompt);
-
-    if (!isBlocked) {
-      checkDOMListeners(1);
-      isBlocked = true;
-    }
-
-    return function () {
-      if (isBlocked) {
-        isBlocked = false;
-        checkDOMListeners(-1);
-      }
-
-      return unblock();
-    };
-  };
-
-  var listen = function listen(listener) {
-    var unlisten = transitionManager.appendListener(listener);
-    checkDOMListeners(1);
-
-    return function () {
-      checkDOMListeners(-1);
-      unlisten();
-    };
-  };
-
-  var history = {
-    length: globalHistory.length,
-    action: 'POP',
-    location: initialLocation,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-exports.default = createBrowserHistory;
-
-/***/ }),
-
-/***/ "./node_modules/history/createTransitionManager.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/history/createTransitionManager.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _warning = __webpack_require__(/*! warning */ "./node_modules/history/node_modules/warning/browser.js");
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var createTransitionManager = function createTransitionManager() {
-  var prompt = null;
-
-  var setPrompt = function setPrompt(nextPrompt) {
-    (0, _warning2.default)(prompt == null, 'A history supports only one prompt at a time');
-
-    prompt = nextPrompt;
-
-    return function () {
-      if (prompt === nextPrompt) prompt = null;
-    };
-  };
-
-  var confirmTransitionTo = function confirmTransitionTo(location, action, getUserConfirmation, callback) {
-    // TODO: If another transition starts while we're still confirming
-    // the previous one, we may end up in a weird state. Figure out the
-    // best way to handle this.
-    if (prompt != null) {
-      var result = typeof prompt === 'function' ? prompt(location, action) : prompt;
-
-      if (typeof result === 'string') {
-        if (typeof getUserConfirmation === 'function') {
-          getUserConfirmation(result, callback);
-        } else {
-          (0, _warning2.default)(false, 'A history needs a getUserConfirmation function in order to use a prompt message');
-
-          callback(true);
-        }
-      } else {
-        // Return false from a transition hook to cancel the transition.
-        callback(result !== false);
-      }
-    } else {
-      callback(true);
-    }
-  };
-
-  var listeners = [];
-
-  var appendListener = function appendListener(fn) {
-    var isActive = true;
-
-    var listener = function listener() {
-      if (isActive) fn.apply(undefined, arguments);
-    };
-
-    listeners.push(listener);
-
-    return function () {
-      isActive = false;
-      listeners = listeners.filter(function (item) {
-        return item !== listener;
-      });
-    };
-  };
-
-  var notifyListeners = function notifyListeners() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    listeners.forEach(function (listener) {
-      return listener.apply(undefined, args);
-    });
-  };
-
-  return {
-    setPrompt: setPrompt,
-    confirmTransitionTo: confirmTransitionTo,
-    appendListener: appendListener,
-    notifyListeners: notifyListeners
-  };
-};
-
-exports.default = createTransitionManager;
-
-/***/ }),
-
 /***/ "./node_modules/history/es/DOMUtils.js":
 /*!*********************************************!*\
   !*** ./node_modules/history/es/DOMUtils.js ***!
@@ -30524,6 +29883,255 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var CreateRooms =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CreateRooms, _React$Component);
+
+  function CreateRooms(props) {
+    var _this;
+
+    _classCallCheck(this, CreateRooms);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CreateRooms).call(this, props));
+    _this.state = {
+      room: {
+        id: '',
+        floor: '',
+        status: '',
+        need_wash: '',
+        beds: '',
+        last_washing_date: '',
+        type_id: ''
+      },
+      types: []
+    };
+    _this.createRoom = _this.createRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.getTypes = _this.getTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.showTypes = _this.showTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(CreateRooms, [{
+    key: "showTypes",
+    value: function showTypes() {
+      if (this.state.types.length === 0) {
+        return "Типов пока нет";
+      }
+
+      var options = [];
+
+      for (var i = 0; i < this.state.types.length; i++) {
+        options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          name: this.state.types[i].id,
+          key: i,
+          value: this.state.types[i].id
+        }, this.state.types[i].name));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "type_id",
+        id: "types-room",
+        onChange: this.inputOnChange
+      }, options));
+    }
+  }, {
+    key: "getTypes",
+    value: function getTypes() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/public/api/admin/room_types").then(function (response) {
+        console.log(response.data);
+
+        _this2.setState({
+          types: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "inputOnChange",
+    value: function inputOnChange(e) {
+      if (e.target.type === 'checkbox') {
+        this.setState({
+          room: _objectSpread({}, this.state.room, _defineProperty({}, e.target.name, e.target.checked))
+        }, function () {
+          console.log('checkbox', this.state.room);
+        });
+      } else {
+        this.setState({
+          room: _objectSpread({}, this.state.room, _defineProperty({}, e.target.name, e.target.value))
+        }, function () {
+          console.log(this.state.room);
+        });
+      }
+    }
+  }, {
+    key: "createRoom",
+    value: function createRoom(e) {
+      e.preventDefault();
+      var formData = this.state.room;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/rooms/create', formData).then(function (response) {
+        console.log(response);
+        alert('Номер добавлен');
+      }).catch(function (error) {
+        console.log(error);
+        alert('Такой номер уже есть');
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getTypes();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "create-rooms",
+        className: "section"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        name: "room",
+        className: "col-7"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "id"
+      }, "\u041D\u043E\u043C\u0435\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "id",
+        type: "number",
+        id: "id",
+        className: "form-control",
+        max: "36",
+        value: this.state.room.id,
+        onChange: this.inputOnChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "floor"
+      }, "\u042D\u0442\u0430\u0436"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "floor",
+        type: "number",
+        id: "floor",
+        className: "form-control",
+        min: "1",
+        max: "3",
+        value: this.state.room.floor,
+        onChange: this.inputOnChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "status"
+      }, "\u0421\u0442\u0430\u0442\u0443\u0441"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "status",
+        type: "text",
+        id: "status",
+        className: "form-control",
+        value: this.state.room.status,
+        onChange: this.inputOnChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-control custom-checkbox item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        name: "need_wash",
+        className: "custom-control-input",
+        id: "clear",
+        checked: this.state.room.need_wash,
+        onChange: this.inputOnChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "custom-control-label",
+        htmlFor: "clear"
+      }, "\u0427\u0438\u0441\u0442\u043A\u0430")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "beds"
+      }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u0440\u043E\u0432\u0430\u0442\u0435\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "beds",
+        type: "number",
+        id: "beds",
+        className: "form-control",
+        max: "5",
+        value: this.state.room.beds,
+        onChange: this.inputOnChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "date-clear"
+      }, "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0434\u0430\u0442\u0430 \u0447\u0438\u0441\u0442\u043A\u0438 \u043D\u043E\u043C\u0435\u0440\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "last_washing_date",
+        type: "date",
+        id: "last_washing_date",
+        className: "form-control",
+        value: this.state.room.last_washing_date,
+        onChange: this.inputOnChange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, this.showTypes()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.createRoom,
+        className: "btn btn-primary",
+        type: "submit"
+      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C")))));
+    }
+  }]);
+
+  return CreateRooms;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (CreateRooms);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/rooms/IndexCreateRooms.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/admin/rooms/IndexCreateRooms.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return IndexCreateRooms; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30534,7 +30142,159 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+var IndexCreateRooms =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(IndexCreateRooms, _React$Component);
+
+  function IndexCreateRooms(props) {
+    var _this;
+
+    _classCallCheck(this, IndexCreateRooms);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(IndexCreateRooms).call(this, props));
+    _this.state = {
+      rooms: []
+    };
+    _this.deleteRoom = _this.deleteRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(IndexCreateRooms, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/public/api/admin/rooms').then(function (response) {
+        _this2.setState({
+          rooms: response.data
+        });
+      }).catch(function (error) {});
+    }
+  }, {
+    key: "deleteRoom",
+    value: function deleteRoom(e) {
+      e.preventDefault();
+      console.log(e.target.getAttribute('data-delete'));
+      var urlDelete = e.target.getAttribute('data-delete');
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(urlDelete).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "createTableRooms",
+    value: function createTableRooms() {
+      var table = [];
+      var url = '';
+      var urlDelete = '';
+
+      for (var i = 0; i < this.state.rooms.length; i++) {
+        var child = [];
+
+        for (var key in this.state.rooms[i]) {
+          child.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+            key: key
+          }, this.state.rooms[i][key]));
+        }
+
+        url = '/public/admin/rooms/update/' + this.state.rooms[i]['id'];
+        urlDelete = '/public/api/admin/rooms/delete/' + this.state.rooms[i]['id'];
+        child.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          key: "action"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          key: "update",
+          to: url
+        }, "Tuda"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          key: "delete",
+          "data-delete": urlDelete,
+          onClick: this.deleteRoom,
+          to: ""
+        }, "Obratno")));
+        table.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: i + 1
+        }, child));
+      }
+
+      return table;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "admin-rooms",
+        className: "section"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-striped"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Floor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Last_washing_date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Need_wash"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Number_of_beds"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTableRooms())))));
+    }
+  }]);
+
+  return IndexCreateRooms;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/rooms/UpdateRooms.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/admin/rooms/UpdateRooms.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UpdateRooms; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -30542,71 +30302,284 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
-var CreateRooms =
+
+
+var UpdateRooms =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(CreateRooms, _React$Component);
+  _inherits(UpdateRooms, _React$Component);
 
-  function CreateRooms() {
-    _classCallCheck(this, CreateRooms);
+  function UpdateRooms(props) {
+    var _this;
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(CreateRooms).apply(this, arguments));
+    _classCallCheck(this, UpdateRooms);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UpdateRooms).call(this, props));
+    _this.state = {
+      room: {
+        id: '',
+        floor: '',
+        status: '',
+        type_id: '',
+        last_washing_date: '',
+        number_of_beds: ''
+      },
+      types: []
+    };
+    _this.fillFormUpdate = _this.fillFormUpdate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.updateRoom = _this.updateRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.changeCheckbox = _this.changeCheckbox.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.fillTypesRoom = _this.fillTypesRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.submitType = _this.submitType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.showFormAddType = _this.showFormAddType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
-  _createClass(CreateRooms, [{
+  _createClass(UpdateRooms, [{
+    key: "fillFormUpdate",
+    value: function fillFormUpdate() {
+      var _this2 = this;
+
+      var url = '/public/api/admin/rooms/update/' + this.props.match.params.id;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
+        _this2.setState({
+          room: response.data.room,
+          types: response.data.types
+        }); //console.log(response.data.room.type_id)
+
+      }).catch(function (error) {//console.log(error);
+      });
+    }
+  }, {
+    key: "updateRoom",
+    value: function updateRoom(e) {
+      e.preventDefault();
+      var form = document.forms.updateRoom;
+      var formData = this.state.room;
+      var url = "/public/api/admin/rooms/update/" + this.props.match.params.id;
+      console.log(form);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, formData).then(function (response) {
+        alert('Данные обновлены');
+      }).catch(function (error) {
+        console.log(error);
+        alert('Такой номер уже есть');
+      });
+    }
+  }, {
+    key: "onChangeInput",
+    value: function onChangeInput(e) {
+      // let newRoom = this.state.room;
+      // newRoom[e.target.name] = e.target.value;
+      // this.setState({
+      //     room: newRoom
+      // });
+      this.setState({
+        room: _objectSpread({}, this.state.room, _defineProperty({}, e.target.name, e.target.value))
+      }, function () {//console.log(this.state.room);
+      });
+    }
+  }, {
+    key: "changeCheckbox",
+    value: function changeCheckbox(e) {
+      var newRoom = this.state.room;
+
+      if (e.target.checked) {
+        newRoom.need_wash = "1";
+        this.setState({
+          room: newRoom
+        });
+      } else {
+        newRoom.need_wash = "0";
+        this.setState({
+          room: newRoom
+        });
+      }
+    }
+  }, {
+    key: "fillTypesRoom",
+    value: function fillTypesRoom() {
+      if (this.state.types.length === 0) {
+        return "Типов пока нет";
+      }
+
+      var options = [];
+
+      for (var i = 0; i < this.state.types.length; i++) {
+        if (this.state.types[i].id === this.state.room.type_id) {
+          options.unshift(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            name: this.state.types[i].id,
+            key: i,
+            value: this.state.types[i].id
+          }, this.state.types[i].name));
+        } else {
+          options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            name: this.state.types[i].id,
+            key: i,
+            value: this.state.types[i].id
+          }, this.state.types[i].name));
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onChange: this.onChangeInput,
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "type_id",
+        id: "types-room"
+      }, options));
+    }
+  }, {
+    key: "submitType",
+    value: function submitType(e) {
+      e.preventDefault();
+      var url = "/public/api/admin/room_types/create";
+      var name = document.getElementById('nameType').value;
+      console.log(document.getElementById('nameType'));
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
+        name: name
+      }).then(function (response) {
+        console.log(response);
+        alert('Комната добавлена');
+      }).catch(function (error) {
+        console.log(error);
+        alert('Такой номер уже есть');
+      });
+    }
+  }, {
+    key: "showFormAddType",
+    value: function showFormAddType() {
+      document.getElementById('inp-nameType').classList.remove('hide');
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fillFormUpdate();
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "create-rooms",
-        className: "section"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "update-rooms"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        action: "",
-        className: "col-9"
+        className: "row d-flex justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.updateRoom,
+        method: "post",
+        name: "updateRoom",
+        className: "col-7"
+      }, "UPDATE", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "id"
+      }, "\u041D\u043E\u043C\u0435\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "id",
+        type: "number",
+        id: "id",
+        defaultValue: this.state.room.id,
+        className: "form-control",
+        max: "36",
+        onChange: this.onChangeInput
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "floor"
-      }, "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u043E\u043C\u043D\u0430\u0442"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "\u042D\u0442\u0430\u0436"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        value: this.state.room.floor,
+        onChange: this.onChangeInput,
         name: "floor",
         type: "number",
         id: "floor",
-        className: "form-control"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "clear"
-      }, "\u0427\u0438\u0441\u0442\u043A\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "clear",
+        className: "form-control",
+        min: "1",
+        max: "3"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "floor"
+      }, "\u0421\u0442\u0430\u0442\u0443\u0441"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "status",
+        type: "text",
+        id: "status",
+        value: this.state.room.status,
+        className: "form-control",
+        onChange: this.onChangeInput
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-control custom-checkbox item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onClick: this.changeCheckbox,
         type: "checkbox",
-        id: "floor",
-        className: "form-control"
+        name: "need_wash",
+        value: this.state.room.need_wash,
+        defaultChecked: this.state.room.need_wash,
+        className: "custom-control-input",
+        id: "clear"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "custom-control-label",
+        htmlFor: "clear"
+      }, "\u0427\u0438\u0441\u0442\u043A\u0430")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "beds"
       }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u0440\u043E\u0432\u0430\u0442\u0435\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "beds",
+        name: "number_of_beds",
         type: "number",
-        id: "floor",
-        className: "form-control"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        value: this.state.room.number_of_beds,
+        id: "beds",
+        className: "form-control",
+        max: "5",
+        onChange: this.onChangeInput
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "date-clear"
       }, "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0434\u0430\u0442\u0430 \u0447\u0438\u0441\u0442\u043A\u0438 \u043D\u043E\u043C\u0435\u0440\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "date-clear",
+        name: "last_washing_date",
+        value: this.state.room.last_washing_date,
         type: "date",
-        id: "floor",
+        id: "last_washing_date",
+        className: "form-control",
+        required: true,
+        onChange: this.onChangeInput
+      })), this.fillTypesRoom(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "inp-nameType",
+        className: "add-types hide d-flex justify-content-around border border-dark d-flex align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "name",
+        type: "text",
+        form: "add-type",
+        id: "nameType",
         className: "form-control"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        form: "add-type",
+        className: "btn btn-success",
+        type: "submit"
+      }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u0438\u043F")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.showFormAddType,
+        type: "button",
+        className: "add-types btn btn-secondary"
+      }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u0438\u043F \u043D\u043E\u043C\u0435\u0440\u0430")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary",
         type: "submit"
-      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C")));
+      }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.submitType,
+        id: "add-type",
+        className: ""
+      }))));
     }
   }]);
 
-  return CreateRooms;
+  return UpdateRooms;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (CreateRooms);
+
 
 /***/ }),
 
@@ -30630,8 +30603,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _rooms_RoomMain__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rooms/RoomMain */ "./resources/js/components/rooms/RoomMain.js");
 /* harmony import */ var _admin_Admin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../admin/Admin */ "./resources/js/components/admin/Admin.js");
 /* harmony import */ var _admin_rooms_CreateRooms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../admin/rooms/CreateRooms */ "./resources/js/components/admin/rooms/CreateRooms.js");
-/* harmony import */ var history_createBrowserHistory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! history/createBrowserHistory */ "./node_modules/history/createBrowserHistory.js");
-/* harmony import */ var history_createBrowserHistory__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(history_createBrowserHistory__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _admin_rooms_IndexCreateRooms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../admin/rooms/IndexCreateRooms */ "./resources/js/components/admin/rooms/IndexCreateRooms.js");
+/* harmony import */ var _admin_rooms_UpdateRooms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../admin/rooms/UpdateRooms */ "./resources/js/components/admin/rooms/UpdateRooms.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30659,7 +30632,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var history = history_createBrowserHistory__WEBPACK_IMPORTED_MODULE_8___default()();
+
 
 var App =
 /*#__PURE__*/
@@ -30699,8 +30672,15 @@ if (document.getElementById('root')) {
     exact: true,
     component: _admin_Admin__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-    path: "/public/admin/create",
+    path: "/public/admin/rooms/create",
     component: _admin_rooms_CreateRooms__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+    path: "/public/admin/rooms",
+    exact: true,
+    component: _admin_rooms_IndexCreateRooms__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+    path: "/public/admin/rooms/update/:id",
+    component: _admin_rooms_UpdateRooms__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sorry");
@@ -31595,8 +31575,8 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\pratoverde1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\pratoverde1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\server\data\htdocs\pratoverde1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\server\data\htdocs\pratoverde1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

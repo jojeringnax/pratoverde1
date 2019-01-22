@@ -5,6 +5,10 @@ $mainFontSize: 16px;
   color: $mainColorText;
 }
 
+.hide {
+  display: none !important;
+}
+
 .banner {
   min-height: 73vh;
   position: relative;
@@ -426,4 +430,13 @@ nav {
       }
     }
   }
+}
+
+
+.fadeIn-appear {
+  opacity: 0.01;
+}
+.fadeIn-appear.fadeIn-appear-active {
+  opacity: 1;
+  transition: opacity 2500ms ease-in;
 }
