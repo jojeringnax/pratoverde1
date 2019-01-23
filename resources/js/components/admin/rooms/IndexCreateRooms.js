@@ -7,7 +7,7 @@ export default class IndexCreateRooms extends React.Component {
         super(props);
         this.state = {
             rooms : []
-        }
+        };
         this.deleteRoom = this.deleteRoom.bind(this);
     }
     componentDidMount() {
@@ -37,7 +37,8 @@ export default class IndexCreateRooms extends React.Component {
     createTableRooms(){
         let table = [];
         let url = '';
-        let urlDelete = ''
+        let urlDelete = '';
+
         for (let i=0; i < this.state.rooms.length; i++) {
             let child = [];
             for(let key in this.state.rooms[i]){
@@ -49,8 +50,9 @@ export default class IndexCreateRooms extends React.Component {
                 <Link key="update" to={url}>Tuda</Link>
                 <Link key="delete" data-delete={urlDelete} onClick={this.deleteRoom} to="">Obratno</Link>
             </td>);
-            table.push(<tr key={i+1}>{child}</tr>);
+            table.push(<tr id={this.state.rooms[i]['id']} key={i+1}>{child}</tr>);
         }
+        console.log('table',table)
         return table
     };
 
@@ -75,6 +77,7 @@ export default class IndexCreateRooms extends React.Component {
                                 {this.createTableRooms()}
                             </tbody>
                         </table>
+                        <Link type="button" className="btn btn-outline-secondary" to="admin/room_types"></Link>
                     </div>
                 </div>
             </div>

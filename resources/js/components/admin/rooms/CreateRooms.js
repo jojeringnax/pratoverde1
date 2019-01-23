@@ -85,9 +85,10 @@ class CreateRooms extends React.Component {
             console.log(response);
             alert('Номер добавлен');
         })
-        .catch(function (error) {
-            console.log(error);
-            alert('Такой номер уже есть');
+        .catch(error => {
+            console.log(error.response.data.code);
+            alert(codes[error.response.data.code])
+
         });
     }
 

@@ -5,6 +5,14 @@ $mainFontSize: 16px;
   color: $mainColorText;
 }
 
+.container-content-admin {
+  margin-top: 70px;
+}
+
+.form-admin {
+  padding: 30px 20px 30px 20px;
+}
+
 .hide {
   display: none !important;
 }
@@ -416,7 +424,28 @@ nav {
       }
     }
   }
+}
 
+.admin-table {
+  thead {
+    tr {
+      th {
+        text-align: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: white;
+      }
+    }
+  }
+}
+
+.inp-problem-create {
+  &#parent_id {
+    padding-right: 0 !important;
+  }
+  &#status {
+    padding-left: 0 !important;
+  }
 }
 
 @media screen and(max-width: 992px) {
@@ -430,13 +459,4 @@ nav {
       }
     }
   }
-}
-
-
-.fadeIn-appear {
-  opacity: 0.01;
-}
-.fadeIn-appear.fadeIn-appear-active {
-  opacity: 1;
-  transition: opacity 2500ms ease-in;
 }

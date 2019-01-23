@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
         <script>
             let codes = {
-                '102': 'Такой номер ужет существует'
+                '2': 'Такой номер уже существует'
             }
         </script>
     </head>

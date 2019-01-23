@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import CreateRooms from '../admin/rooms/CreateRooms'
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 
 class Admin extends React.Component {
     constructor(props) {
@@ -10,6 +9,8 @@ class Admin extends React.Component {
         return (
             <div id="admin-page" className="section">
                 Admin
+                <Link to="/public/admin/problem"> PROBLEMS</Link>
+                <Link to="/public/admin/rooms"> ROOMS</Link>
             </div>
         );
     }

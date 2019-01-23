@@ -44,10 +44,10 @@ Route::get('admin/room_type/{id}', function($id) {
  * Problem routes
  */
 Route::get('admin/problems', 'Admin\ProblemCotroller@index');
-Route::post('admin/problems/create', 'Admin\ProblemCotroller@create');
-Route::get('admin/problems/update/{id}', 'Admin\ProblemCotroller@update');
-Route::post('admin/problems/update/{id}', 'Admin\ProblemCotroller@update');
-Route::delete('admin/problems/delete/{id}', 'Admin\ProblemCotroller@delete');
+Route::post('admin/problems/create', 'Admin\ProblemController@create');
+Route::get('admin/problems/update/{id}', 'Admin\ProblemController@update');
+Route::post('admin/problems/update/{id}', 'Admin\ProblemController@update');
+Route::delete('admin/problems/delete/{id}', 'Admin\ProblemController@delete');
 
 /**
  * ProblemCategory routes

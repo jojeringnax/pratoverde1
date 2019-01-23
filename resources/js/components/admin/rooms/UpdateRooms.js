@@ -22,22 +22,38 @@ export default class UpdateRooms extends React.Component {
         this.submitType = this.submitType.bind(this);
         this.showFormAddType = this.showFormAddType.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
+        this.getTypes = this.getTypes.bind(this);
     }
 
     fillFormUpdate() {
         let url = '/public/api/admin/rooms/update/'+ this.props.match.params.id;
         axios.get(url)
             .then(response => {
+                console.log('form',response.data)
                 this.setState({
-                    room: response.data.room,
-                    types: response.data.types,
+                    room: response.data
+                }, () => {
+                    this.getTypes();
                 });
-                //console.log(response.data.room.type_id)
             })
             .catch(function (error) {
                 //console.log(error);
             });
     };
+
+    getTypes() {
+        axios.get("/public/api/admin/room_types")
+            .then(response => {
+                //console.log(response.data);
+                console.log('type',response.data)
+                this.setState({
+                    types: response.data
+                });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
     updateRoom(e) {
         e.preventDefault();
@@ -45,7 +61,7 @@ export default class UpdateRooms extends React.Component {
         let formData = this.state.room;
 
         let url = "/public/api/admin/rooms/update/" + this.props.match.params.id;
-        console.log(form);
+        //console.log(form);
         axios.post(url, formData)
             .then(function (response) {
                 alert('Данные обновлены');
@@ -101,11 +117,8 @@ export default class UpdateRooms extends React.Component {
                 options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
             }
         }
-       return <div onChange={this.onChangeInput} className="item-form-admin form-group">
-                   <select name="type_id" id="types-room">
-                       {options}
-                   </select>
-               </div>;
+        console.log('options',options);
+        return options;
     }
 
     submitType(e) {
@@ -145,7 +158,7 @@ export default class UpdateRooms extends React.Component {
                                     name="id"
                                     type="number"
                                     id="id"
-                                    defaultValue={this.state.room.id}
+                                    value={this.state.room.id}
                                     className="form-control"
                                     max="36"
                                     onChange={this.onChangeInput}
@@ -214,7 +227,12 @@ export default class UpdateRooms extends React.Component {
                                     onChange={this.onChangeInput}
                                 />
                             </div>
-                            {this.fillTypesRoom()}
+                            <div onChange={this.onChangeInput} className="item-form-admin form-group">
+                                <select name="type_id" id="types-room">
+                                    {this.fillTypesRoom()}
+                                </select>
+                            </div>
+
                             <div className="item-form-admin form-group">
                                 <div id="inp-nameType" className="add-types hide d-flex justify-content-around border border-dark d-flex align-items-center">
                                     <input

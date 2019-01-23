@@ -3,6 +3,14 @@
   color: #2b2a29;
 }
 
+.container-content-admin {
+  margin-top: 70px;
+}
+
+.form-admin {
+  padding: 30px 20px 30px 20px;
+}
+
 .hide {
   display: none !important;
 }
@@ -377,19 +385,25 @@ nav .navbar-collapse ul li a {
   margin-right: 25px;
 }
 
+.admin-table thead tr th {
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+.inp-problem-create#parent_id {
+  padding-right: 0 !important;
+}
+.inp-problem-create#status {
+  padding-left: 0 !important;
+}
+
 @media screen and (max-width: 992px) {
   nav .navbar-collapse ul li {
     margin: 0 !important;
     text-align: center;
   }
-}
-.fadeIn-appear {
-  opacity: 0.01;
-}
-
-.fadeIn-appear.fadeIn-appear-active {
-  opacity: 1;
-  transition: opacity 2500ms ease-in;
 }
 
 /*# sourceMappingURL=style.css.map */
