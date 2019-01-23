@@ -35,6 +35,10 @@ Route::post('admin/room_types/create', 'Admin\RoomTypeController@create');
 Route::post('admin/room_types/update/{id}', 'Admin\RoomTypeController@update');
 Route::delete('admin/room_types/delete/{id}', 'Admin\RoomTypeController@delete');
 
+Route::get('admin/room_type/{id}', function($id) {
+   return \App\RoomType::find($id);
+});
+
 
 /**
  * Problem routes
