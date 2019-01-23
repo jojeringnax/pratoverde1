@@ -24,7 +24,7 @@ class ProblemController extends Controller
     /**
      * @param Request $request
      * @param Problem $problem
-     * @return Problem
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function store(Request $request, Problem $problem)
     {
@@ -33,7 +33,7 @@ class ProblemController extends Controller
         }
         $problem->fill($request->post());
         $problem->save();
-        return $problem;
+        return $problem->toJson();
     }
 
     /**

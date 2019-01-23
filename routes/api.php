@@ -36,7 +36,7 @@ Route::post('admin/room_types/update/{id}', 'Admin\RoomTypeController@update');
 Route::delete('admin/room_types/delete/{id}', 'Admin\RoomTypeController@delete');
 
 Route::get('admin/room_type/{id}', function($id) {
-   return \App\RoomType::find($id);
+    return \App\RoomType::find($id);
 });
 
 
