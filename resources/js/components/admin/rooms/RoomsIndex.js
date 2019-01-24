@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
 
-export default class IndexCreateRooms extends React.Component {
+export default class RoomsIndex extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +15,8 @@ export default class IndexCreateRooms extends React.Component {
             .then(response => {
                 this.setState({
                     rooms: response.data
+                },()=>{
+                    //console.log(this.state.rooms)
                 });
             })
             .catch(function (error) {
@@ -27,10 +29,10 @@ export default class IndexCreateRooms extends React.Component {
         let urlDelete = e.target.getAttribute('data-delete');
         axios.delete(urlDelete)
             .then(response => {
-                console.log(response)
+                //console.log(response)
             })
             .catch(function (error) {
-                console.log(error)
+                //console.log(error)
             });
     }
 
@@ -52,7 +54,7 @@ export default class IndexCreateRooms extends React.Component {
             </td>);
             table.push(<tr id={this.state.rooms[i]['id']} key={i+1}>{child}</tr>);
         }
-        console.log('table',table)
+        console.log(table);
         return table
     };
 
@@ -61,12 +63,13 @@ export default class IndexCreateRooms extends React.Component {
             <div id="admin-rooms" className="section">
                 <div className="container">
                     <div className="row">
-                        <table className="table table-striped">
+                        <table className="table table-striped border">
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>
                                     <th scope="col">Floor</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Type_id</th>
                                     <th scope="col">Last_washing_date</th>
                                     <th scope="col">Need_wash</th>
                                     <th scope="col">Number_of_beds</th>
@@ -77,7 +80,7 @@ export default class IndexCreateRooms extends React.Component {
                                 {this.createTableRooms()}
                             </tbody>
                         </table>
-                        <Link type="button" className="btn btn-outline-secondary" to="admin/room_types"></Link>
+                        <Link className="btn btn-outline-secondary" to="/public/admin/rooms/types">Типы комнат</Link>
                     </div>
                 </div>
             </div>

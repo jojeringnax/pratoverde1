@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-class CreateRooms extends React.Component {
+class RoomsCreate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,13 +43,12 @@ class CreateRooms extends React.Component {
     getTypes() {
         axios.get("/public/api/admin/room_types")
             .then(response => {
-                console.log(response.data);
                 this.setState({
                     types: response.data
                 });
             })
             .catch(function(error) {
-                console.log(error);
+                //console.log(error);
             });
 
     }
@@ -62,7 +61,7 @@ class CreateRooms extends React.Component {
                     [e.target.name]: e.target.checked
                 }
             }, function(){
-                console.log('checkbox',this.state.room);
+                //console.log('checkbox',this.state.room);
             })
         } else {
             this.setState({
@@ -71,7 +70,7 @@ class CreateRooms extends React.Component {
                     [e.target.name]: e.target.value
                 }
             }, function(){
-                console.log(this.state.room);
+                //console.log(this.state.room);
             });
         }
     }
@@ -82,12 +81,10 @@ class CreateRooms extends React.Component {
 
         axios.post('/public/api/admin/rooms/create', formData)
         .then(function (response) {
-            console.log(response);
+            //console.log(response);
             alert('Номер добавлен');
         })
         .catch(error => {
-            console.log(error.response.data.code);
-            alert(codes[error.response.data.code])
 
         });
     }
@@ -185,4 +182,4 @@ class CreateRooms extends React.Component {
     }
 }
 
-export default CreateRooms;
+export default RoomsCreate;

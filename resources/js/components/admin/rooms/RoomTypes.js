@@ -7,7 +7,7 @@ class RoomTypes extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: false
+            data: false,
         };
         this.getTypes = this.getTypes.bind(this);
         this.deleteTypes = this.deleteTypes.bind(this);
@@ -17,49 +17,49 @@ class RoomTypes extends React.Component {
     getTypes() {
         axios.get('/public/api/admin/room_types')
             .then(response => {
-                console.log(response.data);
-                types = response.data
+                types = response.data;
                 this.setState({
                     data: true,
-                }, () => {
-                    //console.log('types',types)
                 })
 
             })
             .catch(error => {
-                console.log(error)
+                //console.log(error)
             })
     }
 
     deleteTypes(e) {
         e.preventDefault();
-        console.log(e.target.href);
+        let id = e.target.id;
+        console.log(document.getElementById(id).parentNode);
         axios.delete(e.target.href)
             .then(response => {
-                console.log(response);
+                //console.log(response);
+                let parent = document.querySelector('tbody');
+                let child = document.getElementById(id).parentNode;
+                parent.removeChild(child);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
             })
     }
 
     createTable() {
         let urlDelete = "/public/api/admin/room_types/delete/";
+        let urlUpdate = "/public/admin/rooms/types/update/";
         let row = [];
         let table = [];
         for(let i=0; i < types.length; i++) {
-            //console.log(types[i],types.length)
             row = [];
             for(let key in types[i]) {
-                console.log();
                 row.push(<td id={types[i][key]} key={key}>{types[i][key]}</td>);
             }
             row.push(<td key="action">
-                    <Link onClick={this.deleteTypes} to={urlDelete + types[i]['id']}>Delete</Link>
+                    <Link to={urlUpdate + types[i]['id']}>Update</Link>
+                    <Link id={types[i]['id']} onClick={this.deleteTypes} to={urlDelete + types[i]['id']}>Delete</Link>
                     </td>);
             table.push(<tr key={i}>{row}</tr>);
         }
-
         return table;
     }
 
@@ -85,6 +85,7 @@ class RoomTypes extends React.Component {
                                 {this.createTable()}
                             </tbody>
                         </table>
+                        <Link to="/public/admin/rooms/types/create" className="btn btn-outline-secondary">Добавить Тип Номера</Link>
                     </div>
                 </div>
             </div>

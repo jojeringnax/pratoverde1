@@ -8,14 +8,20 @@ import RoomMain from '../rooms/RoomMain';
 {/*ADMIN IMPORT*/}
 import Admin from '../admin/Admin';
 {/*ADMIN-ROOMS IMPORT*/}
-import IndexCreateRooms from '../admin/rooms/IndexCreateRooms';
-import CreateRooms from '../admin/rooms/CreateRooms';
-import UpdateRooms from '../admin/rooms/UpdateRooms';
+import RoomsIndex from '../admin/rooms/RoomsIndex';
+import RoomsCreate from '../admin/rooms/RoomsCreate';
+import RoomsUpdate from '../admin/rooms/RoomsUpdate';
 import RoomTypes from "../admin/rooms/RoomTypes";
+import RoomTypesUpdate from "../admin/rooms/RoomTypesUpdate";
+import RoomTypesCreate from '../admin/rooms/RoomTypesCreate'
 {/*ADMIN-PROBLEM IMPORT*/}
-import IndexProblems from "../admin/problems/IndexProblems";
+import ProblemsIndex from "../admin/problems/ProblemsIndex";
 import ProblemCreate from "../admin/problems/ProblemCreate";
 import ProblemUpdate from "../admin/problems/ProblemUpdate";
+import ProblemsCategory from '../admin/problems/categories/ProblemsCategory';
+import ProblemsCategoryCreate from '../admin/problems/categories/ProblemsCategoryCreate';
+import ProblemsCategoryUpdate from '../admin/problems/categories/ProblemsCategoryUpdate';
+
 
 export default class App extends React.Component {
     render() {
@@ -37,14 +43,19 @@ if (document.getElementById('root')) {
                 {/*ADMIN SYSTEM ROUTE*/}
                 <Route path="/public/admin" exact component={Admin} />
                 {/*ADMIN-ROOMS ROUTE*/}
-                <Route path="/public/admin/rooms" exact component={IndexCreateRooms} />
-                <Route path="/public/admin/rooms/create" component={CreateRooms} />
-                <Route path="/public/admin/rooms/update/:id" component={UpdateRooms} />
-                <Route path="/public/admin/room/types" exact component={RoomTypes} />
+                <Route path="/public/admin/rooms" exact component={RoomsIndex} />
+                <Route path="/public/admin/rooms/create" component={RoomsCreate} />
+                <Route path="/public/admin/rooms/update/:id" component={RoomsUpdate} />
+                <Route path="/public/admin/rooms/types" exact component={RoomTypes} />
+                <Route path="/public/admin/rooms/types/update/:id" component={RoomTypesUpdate} />
+                <Route path="/public/admin/rooms/types/create" component={RoomTypesCreate} />
                 {/*ADMIN-PROBLEMS ROUTE*/}
-                <Route path="/public/admin/problems" exact component={IndexProblems} />
+                <Route path="/public/admin/problems" exact component={ProblemsIndex} />
                 <Route path="/public/admin/problems/create" component={ProblemCreate} />
                 <Route path="/public/admin/problems/update/:id" component={ProblemUpdate} />
+                <Route path="/public/admin/problems/categories/" exact component={ProblemsCategory} />
+                <Route path="/public/admin/problems/categories/create" component={ProblemsCategoryCreate} />
+                <Route path="/public/admin/problems/categories/update/:id" component={ProblemsCategoryUpdate} />
                 <Route render={() => (<div>Sorry</div>)}/>
             </Switch>
         </Router>,

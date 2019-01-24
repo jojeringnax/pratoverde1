@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 let problems = [];
 
-class IndexProblems extends React.Component {
+class ProblemsIndex extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -107,4 +107,4 @@ class IndexProblems extends React.Component {
     }
 }
 
-export default IndexProblems;
+export default ProblemsIndex;

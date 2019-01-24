@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
-export default class UpdateRooms extends React.Component {
+export default class RoomsUpdate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +29,6 @@ export default class UpdateRooms extends React.Component {
         let url = '/public/api/admin/rooms/update/'+ this.props.match.params.id;
         axios.get(url)
             .then(response => {
-                console.log('form',response.data)
                 this.setState({
                     room: response.data
                 }, () => {
@@ -45,7 +44,6 @@ export default class UpdateRooms extends React.Component {
         axios.get("/public/api/admin/room_types")
             .then(response => {
                 //console.log(response.data);
-                console.log('type',response.data)
                 this.setState({
                     types: response.data
                 });
@@ -57,7 +55,6 @@ export default class UpdateRooms extends React.Component {
 
     updateRoom(e) {
         e.preventDefault();
-        let form = document.forms.updateRoom;
         let formData = this.state.room;
 
         let url = "/public/api/admin/rooms/update/" + this.props.match.params.id;
@@ -72,11 +69,6 @@ export default class UpdateRooms extends React.Component {
             });
     }
     onChangeInput(e) {
-        // let newRoom = this.state.room;
-        // newRoom[e.target.name] = e.target.value;
-        // this.setState({
-        //     room: newRoom
-        // });
         this.setState({
             room : {
                 ...this.state.room,
@@ -117,7 +109,6 @@ export default class UpdateRooms extends React.Component {
                 options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
             }
         }
-        console.log('options',options);
         return options;
     }
 
@@ -125,7 +116,6 @@ export default class UpdateRooms extends React.Component {
         e.preventDefault();
         let url = "/public/api/admin/room_types/create";
         let name = document.getElementById('nameType').value;
-        console.log(document.getElementById('nameType'));
         axios.post(url, {name:name})
             .then(response => {
                 console.log(response);
@@ -227,8 +217,8 @@ export default class UpdateRooms extends React.Component {
                                     onChange={this.onChangeInput}
                                 />
                             </div>
-                            <div onChange={this.onChangeInput} className="item-form-admin form-group">
-                                <select name="type_id" id="types-room">
+                            <div  className="item-form-admin form-group">
+                                <select onChange={this.onChangeInput} value={this.state.room.type_id || ''} name="type_id" id="types-room">
                                     {this.fillTypesRoom()}
                                 </select>
                             </div>

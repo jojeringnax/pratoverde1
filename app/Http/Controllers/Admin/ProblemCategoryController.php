@@ -6,7 +6,7 @@ use App\ProblemCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProblemCatgoryController extends Controller
+class ProblemCategoryController extends Controller
 {
     /**
      * @var string

@@ -20,25 +20,24 @@ class ProblemUpdate extends React.Component {
         this.updateProblem = this.updateProblem.bind(this);
         this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this)
     }
+
     fillFormUpdateProblem() {
         let url = '/public/api/admin/problems/update/'+ this.props.match.params.id;
         axios.get(url)
             .then(response => {
-                console.log(response.data)
+                //console.log(response.data)
                 this.setState({
                     problem: response.data
                 }, () => {
-                    console.log(response);
+                    //console.log(response);
                 });
-
-                //alert('Проблема создана добавлен');
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 //alert(codes[error.response.data.code])
-
             });
     }
+
     onChangeInput(e) {
         this.setState({
             problem: {
@@ -56,15 +55,15 @@ class ProblemUpdate extends React.Component {
 
         axios.post('/public/api/admin/problems/update/' + this.props.match.params.id, formData)
             .then(function (response) {
-                console.log(response);
-                alert('Проблема создана добавлен');
+                //console.log(response);
+                //alert('Проблема создана добавлен');
             })
             .catch(error => {
-                console.log(error.response.data.code);
-                alert(codes[error.response.data.code])
+                alert(codes[error.response.data.code]);
 
             });
     }
+
     componentDidMount() {
         this.fillFormUpdateProblem();
     }
