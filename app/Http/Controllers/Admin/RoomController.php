@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Room;
-use App\RoomType;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -20,21 +19,25 @@ class RoomController extends Controller
     /**
      * @param Request $request
      * @param Room $room
-     * @return Room
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function store(Request $request, Room $room)
     {
         if ($room === null) {
             return response(json_encode(['category' => 'rooms', 'id' => null, 'message' => 'Room not found', 'code' => 1]), 500);
         }
+        if ($facilities = $request->post('facilities')) {
+            $room->flushFacilities();
+            $room->setFacilities($facilities);
+        }
         $room->fill($request->post());
         $room->save();
-        return $room;
+        return $room->toJson();
     }
 
     /**
      * @param Request $request
-     * @return Room
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function create(Request $request)
     {
@@ -49,7 +52,7 @@ class RoomController extends Controller
     /**
      * @param Request $request
      * @param $id
-     * @return Room
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function update(Request $request, $id)
     {
@@ -59,7 +62,7 @@ class RoomController extends Controller
 
     /**
      * @param $id
-     * @return boolean
+     * @return string
      */
     public function delete($id)
     {

@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * Class RoomType
+ * @package App
+ *
+ * @property integer $id
+ * @property string $name
+ */
 class RoomType extends Model
 {
     /**
@@ -22,7 +30,5 @@ class RoomType extends Model
     public $fillable = [
         'name'
     ];
-
-
 
 }

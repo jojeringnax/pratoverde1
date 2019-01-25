@@ -24,7 +24,7 @@ class ProblemCategoryController extends Controller
     /**
      * @param Request $request
      * @param ProblemCategory $problemCategory
-     * @return ProblemCategory|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function store(Request $request, ProblemCategory $problemCategory)
     {
@@ -33,12 +33,12 @@ class ProblemCategoryController extends Controller
         }
         $problemCategory->fill($request->post());
         $problemCategory->save();
-        return $problemCategory;
+        return $problemCategory->toJson();
     }
 
     /**
      * @param Request $request
-     * @return ProblemCategory|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function create(Request $request)
     {
@@ -53,7 +53,7 @@ class ProblemCategoryController extends Controller
     /**
      * @param Request $request
      * @param $id
-     * @return ProblemCategory
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function update(Request $request, $id)
     {

@@ -21,7 +21,7 @@ class RoomTypeController extends Controller
     /**
      * @param Request $request
      * @param RoomType $roomType
-     * @return RoomType|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
     public function store(Request $request, RoomType $roomType)
     {
@@ -30,7 +30,7 @@ class RoomTypeController extends Controller
         }
         $roomType->fill($request->post());
         $roomType->save();
-        return $roomType;
+        return $roomType->toJson();
     }
 
     /**
@@ -51,7 +51,7 @@ class RoomTypeController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->isMethod('get')) {
-            return json_encode(['room' => RoomType::findOrFail($id)]);
+            return json_encode(['roomType' => RoomType::findOrFail($id)]);
         }
         $roomType = RoomType::findOrFail($id);
         return $this->store($request, $roomType);
@@ -59,7 +59,7 @@ class RoomTypeController extends Controller
 
     /**
      * @param $id
-     * @return boolean
+     * @return string
      */
     public function delete($id)
     {

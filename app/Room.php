@@ -7,11 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Room
  * @package App
+ *
+ *
+ * @property integer $id
+ * @property integer $floor
+ * @property integer $status
+ * @property integer $type_id
+ * @property string $last_washing_date
+ * @property bool $need_wash
+ * @property integer $number_of_beds
  */
 class Room extends Model
 {
+    const MAXIMUM_ROOM_NUMBER = 36;
+    const MAXIMUM_FLOOR = 3;
+
     const STATUSES = [
-        0 => 'Готова',
+        0 => 'Ready',
         1 => ''
     ];
 
@@ -37,8 +49,8 @@ class Room extends Model
      * @var array
      */
     public $rules = [
-        'floor' => 'required|integer|max:1',
-        'status' => 'required|integer|max:1'
+        'floor' => 'required|integer|max:3',
+        'status' => 'required|integer|max:8'
     ];
 
     /**
@@ -46,4 +58,63 @@ class Room extends Model
      */
     public $timestamps = false;
 
+    /**
+     * @return Facility[]
+     */
+    public function facilities()
+    {
+        $connects = FacilityConnect::select('id')->where('room_id', $this->id);
+        return Facility::whereIn('id', $connects)->get();
+    }
+
+    /**
+     * @return bool
+     */
+    public function flushFacilities()
+    {
+        return FacilityConnect::where('room_id', $this->id)->delete();
+    }
+
+    /**
+     * @param $facilities
+     * @return $this
+     */
+    public function setFacilities($facilities)
+    {
+        foreach ($facilities as $facility) {
+            $facilityConnect = new FacilityConnect();
+            $facilityConnect->room_id = $this->id;
+            $facilityConnect->facility_id = is_object($facility) ? $facility->id : $facility['id'];
+            $facilityConnect->save();
+        }
+        return $this;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public static function isExist($id)
+    {
+        return self::find($id) !== null;
+    }
+
+    /**
+     * @return self
+     */
+    public static function createPlug()
+    {
+        $id = self::MAXIMUM_ROOM_NUMBER + 1;
+        $floor = self::MAXIMUM_FLOOR + 1;
+        $plug = Room::firstOrNew([
+            'id' => $id,
+            'floor' => $floor,
+            'status' => 0,
+            'type_id' => null,
+            'last_washing_date' => date('Y-m-d H:i:s'),
+            'need_wash' => 0,
+            'number_of_beds' => 0
+        ]);
+        return $plug;
+    }
 }

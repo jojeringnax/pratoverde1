@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class ProblemCategory
  * @package App
+ *
+ * @property int $id
+ * @property string $name
+ *
  */
 class ProblemCategory extends Model
 {

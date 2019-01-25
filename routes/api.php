@@ -17,6 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('get_config', function () {
+    return json_encode(['rooms_number' => \App\Room::MAXIMUM_ROOM_NUMBER, 'floors_number' => \App\Room::MAXIMUM_FLOOR]);
+});
+
 /**
  * Room routes
  */
@@ -43,6 +47,20 @@ Route::get('room_type/{id}', function($id) {
 
 
 /**
+ * Facilities routes
+ */
+Route::get('admin/facilities', 'Admin\FacilityController@index');
+Route::post('admin/facilities/create', 'Admin\FacilityController@create');
+Route::post('admin/facilities/update/{id}', 'Admin\FacilityController@update');
+Route::delete('admin/facilities/delete/{id}', 'Admin\FacilityController@delete');
+
+Route::get('facility/{id}', function($id) {
+    return \App\Facility::findOrFail($id)->toJson();
+});
+
+
+
+/**
  * Problem routes
  */
 Route::get('admin/problems', 'Admin\ProblemController@index');
@@ -64,4 +82,28 @@ Route::delete('admin/problem_categories/delete/{id}', 'Admin\ProblemCategoryCont
 
 Route::get('problem_category/{id}', function($id) {
     return \App\ProblemCategory::findOrFail($id)->toJson();
+});
+
+
+/**
+ * Customer routes
+ */
+Route::get('admin/customers', 'Admin\CustomerController@index');
+Route::post('admin/customers/create', 'Admin\CustomerController@create');
+Route::post('admin/customers/update/{id}', 'Admin\CustomerController@update');
+Route::delete('admin/customers/delete/{id}', 'Admin\CustomerController@delete');
+
+Route::get('customer/{id}', function($id) {
+    return \App\Customer::findOrFail($id)->toJson();
+});
+
+/**
+ * RoomConnect routes
+ */
+Route::post('admin/room_connects/create', 'Admin\CustomerController@create');
+Route::post('admin/room_connects/update/{id}', 'Admin\CustomerController@update');
+Route::delete('admin/room_connects/delete/{id}', 'Admin\CustomerController@delete');
+
+Route::get('room_connect/{id}', function($id) {
+    return \App\Customer::findOrFail($id)->toJson();
 });

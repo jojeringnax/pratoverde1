@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Problem;
+use App\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProblemController extends Controller
+class CustomerController extends Controller
 {
     /**
      * @var string
      */
-    private $modelName = Problem::class;
+    private $modelName = Customer::class;
 
     /**
      * @return string
@@ -23,17 +23,17 @@ class ProblemController extends Controller
 
     /**
      * @param Request $request
-     * @param Problem $problem
+     * @param Customer $customer
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
-    public function store(Request $request, Problem $problem)
+    public function store(Request $request, Customer $customer)
     {
-        if ($problem === null) {
-            return response(json_encode(['category' => 'problems', 'id' => null, 'message' => 'Problem not found', 'code' => 1]), 500);
+        if ($customer === null) {
+            return response(json_encode(['category' => 'customers', 'id' => null, 'message' => 'Customer not found', 'code' => 1]), 500);
         }
-        $problem->fill($request->post());
-        $problem->save();
-        return $problem->toJson();
+        $customer->fill($request->post());
+        $customer->save();
+        return $customer->toJson();
     }
 
     /**
@@ -42,12 +42,8 @@ class ProblemController extends Controller
      */
     public function create(Request $request)
     {
-        $problem = new $this->modelName();
-        $id = $request->post('id');
-        if ($this->modelName::find($id) !== null) {
-            return response(json_encode(['category' => 'problems', 'id' => $id, 'message' => 'Problem already exists', 'code' => 2]), 500);
-        }
-        return $this->store($request, $problem);
+        $customer = new $this->modelName();
+        return $this->store($request, $customer);
     }
 
     /**
@@ -57,13 +53,13 @@ class ProblemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $problem = $this->modelName::findOrFail($id);
-        return $this->store($request, $problem);
+        $customer = $this->modelName::findOrFail($id);
+        return $this->store($request, $customer);
     }
 
     /**
      * @param $id
-     * @return boolean
+     * @return string
      */
     public function delete($id)
     {
