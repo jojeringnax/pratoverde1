@@ -324,6 +324,7 @@ nav {
   width: 100%;
   align-items: flex-start;
   padding-bottom: 120px;
+
   .card-item {
     border: 2px solid #c6c6c6;
     min-height: 400px;
@@ -333,25 +334,30 @@ nav {
     align-items: center;
     padding: 30px 30px 0 30px;
     transition: 0.5s;
+
     &:hover {
       border: 2px solid white;
       box-shadow:  0 10px 15px rgba(0, 0, 0, 0.1);
     }
+
     .card-top {
       //margin-top: 20px;
       height: 200px;
       width: 100%;
     }
+
     .card-body {
       height: 50%;
       width: 100%;
       .title-card-body {
         text-align: center;
+
         span {
           font-size: 34px;
           font-weight: bold;
         }
       }
+
       .text-card-body {
         font-weight: 400 !important;
         text-align: center;
@@ -366,11 +372,13 @@ nav {
     background-size: cover;
     background-position: center center;
   }
+
   &#card-2 {
     background-image: url("../img/card-img/card-2.jpg");
     background-size: cover;
     background-position: center center;
   }
+
   &#card-3 {
     background-image: url("../img/card-img/card-3.jpg");
     background-size: cover;
@@ -385,6 +393,7 @@ nav {
   font-size: 22px;
   font-weight: 400;
   margin-bottom: 50px;
+
   &:hover {
     background-color: $mainColorText;
     color: white;
@@ -410,6 +419,7 @@ nav {
       }
     }
   }
+
   .contats-info {
     margin-top: 100px;
     height: 30vh;
@@ -446,6 +456,30 @@ nav {
   &#status {
     padding-left: 0 !important;
   }
+}
+.btn-admin-section {
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  &:hover {
+    background-color: #9933CC;
+    color: white !important;
+  }
+}
+
+.dashboard-admin-title {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+  font-weight: bold;
+  div {
+    h3 {
+      font-weight: bold;
+    }
+  }
+
 }
 
 @media screen and(max-width: 992px) {

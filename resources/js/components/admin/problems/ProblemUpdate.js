@@ -18,11 +18,16 @@ class ProblemUpdate extends React.Component {
         };
         this.onChangeInput = this.onChangeInput.bind(this);
         this.updateProblem = this.updateProblem.bind(this);
-        this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this)
+        this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this);
+        this.back = this.back.bind(this);
+    }
+
+    back() {
+        history.back();
     }
 
     fillFormUpdateProblem() {
-        let url = '/public/api/admin/problems/update/'+ this.props.match.params.id;
+        let url = '/public/api/problem/'+ this.props.match.params.id;
         axios.get(url)
             .then(response => {
                 //console.log(response.data)
@@ -74,6 +79,7 @@ class ProblemUpdate extends React.Component {
                 <div className="container container-content-admin">
                     <div className="row d-flex justify-content-center">
                         <h1 className="text-center">ОБНОВЛЕНИЕ ПРОБЛЕМЫ</h1>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                         <form onSubmit={this.updateProblem} className="border form-group col-xl-8 form-admin z-depth-5">
 
                             <div className="item-form-admin">

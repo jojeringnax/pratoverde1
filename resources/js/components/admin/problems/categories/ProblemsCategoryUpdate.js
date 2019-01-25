@@ -6,17 +6,19 @@ class ProblemsCategoryUpdate extends React.Component {
         super(props);
         this.state = {
             category: {
+                id: '',
                 name: ''
             }
         };
         this.getCategory = this.getCategory.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
+        this.updateProblemsCategory = this.updateProblemsCategory.bind(this);
+        this.back = this.back.bind(this);
     }
 
     getCategory() {
-        let url = '/public/api/admin/problem_categories/update/' + this.props.match.params.id;
-        let id= this.props.match.params.id;
-        axios.post(url, {id: id})
+        let url = '/public/api/problem_category/' + this.props.match.params.id;
+        axios.get(url)
             .then(res => {
                 console.log(res.data);
                 this.setState({
@@ -41,9 +43,10 @@ class ProblemsCategoryUpdate extends React.Component {
 
     updateProblemsCategory(e) {
         e.preventDefault();
-        let data = this.state.category;
+        console.log(this.state.category);
+        let data = this.state.category.name;
         let url = '/public/api/admin/problem_categories/update/' + this.props.match.params.id;
-        axios.post(url, data)
+        axios.post(url, {name: data})
             .then(res => {
                 console.log(res)
             })
@@ -56,13 +59,18 @@ class ProblemsCategoryUpdate extends React.Component {
         this.getCategory();
     }
 
+    back() {
+        history.back();
+    }
+
     render() {
         return (
             <div id="admin-page" className="section">
                 <div id="admin-problemsCategoriesCreate" className="section container-content-admin">
                     <h1 className="text-center">СОЗДАНИЕ КАТЕГОРИИ ПРОБЛЕМ</h1>
                     <div className="container">
-                        <div className="row d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center flex-column align-items-center">
+                            <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                             <form onSubmit={this.updateProblemsCategory} className="border form-group col-xl-8 form-admin z-depth-5">
                                 <label htmlFor="name">Название категории</label>
                                 <input

@@ -29858,12 +29858,31 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "admin-page",
-        className: "section"
-      }, "Admin", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/public/admin/problem"
+        className: "section container-content-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex justify-content-center col-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "",
+        className: "col-xl-10 card dashboard-admin-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "DASHBOARD")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body d-flex justify-content-around"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "col-3 btn-admin-section card",
+        to: "/public/admin/problems"
       }, " PROBLEMS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "col-3 btn-admin-section card",
         to: "/public/admin/rooms"
-      }, " ROOMS"));
+      }, " ROOMS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "col-3 btn-admin-section card",
+        to: "/"
+      }, "BOOKING"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "col-3 btn-admin-section card",
+        to: ""
+      }, "CUSTOMER"))))));
     }
   }]);
 
@@ -29935,6 +29954,7 @@ function (_React$Component) {
     };
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createProblem = _this.createProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -29945,6 +29965,11 @@ function (_React$Component) {
         problem: _objectSpread({}, this.state.problem, _defineProperty({}, e.target.name, e.target.value))
       }, function () {//console.log(this.state.problem)
       });
+    }
+  }, {
+    key: "back",
+    value: function back() {
+      history.back();
     }
   }, {
     key: "createProblem",
@@ -29971,7 +29996,12 @@ function (_React$Component) {
         className: "row d-flex justify-content-start flex-column align-items-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u043F\u0438\u0448\u0438\u0442\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u043F\u0438\u0448\u0438\u0442\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.createProblem,
         className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30127,15 +30157,21 @@ function (_React$Component) {
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateProblem = _this.updateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.fillFormUpdateProblem = _this.fillFormUpdateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(ProblemUpdate, [{
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "fillFormUpdateProblem",
     value: function fillFormUpdateProblem() {
       var _this2 = this;
 
-      var url = '/public/api/admin/problems/update/' + this.props.match.params.id;
+      var url = '/public/api/problem/' + this.props.match.params.id;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
         //console.log(response.data)
         _this2.setState({
@@ -30185,7 +30221,12 @@ function (_React$Component) {
         className: "row d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u041F\u0420\u041E\u0411\u041B\u0415\u041C\u042B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u041F\u0420\u041E\u0411\u041B\u0415\u041C\u042B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateProblem,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30349,6 +30390,7 @@ function (_React$Component) {
     _this.getProblems = _this.getProblems.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createTable = _this.createTable.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteProblem = _this.deleteProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -30431,6 +30473,11 @@ function (_React$Component) {
       this.getProblems();
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30440,7 +30487,12 @@ function (_React$Component) {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-striped admin-table table-bordered"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
         className: "secondary-color-dark border-secondary"
@@ -30476,7 +30528,13 @@ function (_React$Component) {
       }, "Category_id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         width: "5%",
         scope: "col"
-      }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTable())))));
+      }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTable())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/problems/categories",
+        className: "btn btn-outline-secondary"
+      }, "\u041A\u0410\u0422\u0415\u0413\u041E\u0420\u0418\u0418"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/problems/create",
+        className: "btn btn-outline-secondary"
+      }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C \u041F\u0420\u041E\u0411\u041B\u0415\u041C\u0423"))));
     }
   }]);
 
@@ -30540,6 +30598,7 @@ function (_React$Component) {
     _this.getCategoies = _this.getCategoies.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createTable = _this.createTable.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteRow = _this.deleteRow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -30611,18 +30670,28 @@ function (_React$Component) {
       this.getCategoies();
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "admin-page",
         className: "section container-content-admin"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "text-center"
-      }, "\u041A\u0410\u0422\u0415\u0413\u041E\u0420\u0418\u0418 \u041F\u0420\u041E\u0411\u041B\u0415\u041C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "text-center"
+      }, "\u041A\u0410\u0422\u0415\u0413\u041E\u0420\u0418\u0418 \u041F\u0420\u041E\u0411\u041B\u0415\u041C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-bordered table-striped"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTable())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         className: "btn btn-outline-secondary",
@@ -30688,6 +30757,7 @@ function (_React$Component) {
     };
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.submitProblemsCategory = _this.submitProblemsCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -30710,6 +30780,11 @@ function (_React$Component) {
       }).catch(function (err) {});
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30720,8 +30795,13 @@ function (_React$Component) {
       }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u041A\u0410\u0422\u0415\u0413\u041E\u0420\u0418\u0418 \u041F\u0420\u041E\u0411\u041B\u0415\u041C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "row d-flex justify-content-center flex-column align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.submitProblemsCategory,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -30798,11 +30878,14 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProblemsCategoryUpdate).call(this, props));
     _this.state = {
       category: {
+        id: '',
         name: ''
       }
     };
     _this.getCategory = _this.getCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.updateProblemsCategory = _this.updateProblemsCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -30811,11 +30894,8 @@ function (_React$Component) {
     value: function getCategory() {
       var _this2 = this;
 
-      var url = '/public/api/admin/problem_categories/update/' + this.props.match.params.id;
-      var id = this.props.match.params.id;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
-        id: id
-      }).then(function (res) {
+      var url = '/public/api/problem_category/' + this.props.match.params.id;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (res) {
         console.log(res.data);
 
         _this2.setState({
@@ -30838,9 +30918,12 @@ function (_React$Component) {
     key: "updateProblemsCategory",
     value: function updateProblemsCategory(e) {
       e.preventDefault();
-      var data = this.state.category;
+      console.log(this.state.category);
+      var data = this.state.category.name;
       var url = '/public/api/admin/problem_categories/update/' + this.props.match.params.id;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, data).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
+        name: data
+      }).then(function (res) {
         console.log(res);
       }).catch(function (err) {});
     }
@@ -30848,6 +30931,11 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getCategory();
+    }
+  }, {
+    key: "back",
+    value: function back() {
+      history.back();
     }
   }, {
     key: "render",
@@ -30863,8 +30951,13 @@ function (_React$Component) {
       }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u041A\u0410\u0422\u0415\u0413\u041E\u0420\u0418\u0418 \u041F\u0420\u041E\u0411\u041B\u0415\u041C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "row d-flex justify-content-center flex-column align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateProblemsCategory,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31015,18 +31108,32 @@ function (_React$Component) {
       this.getTypes();
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "",
+        className: "container-content-admin",
         id: "section-roomTypes"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table table-striped table-bordered"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTable())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "row d-flex justify-content-center align-items-center flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "text-center"
+      }, "\u0422\u0418\u041F\u042B \u041A\u041E\u041C\u041D\u0410\u0422"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-striped admin-table table-bordered"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
+        className: "secondary-color-dark border-secondary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTable())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/public/admin/rooms/types/create",
         className: "btn btn-outline-secondary"
       }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0422\u0438\u043F \u041D\u043E\u043C\u0435\u0440\u0430"))));
@@ -31092,6 +31199,7 @@ function (_React$Component) {
     };
     _this.submitType = _this.submitType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeType = _this.onChangeType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31118,16 +31226,28 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "admin-roomTypesCreate",
-        className: "section"
+        className: "section container-content-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "row d-flex justify-content-center flex-column align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "text-center"
+      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u0422\u0418\u041F\u0410 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.submitType,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31210,6 +31330,7 @@ function (_React$Component) {
     _this.getType = _this.getType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateType = _this.updateType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeType = _this.onChangeType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31218,7 +31339,7 @@ function (_React$Component) {
     value: function getType() {
       var _this2 = this;
 
-      var url = '/public/api/admin/room_type/' + this.props.match.params.id;
+      var url = '/public/api/room_type/' + this.props.match.params.id;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(url).then(function (res) {
         //console.log(res);
         _this2.setState({
@@ -31254,16 +31375,28 @@ function (_React$Component) {
       this.getType();
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "admin-roomTypesUpdate",
-        className: "section"
+        className: "section container-content-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "text-center"
+      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u0422\u0418\u041F\u0410 \u041D\u041E\u041C\u0415\u0420\u041E\u0412"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateType,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31358,6 +31491,7 @@ function (_React$Component) {
     _this.getTypes = _this.getTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.showTypes = _this.showTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31383,6 +31517,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         name: "type_id",
         id: "types-room",
+        className: "form-control",
         onChange: this.inputOnChange
       }, options));
     }
@@ -31429,18 +31564,30 @@ function (_React$Component) {
       this.getTypes();
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "create-rooms",
-        className: "section"
+        className: "section container-content-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "row d-flex justify-content-start flex-column align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "text-center"
+      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         name: "room",
-        className: "col-7"
+        className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31514,7 +31661,7 @@ function (_React$Component) {
         onChange: this.inputOnChange,
         required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item-form-admin form-group"
+        className: "item-form-admin form-group form"
       }, this.showTypes()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.createRoom,
         className: "btn btn-primary",
@@ -31582,6 +31729,7 @@ function (_React$Component) {
       rooms: []
     };
     _this.deleteRoom = _this.deleteRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31646,18 +31794,30 @@ function (_React$Component) {
       return table;
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "admin-rooms",
         className: "section"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+        className: "container container-content-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table table-striped border"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-striped admin-table table-bordered"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
+        className: "secondary-color-dark border-secondary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col"
       }, "id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col"
@@ -31676,7 +31836,10 @@ function (_React$Component) {
       }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.createTableRooms())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         className: "btn btn-outline-secondary",
         to: "/public/admin/rooms/types"
-      }, "\u0422\u0438\u043F\u044B \u043A\u043E\u043C\u043D\u0430\u0442"))));
+      }, "\u0422\u0438\u043F\u044B \u043A\u043E\u043C\u043D\u0430\u0442"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "btn btn-outline-secondary",
+        to: "/public/admin/rooms/create"
+      }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C \u041D\u041E\u041C\u0415\u0420"))));
     }
   }]);
 
@@ -31756,6 +31919,7 @@ function (_React$Component) {
     _this.showFormAddType = _this.showFormAddType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.getTypes = _this.getTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31764,7 +31928,7 @@ function (_React$Component) {
     value: function fillFormUpdate() {
       var _this2 = this;
 
-      var url = '/public/api/admin/rooms/update/' + this.props.match.params.id;
+      var url = '/public/api/room/' + this.props.match.params.id;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
         _this2.setState({
           room: response.data
@@ -31881,6 +32045,11 @@ function (_React$Component) {
       this.fillFormUpdate();
     }
   }, {
+    key: "back",
+    value: function back() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -31888,13 +32057,18 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "row d-flex justify-content-center flex-column align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u0414\u0410\u041D\u041D\u042B\u0425 \u041F\u041E \u041D\u041E\u041C\u0415\u0420\u0423"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn peach-gradient",
+        onClick: this.back,
+        value: "\u041D\u0430\u0437\u0430\u0434"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateRoom,
         method: "post",
         name: "updateRoom",
-        className: "col-7"
-      }, "UPDATE", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "id"
@@ -31973,7 +32147,8 @@ function (_React$Component) {
         onChange: this.onChangeInput,
         value: this.state.room.type_id || '',
         name: "type_id",
-        id: "types-room"
+        id: "types-room",
+        className: "form-control"
       }, this.fillTypesRoom())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

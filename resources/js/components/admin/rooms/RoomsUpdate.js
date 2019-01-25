@@ -23,10 +23,11 @@ export default class RoomsUpdate extends React.Component {
         this.showFormAddType = this.showFormAddType.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
         this.getTypes = this.getTypes.bind(this);
+        this.back = this.back.bind(this);
     }
 
     fillFormUpdate() {
-        let url = '/public/api/admin/rooms/update/'+ this.props.match.params.id;
+        let url = '/public/api/room/'+ this.props.match.params.id;
         axios.get(url)
             .then(response => {
                 this.setState({
@@ -135,13 +136,18 @@ export default class RoomsUpdate extends React.Component {
         this.fillFormUpdate();
     }
 
+    back() {
+        history.back();
+    }
+
     render() {
         return (
             <section id="update-rooms">
                 <div className="container">
-                    <div className="row d-flex justify-content-center">
-                        <form onSubmit={this.updateRoom} method="post" name="updateRoom" className="col-7">
-                            UPDATE
+                    <div className="row d-flex justify-content-center flex-column align-items-center">
+                        <h1>ОБНОВЛЕНИЕ ДАННЫХ ПО НОМЕРУ</h1>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <form onSubmit={this.updateRoom} method="post" name="updateRoom" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin">
                                 <label htmlFor="id">Номер</label>
                                 <input
@@ -218,7 +224,7 @@ export default class RoomsUpdate extends React.Component {
                                 />
                             </div>
                             <div  className="item-form-admin form-group">
-                                <select onChange={this.onChangeInput} value={this.state.room.type_id || ''} name="type_id" id="types-room">
+                                <select onChange={this.onChangeInput} value={this.state.room.type_id || ''} name="type_id" id="types-room" className="form-control">
                                     {this.fillTypesRoom()}
                                 </select>
                             </div>

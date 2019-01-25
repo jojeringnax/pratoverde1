@@ -10,6 +10,7 @@ class RoomTypesCreate extends React.Component {
         };
         this.submitType = this.submitType.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
+        this.back = this.back.bind(this);
     }
 
     onChangeType(e) {
@@ -32,11 +33,18 @@ class RoomTypesCreate extends React.Component {
             });
     }
 
+    back() {
+        history.back();
+    }
+
+
     render() {
         return (
-            <div id="admin-roomTypesCreate" className="section">
+            <div id="admin-roomTypesCreate" className="section container-content-admin">
                 <div className="container">
-                    <div className="row d-flex justify-content-center">
+                    <div className="row d-flex justify-content-center flex-column align-items-center">
+                        <h1 className="text-center">СОЗДАНИЕ ТИПА НОМЕРА</h1>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                         <form onSubmit={this.submitType} className="border form-group col-xl-8 form-admin z-depth-5">
                             <label htmlFor="created_at">Тип номера</label>
                             <div id="inp-nameType" className="add-types d-flex justify-content-around border border-dark d-flex align-items-center">

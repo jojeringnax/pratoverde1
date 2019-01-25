@@ -11,6 +11,7 @@ class ProblemsCategory extends React.Component {
         this.getCategoies = this.getCategoies.bind(this);
         this.createTable = this.createTable.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
+        this.back = this.back.bind(this);
     }
     getCategoies() {
         let url = '/public/api/admin/problem_categories';
@@ -64,12 +65,17 @@ class ProblemsCategory extends React.Component {
         this.getCategoies();
     }
 
+    back() {
+        history.back();
+    }
+
     render() {
         return (
             <div id="admin-page" className="section container-content-admin">
-                <h1 className="text-center">КАТЕГОРИИ ПРОБЛЕМ</h1>
                 <div className="container">
                     <div className="row">
+                        <h1 className="text-center">КАТЕГОРИИ ПРОБЛЕМ</h1>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                         <table className="table table-bordered table-striped">
                             <thead>
                                 <tr>

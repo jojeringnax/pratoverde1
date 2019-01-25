@@ -10,10 +10,11 @@ class RoomTypesUpdate extends React.Component {
         this.getType = this.getType.bind(this);
         this.updateType = this.updateType.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
+        this.back = this.back.bind(this);
     }
 
     getType(){
-        let url = '/public/api/admin/room_type/' + this.props.match.params.id;
+        let url = '/public/api/room_type/' + this.props.match.params.id;
         axios.get(url)
             .then(res => {
                 //console.log(res);
@@ -51,11 +52,17 @@ class RoomTypesUpdate extends React.Component {
         this.getType();
     }
 
+    back() {
+        history.back();
+    }
+
     render() {
         return (
-            <div id="admin-roomTypesUpdate" className="section">
+            <div id="admin-roomTypesUpdate" className="section container-content-admin">
                 <div className="container">
                     <div className="row d-flex justify-content-center">
+                        <h1 className="text-center">ОБНОВЛЕНИЕ ТИПА НОМЕРОВ</h1>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                         <form onSubmit={this.updateType} className="border form-group col-xl-8 form-admin z-depth-5">
                                 <label htmlFor="created_at">Тип номера</label>
                                 <div id="inp-nameType" className="add-types d-flex justify-content-around border border-dark d-flex align-items-center">

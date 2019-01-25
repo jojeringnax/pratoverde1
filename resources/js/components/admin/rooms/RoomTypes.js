@@ -67,14 +67,19 @@ class RoomTypes extends React.Component {
         this.getTypes()
     }
 
+    back() {
+        history.back();
+    }
 
     render() {
         return (
-            <div className="" id="section-roomTypes">
+            <div className="container-content-admin" id="section-roomTypes">
                 <div className="container">
-                    <div className="row">
-                        <table className="table table-striped table-bordered">
-                            <thead>
+                    <div className="row d-flex justify-content-center align-items-center flex-column">
+                         <h1 className="text-center">ТИПЫ КОМНАТ</h1>
+                         <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                         <table className="table table-striped admin-table table-bordered">
+                         <thead className="secondary-color-dark border-secondary">
                                 <tr>
                                     <th>id</th>
                                     <th>Name</th>

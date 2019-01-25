@@ -6,9 +6,11 @@ class ProblemsCategoryCreate extends React.Component {
         super(props);
         this.state = {
             categoryName: ''
-        }
+        };
+
         this.onChangeInput = this.onChangeInput.bind(this);
         this.submitProblemsCategory = this.submitProblemsCategory.bind(this);
+        this.back = this.back.bind(this);
     }
 
     onChangeInput(e) {
@@ -29,12 +31,17 @@ class ProblemsCategoryCreate extends React.Component {
             })
     }
 
+    back() {
+        history.back();
+    }
+
     render() {
         return (
             <div id="admin-problemsCategoriesCreate" className="section container-content-admin">
                 <h1 className="text-center">СОЗДАНИЕ КАТЕГОРИИ ПРОБЛЕМ</h1>
                 <div className="container">
-                    <div className="row d-flex justify-content-center">
+                    <div className="row d-flex justify-content-center flex-column align-items-center">
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                         <form onSubmit={this.submitProblemsCategory} className="border form-group col-xl-8 form-admin z-depth-5">
                             <label htmlFor="name">Название категории</label>
                             <input

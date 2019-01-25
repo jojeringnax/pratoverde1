@@ -16,6 +16,7 @@ class ProblemCreate extends React.Component {
         };
         this.inputOnChange = this.inputOnChange.bind(this);
         this.createProblem = this.createProblem.bind(this);
+        this.back = this.back.bind(this);
     }
 
     inputOnChange(e) {
@@ -27,6 +28,9 @@ class ProblemCreate extends React.Component {
         }, () => {
             //console.log(this.state.problem)
         })
+    }
+    back() {
+        history.back();
     }
 
     createProblem(e) {
@@ -51,6 +55,7 @@ class ProblemCreate extends React.Component {
                 <div className="container">
                     <div className="row d-flex justify-content-start flex-column align-items-center">
                         <div className="title-form"><h1>Опишите проблему</h1></div>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
                         <form onSubmit={this.createProblem}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin form-group">
                                 <label htmlFor="room_id">room_id</label>

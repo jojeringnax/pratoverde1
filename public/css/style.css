@@ -399,6 +399,28 @@ nav .navbar-collapse ul li a {
   padding-left: 0 !important;
 }
 
+.btn-admin-section {
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+.btn-admin-section:hover {
+  background-color: #9933CC;
+  color: white !important;
+}
+
+.dashboard-admin-title {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+  font-weight: bold;
+}
+.dashboard-admin-title div h3 {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 992px) {
   nav .navbar-collapse ul li {
     margin: 0 !important;

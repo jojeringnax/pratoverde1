@@ -45,7 +45,7 @@ Route::get('room_type/{id}', function($id) {
 /**
  * Problem routes
  */
-Route::get('admin/problems', 'Admin\ProblemCotroller@index');
+Route::get('admin/problems', 'Admin\ProblemController@index');
 Route::post('admin/problems/create', 'Admin\ProblemController@create');
 Route::post('admin/problems/update/{id}', 'Admin\ProblemController@update');
 Route::delete('admin/problems/delete/{id}', 'Admin\ProblemController@delete');

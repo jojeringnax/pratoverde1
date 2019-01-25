@@ -19,6 +19,7 @@ class RoomsCreate extends React.Component {
         this.getTypes = this.getTypes.bind(this);
         this.showTypes = this.showTypes.bind(this);
         this.inputOnChange = this.inputOnChange.bind(this);
+        this.back = this.back.bind(this);
     }
 
     showTypes() {
@@ -33,6 +34,7 @@ class RoomsCreate extends React.Component {
             <select
                 name="type_id"
                 id="types-room"
+                className="form-control"
                 onChange={this.inputOnChange}
             >
                 {options}
@@ -93,12 +95,18 @@ class RoomsCreate extends React.Component {
         this.getTypes();
     }
 
+    back() {
+        history.back();
+    }
+
     render() {
         return (
-            <div id="create-rooms" className="section">
+            <div id="create-rooms" className="section container-content-admin">
                 <div className="container">
-                    <div className="row d-flex justify-content-center">
-                        <form name="room" className="col-7">
+                    <div className="row d-flex justify-content-start flex-column align-items-center">
+                        <h1 className="text-center">СОЗДАНИЕ НОМЕРА</h1>
+                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <form name="room" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin">
                                 <label htmlFor="id">Номер</label>
                                 <input
@@ -169,7 +177,7 @@ class RoomsCreate extends React.Component {
                                 required
                             />
                         </div>
-                        <div className="item-form-admin form-group">
+                        <div className="item-form-admin form-group form">
                             {this.showTypes()}
                         </div>
 
