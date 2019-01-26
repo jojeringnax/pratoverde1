@@ -15,10 +15,18 @@ class Admin extends React.Component {
                                 <h3>DASHBOARD</h3>
                             </div>
                             <div className="card-body d-flex justify-content-around">
-                                <Link className="col-3 btn-admin-section card" to="/public/admin/problems"> PROBLEMS</Link>
-                                <Link className="col-3 btn-admin-section card" to="/public/admin/rooms"> ROOMS</Link>
-                                <Link className="col-3 btn-admin-section card" to="/">BOOKING</Link>
-                                <Link className="col-3 btn-admin-section card" to="">CUSTOMER</Link>
+                                <div className="col-3 ">
+                                    <Link className="btn-admin-section card" to="/public/admin/problems"> PROBLEMS</Link>
+                                </div>
+                                <div className="col-3 ">
+                                    <Link className="btn-admin-section card" to="/public/admin/rooms"> ROOMS</Link>
+                                </div>
+                                <div className="col-3 ">
+                                    <Link className="btn-admin-section card" to="/">BOOKING</Link>
+                                </div>
+                                <div className="col-3 ">
+                                    <Link className="btn-admin-section card" to="">CUSTOMER</Link>
+                                </div>
                             </div>
                         </div>
                     </div>

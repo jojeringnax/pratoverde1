@@ -9,8 +9,8 @@ export default class RoomsIndex extends React.Component {
             rooms : []
         };
         this.deleteRoom = this.deleteRoom.bind(this);
-        this.back = this.back.bind(this);
     }
+
     componentDidMount() {
         axios.get('/public/api/admin/rooms')
             .then(response => {
@@ -59,16 +59,12 @@ export default class RoomsIndex extends React.Component {
         return table
     };
 
-    back() {
-        history.back();
-    }
-
     render() {
         return (
             <div id="admin-rooms" className="section">
                 <div className="container container-content-admin">
                     <div className="row">
-                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
                         <table className="table table-striped admin-table table-bordered">
                             <thead className="secondary-color-dark border-secondary">
                                 <tr>

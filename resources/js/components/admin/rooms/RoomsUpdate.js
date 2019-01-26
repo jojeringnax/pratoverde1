@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 export default class RoomsUpdate extends React.Component {
     constructor(props) {
@@ -23,7 +24,6 @@ export default class RoomsUpdate extends React.Component {
         this.showFormAddType = this.showFormAddType.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
         this.getTypes = this.getTypes.bind(this);
-        this.back = this.back.bind(this);
     }
 
     fillFormUpdate() {
@@ -50,7 +50,7 @@ export default class RoomsUpdate extends React.Component {
                 });
             })
             .catch(function(error) {
-                console.log(error);
+                //console.log(error);
             });
     }
 
@@ -63,12 +63,14 @@ export default class RoomsUpdate extends React.Component {
         axios.post(url, formData)
             .then(function (response) {
                 alert('Данные обновлены');
+                document.location.href = '/public/admin/rooms'
             })
             .catch(function (error) {
                 console.log(error);
                 alert('Такой номер уже есть');
             });
     }
+
     onChangeInput(e) {
         this.setState({
             room : {
@@ -78,9 +80,6 @@ export default class RoomsUpdate extends React.Component {
         }, function(){
             //console.log(this.state.room);
         });
-
-
-
     }
 
     changeCheckbox(e) {
@@ -136,17 +135,13 @@ export default class RoomsUpdate extends React.Component {
         this.fillFormUpdate();
     }
 
-    back() {
-        history.back();
-    }
-
     render() {
         return (
             <section id="update-rooms">
                 <div className="container">
                     <div className="row d-flex justify-content-center flex-column align-items-center">
                         <h1>ОБНОВЛЕНИЕ ДАННЫХ ПО НОМЕРУ</h1>
-                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <Link to="/public/admin/rooms" className="btn peach-gradient" >Назад</Link>
                         <form onSubmit={this.updateRoom} method="post" name="updateRoom" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin">
                                 <label htmlFor="id">Номер</label>

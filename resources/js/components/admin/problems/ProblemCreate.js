@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class ProblemCreate extends React.Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class ProblemCreate extends React.Component {
                 <div className="container">
                     <div className="row d-flex justify-content-start flex-column align-items-center">
                         <div className="title-form"><h1>Опишите проблему</h1></div>
-                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
                         <form onSubmit={this.createProblem}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin form-group">
                                 <label htmlFor="room_id">room_id</label>

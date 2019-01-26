@@ -29870,19 +29870,27 @@ function (_React$Component) {
         className: "card-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "DASHBOARD")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body d-flex justify-content-around"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3 "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "col-3 btn-admin-section card",
+        className: "btn-admin-section card",
         to: "/public/admin/problems"
-      }, " PROBLEMS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "col-3 btn-admin-section card",
+      }, " PROBLEMS")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3 "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn-admin-section card",
         to: "/public/admin/rooms"
-      }, " ROOMS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "col-3 btn-admin-section card",
+      }, " ROOMS")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3 "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn-admin-section card",
         to: "/"
-      }, "BOOKING"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "col-3 btn-admin-section card",
+      }, "BOOKING")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3 "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn-admin-section card",
         to: ""
-      }, "CUSTOMER"))))));
+      }, "CUSTOMER")))))));
     }
   }]);
 
@@ -29906,6 +29914,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -29927,6 +29936,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -29996,12 +30006,10 @@ function (_React$Component) {
         className: "row d-flex justify-content-start flex-column align-items-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u043F\u0438\u0448\u0438\u0442\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u043F\u0438\u0448\u0438\u0442\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/problems",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.createProblem,
         className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30106,6 +30114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -30127,6 +30136,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -30157,16 +30167,10 @@ function (_React$Component) {
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateProblem = _this.updateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.fillFormUpdateProblem = _this.fillFormUpdateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(ProblemUpdate, [{
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "fillFormUpdateProblem",
     value: function fillFormUpdateProblem() {
       var _this2 = this;
@@ -30221,12 +30225,10 @@ function (_React$Component) {
         className: "row d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u041F\u0420\u041E\u0411\u041B\u0415\u041C\u042B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u041F\u0420\u041E\u0411\u041B\u0415\u041C\u042B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/problems",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateProblem,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30390,7 +30392,6 @@ function (_React$Component) {
     _this.getProblems = _this.getProblems.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createTable = _this.createTable.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteProblem = _this.deleteProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -30473,11 +30474,6 @@ function (_React$Component) {
       this.getProblems();
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30487,12 +30483,10 @@ function (_React$Component) {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-striped admin-table table-bordered"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
         className: "secondary-color-dark border-secondary"
@@ -31108,11 +31102,6 @@ function (_React$Component) {
       this.getTypes();
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -31124,12 +31113,10 @@ function (_React$Component) {
         className: "row d-flex justify-content-center align-items-center flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u0422\u0418\u041F\u042B \u041A\u041E\u041C\u041D\u0410\u0422"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      }, "\u0422\u0418\u041F\u042B \u041A\u041E\u041C\u041D\u0410\u0422"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/rooms",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-striped admin-table table-bordered"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
         className: "secondary-color-dark border-secondary"
@@ -31199,7 +31186,6 @@ function (_React$Component) {
     };
     _this.submitType = _this.submitType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeType = _this.onChangeType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31220,15 +31206,11 @@ function (_React$Component) {
       }).then(function (response) {
         console.log(response);
         alert('Тип номера добавлен');
+        document.location.href = "/public/admin/rooms/types";
       }).catch(function (error) {
         console.log(error);
         alert('Такой номер уже есть');
       });
-    }
-  }, {
-    key: "back",
-    value: function back() {
-      history.back();
     }
   }, {
     key: "render",
@@ -31242,12 +31224,11 @@ function (_React$Component) {
         className: "row d-flex justify-content-center flex-column align-items-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u0422\u0418\u041F\u0410 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
+      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u0422\u0418\u041F\u0410 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/public/admin/rooms/types",
         className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        value: ""
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.submitType,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31330,7 +31311,6 @@ function (_React$Component) {
     _this.getType = _this.getType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateType = _this.updateType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeType = _this.onChangeType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31375,11 +31355,6 @@ function (_React$Component) {
       this.getType();
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -31391,12 +31366,10 @@ function (_React$Component) {
         className: "row d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u0422\u0418\u041F\u0410 \u041D\u041E\u041C\u0415\u0420\u041E\u0412"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u0422\u0418\u041F\u0410 \u041D\u041E\u041C\u0415\u0420\u041E\u0412"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/public/admin/rooms/types",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateType,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31439,6 +31412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -31460,6 +31434,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -31491,7 +31466,6 @@ function (_React$Component) {
     _this.getTypes = _this.getTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.showTypes = _this.showTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31529,7 +31503,15 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/public/api/admin/room_types").then(function (response) {
         _this2.setState({
           types: response.data
+        }, function () {
+          _this2.setState({
+            room: _objectSpread({}, _this2.state.room, {
+              type_id: _this2.state.types[0]['id']
+            })
+          });
         });
+
+        console.log(_this2.state.types[0]['id']);
       }).catch(function (error) {//console.log(error);
       });
     }
@@ -31556,17 +31538,13 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/rooms/create', formData).then(function (response) {
         //console.log(response);
         alert('Номер добавлен');
+        document.location.href = '/public/admin/rooms';
       }).catch(function (error) {});
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getTypes();
-    }
-  }, {
-    key: "back",
-    value: function back() {
-      history.back();
     }
   }, {
     key: "render",
@@ -31580,12 +31558,11 @@ function (_React$Component) {
         className: "row d-flex justify-content-start flex-column align-items-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
+      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/rooms",
         className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        value: ""
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         name: "room",
         className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -31729,7 +31706,6 @@ function (_React$Component) {
       rooms: []
     };
     _this.deleteRoom = _this.deleteRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31794,11 +31770,6 @@ function (_React$Component) {
       return table;
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -31808,12 +31779,10 @@ function (_React$Component) {
         className: "container container-content-admin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-striped admin-table table-bordered"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
         className: "secondary-color-dark border-secondary"
@@ -31864,6 +31833,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -31885,6 +31855,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -31919,7 +31890,6 @@ function (_React$Component) {
     _this.showFormAddType = _this.showFormAddType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.getTypes = _this.getTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31948,8 +31918,7 @@ function (_React$Component) {
         _this3.setState({
           types: response.data
         });
-      }).catch(function (error) {
-        console.log(error);
+      }).catch(function (error) {//console.log(error);
       });
     }
   }, {
@@ -31961,6 +31930,7 @@ function (_React$Component) {
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, formData).then(function (response) {
         alert('Данные обновлены');
+        document.location.href = '/public/admin/rooms';
       }).catch(function (error) {
         console.log(error);
         alert('Такой номер уже есть');
@@ -32045,11 +32015,6 @@ function (_React$Component) {
       this.fillFormUpdate();
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -32058,12 +32023,10 @@ function (_React$Component) {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row d-flex justify-content-center flex-column align-items-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u0414\u0410\u041D\u041D\u042B\u0425 \u041F\u041E \u041D\u041E\u041C\u0415\u0420\u0423"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u041E\u0411\u041D\u041E\u0412\u041B\u0415\u041D\u0418\u0415 \u0414\u0410\u041D\u041D\u042B\u0425 \u041F\u041E \u041D\u041E\u041C\u0415\u0420\u0423"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/public/admin/rooms",
+        className: "btn peach-gradient"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.updateRoom,
         method: "post",
         name: "updateRoom",

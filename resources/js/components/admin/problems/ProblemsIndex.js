@@ -13,7 +13,6 @@ class ProblemsIndex extends React.Component {
         this.getProblems = this.getProblems.bind(this);
         this.createTable =this.createTable.bind(this);
         this.deleteProblem = this.deleteProblem.bind(this);
-        this.back = this.back.bind(this);
     }
 
     getProblems() {
@@ -77,16 +76,12 @@ class ProblemsIndex extends React.Component {
         this.getProblems();
     }
 
-    back() {
-        history.back();
-    }
-
     render() {
         return (
             <div id="problems-page " className="section container-content-admin">
                 <div className="container">
                     <div className="row">
-                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
                         <table className="table table-striped admin-table table-bordered">
                             <thead className="secondary-color-dark border-secondary">
                                 <tr className="">

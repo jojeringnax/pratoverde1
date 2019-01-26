@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
+
 class RoomsCreate extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +21,6 @@ class RoomsCreate extends React.Component {
         this.getTypes = this.getTypes.bind(this);
         this.showTypes = this.showTypes.bind(this);
         this.inputOnChange = this.inputOnChange.bind(this);
-        this.back = this.back.bind(this);
     }
 
     showTypes() {
@@ -30,6 +31,7 @@ class RoomsCreate extends React.Component {
         for(let i=0; i < this.state.types.length; i++) {
             options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
         }
+
         return <div className="item-form-admin form-group">
             <select
                 name="type_id"
@@ -47,7 +49,16 @@ class RoomsCreate extends React.Component {
             .then(response => {
                 this.setState({
                     types: response.data
+                }, () => {
+                    this.setState({
+                        room: {
+                            ...this.state.room,
+                            type_id: this.state.types[0]['id']
+                        }
+                    })
                 });
+
+                console.log(this.state.types[0]['id'])
             })
             .catch(function(error) {
                 //console.log(error);
@@ -85,6 +96,7 @@ class RoomsCreate extends React.Component {
         .then(function (response) {
             //console.log(response);
             alert('Номер добавлен');
+            document.location.href = '/public/admin/rooms'
         })
         .catch(error => {
 
@@ -93,11 +105,9 @@ class RoomsCreate extends React.Component {
 
     componentDidMount() {
         this.getTypes();
+
     }
 
-    back() {
-        history.back();
-    }
 
     render() {
         return (
@@ -105,7 +115,7 @@ class RoomsCreate extends React.Component {
                 <div className="container">
                     <div className="row d-flex justify-content-start flex-column align-items-center">
                         <h1 className="text-center">СОЗДАНИЕ НОМЕРА</h1>
-                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <Link to="/public/admin/rooms" className="btn peach-gradient" value="">Назад</Link>
                         <form name="room" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin">
                                 <label htmlFor="id">Номер</label>
