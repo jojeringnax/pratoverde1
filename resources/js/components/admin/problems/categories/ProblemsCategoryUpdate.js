@@ -49,6 +49,7 @@ class ProblemsCategoryUpdate extends React.Component {
         axios.post(url, {name: data})
             .then(res => {
                 console.log(res)
+                document.location.href = '/public/admin/problems/categories';
             })
             .catch(err => {
 

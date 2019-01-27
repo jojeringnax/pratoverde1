@@ -22,7 +22,7 @@ class Admin extends React.Component {
                                     <Link className="btn-admin-section card" to="/public/admin/rooms"> ROOMS</Link>
                                 </div>
                                 <div className="col-3 ">
-                                    <Link className="btn-admin-section card" to="/">BOOKING</Link>
+                                    <Link className="btn-admin-section card" to="/public/admin/booking">BOOKING</Link>
                                 </div>
                                 <div className="col-3 ">
                                     <Link className="btn-admin-section card" to="">CUSTOMER</Link>

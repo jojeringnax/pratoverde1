@@ -42,6 +42,7 @@ class ProblemCreate extends React.Component {
             .then(function (response) {
                 console.log(response);
                 alert('Проблема создана добавлен');
+                document.location.href = '/public/admin/problems';
             })
             .catch(error => {
                 console.log(error.response.data.code);

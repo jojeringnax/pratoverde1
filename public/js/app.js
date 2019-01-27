@@ -29884,7 +29884,7 @@ function (_React$Component) {
         className: "col-3 "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "btn-admin-section card",
-        to: "/"
+        to: "/public/admin/booking"
       }, "BOOKING")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -29898,6 +29898,201 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Admin);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/booking/BookCreate.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/admin/booking/BookCreate.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var BookCreate =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BookCreate, _React$Component);
+
+  function BookCreate(props) {
+    _classCallCheck(this, BookCreate);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(BookCreate).call(this, props));
+  }
+
+  _createClass(BookCreate, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "admin-page",
+        className: "section container-content-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex justify-content-center col-12"
+      }, "BookingCreate")));
+    }
+  }]);
+
+  return BookCreate;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BookCreate);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/booking/BookIndex.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/admin/booking/BookIndex.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var BookIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BookIndex, _React$Component);
+
+  function BookIndex(props) {
+    _classCallCheck(this, BookIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(BookIndex).call(this, props));
+  }
+
+  _createClass(BookIndex, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "admin-page",
+        className: "section container-content-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex justify-content-center col-12"
+      }, "BookingIndex")));
+    }
+  }]);
+
+  return BookIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BookIndex);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/booking/BookUpdate.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/admin/booking/BookUpdate.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var BookUpdate =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BookUpdate, _React$Component);
+
+  function BookUpdate(props) {
+    _classCallCheck(this, BookUpdate);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(BookUpdate).call(this, props));
+  }
+
+  _createClass(BookUpdate, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "admin-page",
+        className: "section container-content-admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex justify-content-center col-12"
+      }, "BookingUpdate")));
+    }
+  }]);
+
+  return BookUpdate;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BookUpdate);
 
 /***/ }),
 
@@ -29989,6 +30184,7 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/problems/create', formData).then(function (response) {
         console.log(response);
         alert('Проблема создана добавлен');
+        document.location.href = '/public/admin/problems';
       }).catch(function (error) {
         console.log(error.response.data.code);
         alert(codes[error.response.data.code]);
@@ -30202,8 +30398,10 @@ function (_React$Component) {
     value: function updateProblem(e) {
       e.preventDefault();
       var formData = this.state.problem;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/problems/update/' + this.props.match.params.id, formData).then(function (response) {//console.log(response);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/problems/update/' + this.props.match.params.id, formData).then(function (response) {
+        //console.log(response);
         //alert('Проблема создана добавлен');
+        document.location.href = '/public/admin/problems';
       }).catch(function (error) {
         alert(codes[error.response.data.code]);
       });
@@ -30771,6 +30969,7 @@ function (_React$Component) {
         name: this.state.categoryName
       }).then(function (res) {
         console.log(res);
+        document.location.href = '/public/admin/problems/categories';
       }).catch(function (err) {});
     }
   }, {
@@ -30919,6 +31118,7 @@ function (_React$Component) {
         name: data
       }).then(function (res) {
         console.log(res);
+        document.location.href = '/public/admin/problems/categories';
       }).catch(function (err) {});
     }
   }, {
@@ -32180,6 +32380,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_problems_categories_ProblemsCategory__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../admin/problems/categories/ProblemsCategory */ "./resources/js/components/admin/problems/categories/ProblemsCategory.js");
 /* harmony import */ var _admin_problems_categories_ProblemsCategoryCreate__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../admin/problems/categories/ProblemsCategoryCreate */ "./resources/js/components/admin/problems/categories/ProblemsCategoryCreate.js");
 /* harmony import */ var _admin_problems_categories_ProblemsCategoryUpdate__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../admin/problems/categories/ProblemsCategoryUpdate */ "./resources/js/components/admin/problems/categories/ProblemsCategoryUpdate.js");
+/* harmony import */ var _admin_booking_BookIndex__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../admin/booking/BookIndex */ "./resources/js/components/admin/booking/BookIndex.js");
+/* harmony import */ var _admin_booking_BookCreate__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../admin/booking/BookCreate */ "./resources/js/components/admin/booking/BookCreate.js");
+/* harmony import */ var _admin_booking_BookUpdate__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../admin/booking/BookUpdate */ "./resources/js/components/admin/booking/BookUpdate.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32226,6 +32429,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
+{
+  /*ADMIN-BOOKING IMPORT*/
+}
 
 
 
@@ -32307,6 +32516,16 @@ if (document.getElementById('root')) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems/categories/update/:id",
     component: _admin_problems_categories_ProblemsCategoryUpdate__WEBPACK_IMPORTED_MODULE_18__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/public/admin/booking",
+    exact: true,
+    component: _admin_booking_BookIndex__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/public/admin/booking/create",
+    component: _admin_booking_BookCreate__WEBPACK_IMPORTED_MODULE_20__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/public/admin/booking/update",
+    component: _admin_booking_BookUpdate__WEBPACK_IMPORTED_MODULE_21__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sorry");

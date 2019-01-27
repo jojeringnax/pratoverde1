@@ -58,6 +58,7 @@ class ProblemUpdate extends React.Component {
             .then(function (response) {
                 //console.log(response);
                 //alert('Проблема создана добавлен');
+                document.location.href = '/public/admin/problems';
             })
             .catch(error => {
                 alert(codes[error.response.data.code]);

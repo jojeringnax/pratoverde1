@@ -21,6 +21,10 @@ import ProblemUpdate from "../admin/problems/ProblemUpdate";
 import ProblemsCategory from '../admin/problems/categories/ProblemsCategory';
 import ProblemsCategoryCreate from '../admin/problems/categories/ProblemsCategoryCreate';
 import ProblemsCategoryUpdate from '../admin/problems/categories/ProblemsCategoryUpdate';
+{/*ADMIN-BOOKING IMPORT*/}
+import BookIndex from "../admin/booking/BookIndex";
+import BookCreate from "../admin/booking/BookCreate";
+import BookUpdate from "../admin/booking/BookUpdate";
 
 
 export default class App extends React.Component {
@@ -56,6 +60,11 @@ if (document.getElementById('root')) {
                 <Route path="/public/admin/problems/categories/" exact component={ProblemsCategory} />
                 <Route path="/public/admin/problems/categories/create" component={ProblemsCategoryCreate} />
                 <Route path="/public/admin/problems/categories/update/:id" component={ProblemsCategoryUpdate} />
+                {/*ADMIN-BOOKING ROUTE*/}
+                <Route path="/public/admin/booking" exact component={BookIndex}/>
+                <Route path="/public/admin/booking/create" component={BookCreate}/>
+                <Route path="/public/admin/booking/update" component={BookUpdate}/>
+
                 <Route render={() => (<div>Sorry</div>)}/>
             </Switch>
         </Router>,
