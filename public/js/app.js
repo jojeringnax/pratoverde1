@@ -31386,6 +31386,7 @@ function (_React$Component) {
     };
     _this.submitType = _this.submitType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeType = _this.onChangeType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.getType = _this.getType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31400,7 +31401,14 @@ function (_React$Component) {
     key: "submitType",
     value: function submitType(e) {
       e.preventDefault();
-      var url = "/public/api/admin/room_types/create";
+      var url;
+
+      if (this.props.match.params.status === "update") {
+        url = "/public/api/admin/room_types/update/" + this.props.match.params.id;
+      } else {
+        url = "/public/api/admin/room_types/create";
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(url, {
         name: this.state.type
       }).then(function (response) {
@@ -31411,6 +31419,29 @@ function (_React$Component) {
         console.log(error);
         alert('Такой номер уже есть');
       });
+    }
+  }, {
+    key: "getType",
+    value: function getType() {
+      var _this2 = this;
+
+      var url;
+
+      if (this.props.match.params.status === "update") {
+        url = '/public/api/room_type/' + this.props.match.params.id;
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(url).then(function (res) {
+          //console.log(res);
+          _this2.setState({
+            type: res.data.name
+          });
+        }).catch(function (err) {});
+      }
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      console.log(this.props.match.params.status);
+      this.getType();
     }
   }, {
     key: "render",
@@ -32491,10 +32522,10 @@ if (document.getElementById('root')) {
     exact: true,
     component: _admin_rooms_RoomTypes__WEBPACK_IMPORTED_MODULE_10__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/public/admin/rooms/types/update/:id",
-    component: _admin_rooms_RoomTypesUpdate__WEBPACK_IMPORTED_MODULE_11__["default"]
+    path: "/public/admin/rooms/types/:status/:id",
+    component: _admin_rooms_RoomTypesCreate__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/public/admin/rooms/types/create",
+    path: "/public/admin/rooms/types/:status",
     component: _admin_rooms_RoomTypesCreate__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems",

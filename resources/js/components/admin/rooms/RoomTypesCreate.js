@@ -10,6 +10,7 @@ class RoomTypesCreate extends React.Component {
         };
         this.submitType = this.submitType.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
+        this.getType = this.getType.bind(this);
     }
 
     onChangeType(e) {
@@ -20,7 +21,13 @@ class RoomTypesCreate extends React.Component {
 
     submitType(e) {
         e.preventDefault();
-        let url = "/public/api/admin/room_types/create";
+        let url;
+        if(this.props.match.params.status === "update") {
+            url = "/public/api/admin/room_types/update/" + this.props.match.params.id;
+        } else {
+            url = "/public/api/admin/room_types/create";
+        }
+
         axios.post(url, {name:this.state.type})
             .then(response => {
                 console.log(response);
@@ -33,6 +40,27 @@ class RoomTypesCreate extends React.Component {
             });
     }
 
+    getType(){
+        let url;
+        if(this.props.match.params.status === "update") {
+            url = '/public/api/room_type/' + this.props.match.params.id;
+            axios.get(url)
+                .then(res => {
+                    //console.log(res);
+                    this.setState({
+                        type: res.data.name
+                    });
+                })
+                .catch(err => {
+
+                });
+        }
+    }
+
+    componentWillMount() {
+        console.log(this.props.match.params.status);
+        this.getType();
+    }
 
     render() {
         return (

@@ -51,8 +51,8 @@ if (document.getElementById('root')) {
                 <Route path="/public/admin/rooms/create" component={RoomsCreate} />
                 <Route path="/public/admin/rooms/update/:id" component={RoomsUpdate} />
                 <Route path="/public/admin/rooms/types" exact component={RoomTypes} />
-                <Route path="/public/admin/rooms/types/update/:id" component={RoomTypesUpdate} />
-                <Route path="/public/admin/rooms/types/create" component={RoomTypesCreate} />
+                <Route path="/public/admin/rooms/types/:status/:id" component={RoomTypesCreate} />
+                <Route path="/public/admin/rooms/types/:status" component={RoomTypesCreate} />
                 {/*ADMIN-PROBLEMS ROUTE*/}
                 <Route path="/public/admin/problems" exact component={ProblemsIndex} />
                 <Route path="/public/admin/problems/create" component={ProblemCreate} />
