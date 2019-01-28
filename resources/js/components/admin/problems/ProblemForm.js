@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
 
-class ProblemCreate extends React.Component {
+class ProblemForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,19 +35,19 @@ class ProblemCreate extends React.Component {
         e.preventDefault();
         let formData = this.state.problem;
         let url;
-        if(this.props.match.params.status === "update"){
+        if(this.props.match.params.id){
             url = '/public/api/admin/problems/update' + this.props.match.params.id;
         } else {
             url = '/public/api/admin/problems/create';
         }
         axios.post(url, formData)
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 alert('Проблема создана добавлен');
                 document.location.href = '/public/admin/problems';
             })
             .catch(error => {
-                console.log(error.response.data.code);
+                //console.log(error.response.data.code);
                 alert(codes[error.response.data.code])
 
             });
@@ -56,7 +56,7 @@ class ProblemCreate extends React.Component {
     fillFormUpdateProblem() {
         let url;
         //console.log(this.props.match);
-        if(this.props.match.params.status === "update"){
+        if(this.props.match.params.id){
             url = '/public/api/problem/' + this.props.match.params.id;
             //console.log(url)
             axios.get(url)
@@ -169,4 +169,4 @@ class ProblemCreate extends React.Component {
     }
 }
 
-export default ProblemCreate
+export default ProblemForm

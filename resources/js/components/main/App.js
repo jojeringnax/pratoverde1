@@ -16,11 +16,9 @@ import RoomTypesUpdate from "../admin/rooms/RoomTypesUpdate";
 import RoomTypesCreate from '../admin/rooms/RoomTypesCreate'
 {/*ADMIN-PROBLEM IMPORT*/}
 import ProblemsIndex from "../admin/problems/ProblemsIndex";
-import ProblemCreate from "../admin/problems/ProblemCreate";
-import ProblemUpdate from "../admin/problems/ProblemUpdate";
+import ProblemForm from "../admin/problems/ProblemForm";
 import ProblemsCategory from '../admin/problems/categories/ProblemsCategory';
-import ProblemsCategoryCreate from '../admin/problems/categories/ProblemsCategoryCreate';
-import ProblemsCategoryUpdate from '../admin/problems/categories/ProblemsCategoryUpdate';
+import ProblemsCategoryForm from '../admin/problems/categories/ProblemsCategoryForm';
 {/*ADMIN-BOOKING IMPORT*/}
 import BookIndex from "../admin/booking/BookIndex";
 import BookCreate from "../admin/booking/BookCreate";
@@ -57,11 +55,11 @@ if (document.getElementById('root')) {
                 {/*ADMIN-PROBLEMS ROUTE*/}
 
                 <Route path="/public/admin/problems" exact component={ProblemsIndex} />
-                <Route path="/public/admin/problems/create" exact component={ProblemCreate} />
-                <Route path="/public/admin/problems/update/:id" component={ProblemCreate} />
+                <Route path="/public/admin/problems/create" component={ProblemForm} />
+                <Route path="/public/admin/problems/update/:id" component={ProblemForm} />
                 <Route path="/public/admin/problems/categories/" exact component={ProblemsCategory} />
-                <Route path="/public/admin/problems/categories/create"  exact component={ProblemsCategoryCreate} />
-                <Route path="/public/admin/problems/categories/update/:id" component={ProblemsCategoryCreate} />
+                <Route path="/public/admin/problems/categories/create"  exact component={ProblemsCategoryForm} />
+                <Route path="/public/admin/problems/categories/update/:id" component={ProblemsCategoryForm} />
 
                 {/*ADMIN-BOOKING ROUTE*/}
                 <Route path="/public/admin/booking" exact component={BookIndex}/>

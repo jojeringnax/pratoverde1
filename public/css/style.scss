@@ -482,6 +482,19 @@ nav {
 
 }
 
+.icons {
+  fill: #d62f2f;
+  width: 30px;
+  height: 30px;
+  &:hover {
+    fill: #ff3535;
+  }
+}
+
+.actions {
+  text-align: center;
+}
+
 @media screen and(max-width: 992px) {
   nav {
     .navbar-collapse {

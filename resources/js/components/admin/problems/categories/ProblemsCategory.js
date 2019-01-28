@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
-
+import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 class ProblemsCategory extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +11,6 @@ class ProblemsCategory extends React.Component {
         this.getCategoies = this.getCategoies.bind(this);
         this.createTable = this.createTable.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
-        this.back = this.back.bind(this);
     }
     getCategoies() {
         let url = '/public/api/admin/problem_categories';
@@ -21,7 +20,7 @@ class ProblemsCategory extends React.Component {
                 this.setState({
                     categories: res.data
                 }, () => {
-                    console.log(this.state.categories);
+                   // console.log(this.state.categories);
                 });
             })
             .catch(err => {
@@ -53,9 +52,9 @@ class ProblemsCategory extends React.Component {
             for(let key in this.state.categories[i]) {
                 row.push(<td key={this.state.categories[i][key]}>{this.state.categories[i][key]}</td>);
             }
-            row.push(<td key="actions">
-                <Link to={urlUpdate + this.state.categories[i]['id']}>Update</Link>
-                <Link onClick={this.deleteRow} data-delete={this.state.categories[i]['name']} to={urlDelete + this.state.categories[i]['id']}>Delete</Link>
+            row.push(<td width="10%" className="actions" key="actions">
+                <Link to={urlUpdate + this.state.categories[i]['id']}><MdModeEdit className="icons"/></Link>
+                <Link onClick={this.deleteRow} data-delete={this.state.categories[i]['name']} to={urlDelete + this.state.categories[i]['id']}><MdDeleteForever className="icons"/></Link>
             </td>);
             table.push(<tr id={this.state.categories[i]['name']} key={i}>{row}</tr>);
         }
@@ -65,17 +64,13 @@ class ProblemsCategory extends React.Component {
         this.getCategoies();
     }
 
-    back() {
-        history.back();
-    }
-
     render() {
         return (
             <div id="admin-page" className="section container-content-admin">
                 <div className="container">
                     <div className="row">
                         <h1 className="text-center">КАТЕГОРИИ ПРОБЛЕМ</h1>
-                        <input type="button" className="btn peach-gradient" onClick={this.back} value="Назад"/>
+                        <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
                         <table className="table table-bordered table-striped">
                             <thead>
                                 <tr>
