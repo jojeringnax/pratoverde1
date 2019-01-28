@@ -47,19 +47,22 @@ if (document.getElementById('root')) {
                 {/*ADMIN SYSTEM ROUTE*/}
                 <Route path="/public/admin" exact component={Admin} />
                 {/*ADMIN-ROOMS ROUTE*/}
+
                 <Route path="/public/admin/rooms" exact component={RoomsIndex} />
                 <Route path="/public/admin/rooms/create" component={RoomsCreate} />
                 <Route path="/public/admin/rooms/update/:id" component={RoomsUpdate} />
                 <Route path="/public/admin/rooms/types" exact component={RoomTypes} />
-                <Route path="/public/admin/rooms/types/:status/:id" component={RoomTypesCreate} />
-                <Route path="/public/admin/rooms/types/:status" component={RoomTypesCreate} />
+                <Route path="/public/admin/rooms/types/:status/:id" exact component={RoomTypesCreate} />
+                <Route path="/public/admin/rooms/types/:status" exact component={RoomTypesCreate} />
                 {/*ADMIN-PROBLEMS ROUTE*/}
+
                 <Route path="/public/admin/problems" exact component={ProblemsIndex} />
-                <Route path="/public/admin/problems/create" component={ProblemCreate} />
-                <Route path="/public/admin/problems/update/:id" component={ProblemUpdate} />
+                <Route path="/public/admin/problems/create" exact component={ProblemCreate} />
+                <Route path="/public/admin/problems/update/:id" component={ProblemCreate} />
                 <Route path="/public/admin/problems/categories/" exact component={ProblemsCategory} />
-                <Route path="/public/admin/problems/categories/create" component={ProblemsCategoryCreate} />
-                <Route path="/public/admin/problems/categories/update/:id" component={ProblemsCategoryUpdate} />
+                <Route path="/public/admin/problems/categories/create"  exact component={ProblemsCategoryCreate} />
+                <Route path="/public/admin/problems/categories/update/:id" component={ProblemsCategoryCreate} />
+
                 {/*ADMIN-BOOKING ROUTE*/}
                 <Route path="/public/admin/booking" exact component={BookIndex}/>
                 <Route path="/public/admin/booking/create" component={BookCreate}/>

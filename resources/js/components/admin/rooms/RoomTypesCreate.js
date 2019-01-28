@@ -58,7 +58,7 @@ class RoomTypesCreate extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props.match.params.status);
+        console.log(this.props.match.params)
         this.getType();
     }
 

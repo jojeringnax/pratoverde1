@@ -13,7 +13,6 @@ class ProblemsCategoryUpdate extends React.Component {
         this.getCategory = this.getCategory.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
         this.updateProblemsCategory = this.updateProblemsCategory.bind(this);
-        this.back = this.back.bind(this);
     }
 
     getCategory() {
@@ -58,10 +57,6 @@ class ProblemsCategoryUpdate extends React.Component {
 
     componentDidMount() {
         this.getCategory();
-    }
-
-    back() {
-        history.back();
     }
 
     render() {

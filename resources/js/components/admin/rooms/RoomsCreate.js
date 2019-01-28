@@ -47,18 +47,25 @@ class RoomsCreate extends React.Component {
     getTypes() {
         axios.get("/public/api/admin/room_types")
             .then(response => {
-                this.setState({
-                    types: response.data
-                }, () => {
+                if(response.data.length !== 0) {
+                    //console.log(response.data)
                     this.setState({
-                        room: {
-                            ...this.state.room,
-                            type_id: this.state.types[0]['id']
-                        }
-                    })
-                });
+                        types: response.data
+                    }, () => {
+                        this.setState({
+                            room: {
+                                ...this.state.room,
+                                type_id: this.state.types[0]['id']
+                            }
+                        })
+                    });
+                    console.log(this.state.types[0]['id'])
+                } else {
+                    return "Типов номеров нет"
+                }
 
-                console.log(this.state.types[0]['id'])
+
+
             })
             .catch(function(error) {
                 //console.log(error);

@@ -30149,17 +30149,17 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProblemCreate).call(this, props));
     _this.state = {
       problem: {
-        room_id: null,
+        room_id: '',
         title: '',
         content: '',
         status: '',
-        parent_id: null,
-        category_id: null
+        parent_id: '',
+        category_id: ''
       }
     };
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createProblem = _this.createProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.fillFormUpdateProblem = _this.fillFormUpdateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -30172,16 +30172,19 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
-    }
-  }, {
     key: "createProblem",
     value: function createProblem(e) {
       e.preventDefault();
       var formData = this.state.problem;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/problems/create', formData).then(function (response) {
+      var url;
+
+      if (this.props.match.params.status === "update") {
+        url = '/public/api/admin/problems/update' + this.props.match.params.id;
+      } else {
+        url = '/public/api/admin/problems/create';
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, formData).then(function (response) {
         console.log(response);
         alert('Проблема создана добавлен');
         document.location.href = '/public/admin/problems';
@@ -30189,6 +30192,34 @@ function (_React$Component) {
         console.log(error.response.data.code);
         alert(codes[error.response.data.code]);
       });
+    }
+  }, {
+    key: "fillFormUpdateProblem",
+    value: function fillFormUpdateProblem() {
+      var _this2 = this;
+
+      var url; //console.log(this.props.match);
+
+      if (this.props.match.params.status === "update") {
+        url = '/public/api/problem/' + this.props.match.params.id; //console.log(url)
+
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
+          console.log(response.data);
+
+          _this2.setState({
+            problem: response.data
+          }, function () {//console.log(response);
+          });
+        }).catch(function (error) {//console.log(error);
+          //alert(codes[error.response.data.code])
+        });
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      //console.log(this.props.match.params.status)
+      this.fillFormUpdateProblem();
     }
   }, {
     key: "render",
@@ -30218,7 +30249,7 @@ function (_React$Component) {
         id: "room_id",
         name: "room_id",
         onChange: this.inputOnChange,
-        value: this.state.problem.room_id
+        value: this.state.problem.room_id || ''
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -30229,18 +30260,17 @@ function (_React$Component) {
         id: "title",
         name: "title",
         onChange: this.inputOnChange,
-        value: this.state.problem.title
+        value: this.state.problem.title || ''
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "content"
       }, "content"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        type: "text",
         className: "form-control",
         id: "content",
         name: "content",
         onChange: this.inputOnChange,
-        value: this.state.problem.content
+        value: this.state.problem.content || ''
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-between"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -30256,7 +30286,7 @@ function (_React$Component) {
         min: "0",
         max: "1",
         onChange: this.inputOnChange,
-        value: this.state.problem.status
+        value: this.state.problem.status || ''
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "parent_id",
         className: "inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12"
@@ -30268,7 +30298,7 @@ function (_React$Component) {
         id: "parent_id",
         name: "parent_id",
         onChange: this.inputOnChange,
-        value: this.state.problem.parent_id
+        value: this.state.problem.parent_id || ''
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -30279,7 +30309,7 @@ function (_React$Component) {
         id: "category_id",
         name: "category_id",
         onChange: this.inputOnChange,
-        value: this.state.problem.category_id
+        value: this.state.problem.category_id || ''
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-outline-primary"
@@ -30912,7 +30942,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30933,6 +30968,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var ProblemsCategoryCreate =
 /*#__PURE__*/
 function (_React$Component) {
@@ -30945,37 +30981,63 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProblemsCategoryCreate).call(this, props));
     _this.state = {
-      categoryName: ''
+      category: {
+        id: '',
+        name: ''
+      }
     };
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.submitProblemsCategory = _this.submitProblemsCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.getCategory = _this.getCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(ProblemsCategoryCreate, [{
+    key: "getCategory",
+    value: function getCategory() {
+      var _this2 = this;
+
+      if (this.props.match.params.status === "update") {
+        var url = '/public/api/problem_category/' + this.props.match.params.id;
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (res) {
+          console.log(res.data);
+
+          _this2.setState({
+            category: res.data
+          });
+        }).catch(function (err) {});
+      }
+    }
+  }, {
     key: "onChangeInput",
     value: function onChangeInput(e) {
-      this.setState({
-        categoryName: e.target.value
-      });
+      this.setState(_objectSpread({}, this.state.category, {
+        name: e.target.value
+      }));
     }
   }, {
     key: "submitProblemsCategory",
     value: function submitProblemsCategory(e) {
       e.preventDefault();
-      var url = '/public/api/admin/problem_categories/create';
+      var url;
+
+      if (this.props.match.params.status === "update") {
+        url = '/public/api/admin/problem_categories/update/' + this.props.match.params.id;
+      } else {
+        url = '/public/api/admin/problem_categories/create';
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
-        name: this.state.categoryName
+        name: this.state.category.name
       }).then(function (res) {
         console.log(res);
         document.location.href = '/public/admin/problems/categories';
       }).catch(function (err) {});
     }
   }, {
-    key: "back",
-    value: function back() {
-      history.back();
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.getCategory();
     }
   }, {
     key: "render",
@@ -30989,12 +31051,10 @@ function (_React$Component) {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row d-flex justify-content-center flex-column align-items-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         className: "btn peach-gradient",
-        onClick: this.back,
-        value: "\u041D\u0430\u0437\u0430\u0434"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        to: "/public/admin/problems/categories"
+      }, "\u041D\u0430\u0437\u0430\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.submitProblemsCategory,
         className: "border form-group col-xl-8 form-admin z-depth-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -31004,7 +31064,7 @@ function (_React$Component) {
         className: "form-control",
         id: "name",
         name: "name",
-        value: this.state.categoryName,
+        value: this.state.category.name,
         onChange: this.onChangeInput
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
@@ -31078,7 +31138,6 @@ function (_React$Component) {
     _this.getCategory = _this.getCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onChangeInput = _this.onChangeInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateProblemsCategory = _this.updateProblemsCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.back = _this.back.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -31125,11 +31184,6 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getCategory();
-    }
-  }, {
-    key: "back",
-    value: function back() {
-      history.back();
     }
   }, {
     key: "render",
@@ -31440,7 +31494,7 @@ function (_React$Component) {
   }, {
     key: "componentWillMount",
     value: function componentWillMount() {
-      console.log(this.props.match.params.status);
+      console.log(this.props.match.params);
       this.getType();
     }
   }, {
@@ -31732,17 +31786,22 @@ function (_React$Component) {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/public/api/admin/room_types").then(function (response) {
-        _this2.setState({
-          types: response.data
-        }, function () {
+        if (response.data.length !== 0) {
+          //console.log(response.data)
           _this2.setState({
-            room: _objectSpread({}, _this2.state.room, {
-              type_id: _this2.state.types[0]['id']
-            })
+            types: response.data
+          }, function () {
+            _this2.setState({
+              room: _objectSpread({}, _this2.state.room, {
+                type_id: _this2.state.types[0]['id']
+              })
+            });
           });
-        });
 
-        console.log(_this2.state.types[0]['id']);
+          console.log(_this2.state.types[0]['id']);
+        } else {
+          return "Типов номеров нет";
+        }
       }).catch(function (error) {//console.log(error);
       });
     }
@@ -32523,9 +32582,11 @@ if (document.getElementById('root')) {
     component: _admin_rooms_RoomTypes__WEBPACK_IMPORTED_MODULE_10__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/rooms/types/:status/:id",
+    exact: true,
     component: _admin_rooms_RoomTypesCreate__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/rooms/types/:status",
+    exact: true,
     component: _admin_rooms_RoomTypesCreate__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems",
@@ -32533,20 +32594,22 @@ if (document.getElementById('root')) {
     component: _admin_problems_ProblemsIndex__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems/create",
+    exact: true,
     component: _admin_problems_ProblemCreate__WEBPACK_IMPORTED_MODULE_14__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems/update/:id",
-    component: _admin_problems_ProblemUpdate__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _admin_problems_ProblemCreate__WEBPACK_IMPORTED_MODULE_14__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems/categories/",
     exact: true,
     component: _admin_problems_categories_ProblemsCategory__WEBPACK_IMPORTED_MODULE_16__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems/categories/create",
+    exact: true,
     component: _admin_problems_categories_ProblemsCategoryCreate__WEBPACK_IMPORTED_MODULE_17__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/problems/categories/update/:id",
-    component: _admin_problems_categories_ProblemsCategoryUpdate__WEBPACK_IMPORTED_MODULE_18__["default"]
+    component: _admin_problems_categories_ProblemsCategoryCreate__WEBPACK_IMPORTED_MODULE_17__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/booking",
     exact: true,

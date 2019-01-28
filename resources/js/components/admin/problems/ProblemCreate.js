@@ -7,17 +7,17 @@ class ProblemCreate extends React.Component {
         super(props);
         this.state = {
             problem: {
-                room_id: null,
+                room_id: '',
                 title: '',
                 content: '',
                 status : '',
-                parent_id: null,
-                category_id: null
+                parent_id: '',
+                category_id: ''
             }
         };
         this.inputOnChange = this.inputOnChange.bind(this);
         this.createProblem = this.createProblem.bind(this);
-        this.back = this.back.bind(this);
+        this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this);
     }
 
     inputOnChange(e) {
@@ -30,15 +30,17 @@ class ProblemCreate extends React.Component {
             //console.log(this.state.problem)
         })
     }
-    back() {
-        history.back();
-    }
 
     createProblem(e) {
         e.preventDefault();
         let formData = this.state.problem;
-
-        axios.post('/public/api/admin/problems/create', formData)
+        let url;
+        if(this.props.match.params.status === "update"){
+            url = '/public/api/admin/problems/update' + this.props.match.params.id;
+        } else {
+            url = '/public/api/admin/problems/create';
+        }
+        axios.post(url, formData)
             .then(function (response) {
                 console.log(response);
                 alert('Проблема создана добавлен');
@@ -49,6 +51,34 @@ class ProblemCreate extends React.Component {
                 alert(codes[error.response.data.code])
 
             });
+
+    }
+    fillFormUpdateProblem() {
+        let url;
+        //console.log(this.props.match);
+        if(this.props.match.params.status === "update"){
+            url = '/public/api/problem/' + this.props.match.params.id;
+            //console.log(url)
+            axios.get(url)
+                .then(response => {
+                    console.log(response.data)
+                    this.setState({
+                        problem: response.data
+                    }, () => {
+                        //console.log(response);
+                    });
+                })
+                .catch(error => {
+                    //console.log(error);
+                    //alert(codes[error.response.data.code])
+                });
+        }
+
+    }
+
+    componentDidMount() {
+        //console.log(this.props.match.params.status)
+        this.fillFormUpdateProblem();
     }
 
     render() {
@@ -67,7 +97,7 @@ class ProblemCreate extends React.Component {
                                     id="room_id"
                                     name="room_id"
                                     onChange={this.inputOnChange}
-                                    value={this.state.problem.room_id}
+                                    value={this.state.problem.room_id || ''}
                                 />
                             </div>
                             <div className="item-form-admin form-group">
@@ -78,18 +108,17 @@ class ProblemCreate extends React.Component {
                                     id="title"
                                     name="title"
                                     onChange={this.inputOnChange}
-                                    value={this.state.problem.title}
+                                    value={this.state.problem.title || ''}
                                 />
                             </div>
                             <div className="item-form-admin form-group">
                                 <label htmlFor="content">content</label>
                                 <textarea
-                                    type="text"
                                     className="form-control"
                                     id="content"
                                     name="content"
-                                    onChange={this.inputOnChange}
-                                    value={this.state.problem.content}
+                                        onChange={this.inputOnChange}
+                                    value={this.state.problem.content || ''}
                                 />
                             </div>
                             <div className="d-flex justify-content-between">
@@ -103,7 +132,7 @@ class ProblemCreate extends React.Component {
                                         min="0"
                                         max="1"
                                         onChange={this.inputOnChange}
-                                        value={this.state.problem.status}
+                                        value={this.state.problem.status || ''}
                                     />
                                 </div>
                                 <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
@@ -114,7 +143,7 @@ class ProblemCreate extends React.Component {
                                         id="parent_id"
                                         name="parent_id"
                                         onChange={this.inputOnChange}
-                                        value={this.state.problem.parent_id}
+                                        value={this.state.problem.parent_id || ''}
                                     />
                                 </div>
                             </div>
@@ -127,7 +156,7 @@ class ProblemCreate extends React.Component {
                                     id="category_id"
                                     name="category_id"
                                     onChange={this.inputOnChange}
-                                    value={this.state.problem.category_id}
+                                    value={this.state.problem.category_id || ''}
                                 />
                             </div>
                             <button type="submit" className="btn btn-outline-primary">Создать проблему</button>
