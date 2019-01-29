@@ -15,6 +15,8 @@ class ProblemsCategoryUpdate extends React.Component {
         this.updateProblemsCategory = this.updateProblemsCategory.bind(this);
     }
 
+
+
     getCategory() {
         let url = '/public/api/problem_category/' + this.props.match.params.id;
         axios.get(url)
