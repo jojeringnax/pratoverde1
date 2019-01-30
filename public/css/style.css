@@ -3,6 +3,10 @@
   color: #2b2a29;
 }
 
+body {
+  padding-bottom: 120px;
+}
+
 .container-content-admin {
   margin-top: 70px;
 }

@@ -48,7 +48,7 @@ if (document.getElementById('root')) {
 
                 <Route path="/public/admin/rooms" exact component={RoomsIndex} />
                 <Route path="/public/admin/rooms/create" component={RoomsCreate} />
-                <Route path="/public/admin/rooms/update/:id" component={RoomsUpdate} />
+                <Route path="/public/admin/rooms/update/:id" component={RoomsCreate} />
                 <Route path="/public/admin/rooms/types" exact component={RoomTypes} />
                 <Route path="/public/admin/rooms/types/:status/:id" exact component={RoomTypesCreate} />
                 <Route path="/public/admin/rooms/types/:status" exact component={RoomTypesCreate} />

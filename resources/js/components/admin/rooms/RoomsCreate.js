@@ -11,16 +11,26 @@ class RoomsCreate extends React.Component {
                 floor: '',
                 status: '',
                 need_wash: '',
-                beds: '',
+                number_of_beds: '',
                 last_washing_date: '',
                 type_id: ''
             },
             types: []
         };
-        this.createRoom = this.createRoom.bind(this);
+        this.submitRoom = this.submitRoom.bind(this);
         this.getTypes = this.getTypes.bind(this);
         this.showTypes = this.showTypes.bind(this);
         this.inputOnChange = this.inputOnChange.bind(this);
+        this.fillFormUpdate = this.fillFormUpdate.bind(this);
+        this.addTitleText = this.addTitleText.bind(this);
+    }
+
+    addTitleText() {
+        if(this.props.match.params.id) {
+            return "ОБНОВЛЕНИЕ НОМЕРА";
+        } else {
+            return "СОЗДАНИЕ НОМЕРА";
+        }
     }
 
     showTypes() {
@@ -29,19 +39,16 @@ class RoomsCreate extends React.Component {
         }
         let options = [];
         for(let i=0; i < this.state.types.length; i++) {
-            options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
+            if(this.state.types[i].id === this.state.room.type_id) {
+                console.log('hui', this.state.types[i].id, this.state.room.type_id);
+                options.unshift(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
+            } else {
+                options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
+            }
         }
 
-        return <div className="item-form-admin form-group">
-            <select
-                name="type_id"
-                id="types-room"
-                className="form-control"
-                onChange={this.inputOnChange}
-            >
-                {options}
-            </select>
-        </div>;
+        return options;
+
     }
 
     getTypes() {
@@ -52,20 +59,18 @@ class RoomsCreate extends React.Component {
                     this.setState({
                         types: response.data
                     }, () => {
-                        this.setState({
-                            room: {
-                                ...this.state.room,
-                                type_id: this.state.types[0]['id']
-                            }
-                        })
+                        if(!this.props.match.params.id) {
+                            this.setState({
+                                room: {
+                                    ...this.state.room,
+                                    type_id: this.state.types[0]['id']
+                                }
+                            });
+                        }
                     });
-                    console.log(this.state.types[0]['id'])
                 } else {
                     return "Типов номеров нет"
                 }
-
-
-
             })
             .catch(function(error) {
                 //console.log(error);
@@ -95,14 +100,21 @@ class RoomsCreate extends React.Component {
         }
     }
 
-    createRoom(e) {
+    submitRoom(e) {
         e.preventDefault();
         let formData = this.state.room;
-
-        axios.post('/public/api/admin/rooms/create', formData)
+        let url, textResponse;
+        if(this.props.match.params.id) {
+            url = '/public/api/admin/rooms/update/' + this.props.match.params.id;
+            textResponse = "Номер обновлен";
+        } else {
+            url = '/public/api/admin/rooms/create';
+            textResponse = 'Номер добавлен';
+        }
+        axios.post(url, formData)
         .then(function (response) {
             //console.log(response);
-            alert('Номер добавлен');
+            alert(textResponse);
             document.location.href = '/public/admin/rooms'
         })
         .catch(error => {
@@ -110,9 +122,26 @@ class RoomsCreate extends React.Component {
         });
     }
 
+    fillFormUpdate() {
+        if(this.props.match.params.id) {
+            let url = '/public/api/room/'+ this.props.match.params.id;
+            axios.get(url)
+                .then(response => {
+                    this.setState({
+                        room: response.data
+                    }, () => {
+                        this.getTypes();
+                    });
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
+        }
+    };
+
     componentDidMount() {
         this.getTypes();
-
+        this.fillFormUpdate();
     }
 
 
@@ -121,7 +150,7 @@ class RoomsCreate extends React.Component {
             <div id="create-rooms" className="section container-content-admin">
                 <div className="container">
                     <div className="row d-flex justify-content-start flex-column align-items-center">
-                        <h1 className="text-center">СОЗДАНИЕ НОМЕРА</h1>
+                        <h1 className="text-center">{this.addTitleText()}</h1>
                         <Link to="/public/admin/rooms" className="btn peach-gradient" value="">Назад</Link>
                         <form name="room" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin">
@@ -173,12 +202,12 @@ class RoomsCreate extends React.Component {
                             <div className="item-form-admin">
                                 <label htmlFor="beds">Количество кроватей</label>
                                 <input
-                                    name="beds"
+                                    name="number_of_beds"
                                     type="number"
                                     id="beds"
                                     className="form-control"
                                     max="5"
-                                    value={this.state.room.beds}
+                                    value={this.state.room.number_of_beds}
                                     onChange={this.inputOnChange}
                                 />
                             </div>
@@ -195,10 +224,12 @@ class RoomsCreate extends React.Component {
                             />
                         </div>
                         <div className="item-form-admin form-group form">
-                            {this.showTypes()}
+                            <select onChange={this.inputOnChange} value={this.state.room.type_id || ''} name="type_id" id="types-room" className="form-control">
+                                {this.showTypes()}
+                            </select>
                         </div>
 
-                            <button onClick={this.createRoom} className="btn btn-primary" type="submit">Сохранить</button>
+                            <button onClick={this.submitRoom} className="btn btn-primary" type="submit">Сохранить</button>
                         </form>
                     </div>
                 </div>

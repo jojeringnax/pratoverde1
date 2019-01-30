@@ -35030,6 +35030,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _SubProblem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SubProblem */ "./resources/js/components/admin/problems/SubProblem.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -35056,6 +35057,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var ProblemForm =
 /*#__PURE__*/
 function (_React$Component) {
@@ -35068,6 +35070,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProblemForm).call(this, props));
     _this.state = {
+      room_id: '3',
       problem: {
         room_id: '',
         title: '',
@@ -35080,10 +35083,20 @@ function (_React$Component) {
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createProblem = _this.createProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.fillFormUpdateProblem = _this.fillFormUpdateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.textButton = _this.textButton.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(ProblemForm, [{
+    key: "textButton",
+    value: function textButton() {
+      if (this.props.match.params.id) {
+        return "Обновить проблему";
+      } else {
+        return "Создать проблему";
+      }
+    }
+  }, {
     key: "inputOnChange",
     value: function inputOnChange(e) {
       this.setState({
@@ -35099,7 +35112,7 @@ function (_React$Component) {
       var url;
 
       if (this.props.match.params.id) {
-        url = '/public/api/admin/problems/update' + this.props.match.params.id;
+        url = '/public/api/admin/problems/update/' + this.props.match.params.id;
       } else {
         url = '/public/api/admin/problems/create';
       }
@@ -35124,11 +35137,14 @@ function (_React$Component) {
         url = '/public/api/problem/' + this.props.match.params.id; //console.log(url)
 
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
-          console.log(response.data);
-
-          _this2.setState({
+          //console.log(response.data)
+          var nextState = Object.assign({}, _this2.state, {
+            room_id: response.data.room_id,
             problem: response.data
-          }, function () {//console.log(response);
+          });
+
+          _this2.setState(nextState, function () {
+            console.log(_this2.state);
           });
         }).catch(function (error) {//console.log(error);
           //alert(codes[error.response.data.code])
@@ -35140,6 +35156,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       //console.log(this.props.match.params.status)
       this.fillFormUpdateProblem();
+      console.log('parent', this.state.room_id);
     }
   }, {
     key: "render",
@@ -35230,13 +35247,17 @@ function (_React$Component) {
         name: "category_id",
         onChange: this.inputOnChange,
         value: this.state.problem.category_id || ''
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-between"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-outline-primary"
-      }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.textButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "btn btn-outline-secondary"
-      }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0434\u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443"))));
+      }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0434\u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443"))), console.log('room_id', this.state.room_id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubProblem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        room_id: this.state.room_id
+      }))));
     }
   }]);
 
@@ -35445,6 +35466,179 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (ProblemsIndex);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/problems/SubProblem.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/admin/problems/SubProblem.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+var SubProblem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SubProblem, _React$Component);
+
+  function SubProblem(props) {
+    var _this;
+
+    _classCallCheck(this, SubProblem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SubProblem).call(this, props));
+    _this.state = {
+      subproblem: {
+        room_id: '',
+        title: '',
+        content: '',
+        status: '',
+        parent_id: '',
+        category_id: ''
+      }
+    };
+    _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(SubProblem, [{
+    key: "inputOnChange",
+    value: function inputOnChange() {
+      console.log('kuku');
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log('prev', prevProps, prevState, this.props.room_id);
+
+      if (prevProps.room_id !== this.props.room_id) {
+        this.setState({
+          subproblem: _objectSpread({}, this.state.subproblem, {
+            parent_id: this.props.room_id
+          })
+        }, function () {//console.log('kuku', this.state.subproblem);
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-subProblem col-12 d-flex justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "room_id"
+      }, "room_id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "room_id",
+        name: "room_id",
+        onChange: this.inputOnChange,
+        value: this.state.subproblem.room_id || ''
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "title"
+      }, "title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "title",
+        name: "title",
+        onChange: this.inputOnChange,
+        value: this.state.subproblem.title || ''
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "content"
+      }, "content"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "form-control",
+        id: "content",
+        name: "content",
+        onChange: this.inputOnChange,
+        value: this.state.subproblem.content || ''
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-between"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "status",
+        className: "inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "status"
+      }, "status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        className: "form-control",
+        id: "status",
+        name: "status",
+        min: "0",
+        max: "1",
+        onChange: this.inputOnChange,
+        value: this.state.subproblem.status || ''
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "parent_id",
+        className: "inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "parent_id"
+      }, "parent_id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        className: "form-control",
+        id: "parent_id",
+        name: "parent_id",
+        onChange: this.inputOnChange,
+        value: this.props.room_id || ''
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item-form-admin form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "category_id"
+      }, "category_id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        className: "form-control",
+        id: "category_id",
+        name: "category_id",
+        onChange: this.inputOnChange,
+        value: this.state.subproblem.category_id || ''
+      }))));
+    }
+  }]);
+
+  return SubProblem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (SubProblem);
 
 /***/ }),
 
@@ -36279,20 +36473,31 @@ function (_React$Component) {
         floor: '',
         status: '',
         need_wash: '',
-        beds: '',
+        number_of_beds: '',
         last_washing_date: '',
         type_id: ''
       },
       types: []
     };
-    _this.createRoom = _this.createRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.submitRoom = _this.submitRoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.getTypes = _this.getTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.showTypes = _this.showTypes.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.fillFormUpdate = _this.fillFormUpdate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.addTitleText = _this.addTitleText.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(RoomsCreate, [{
+    key: "addTitleText",
+    value: function addTitleText() {
+      if (this.props.match.params.id) {
+        return "ОБНОВЛЕНИЕ НОМЕРА";
+      } else {
+        return "СОЗДАНИЕ НОМЕРА";
+      }
+    }
+  }, {
     key: "showTypes",
     value: function showTypes() {
       if (this.state.types.length === 0) {
@@ -36302,21 +36507,23 @@ function (_React$Component) {
       var options = [];
 
       for (var i = 0; i < this.state.types.length; i++) {
-        options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          name: this.state.types[i].id,
-          key: i,
-          value: this.state.types[i].id
-        }, this.state.types[i].name));
+        if (this.state.types[i].id === this.state.room.type_id) {
+          console.log('hui', this.state.types[i].id, this.state.room.type_id);
+          options.unshift(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            name: this.state.types[i].id,
+            key: i,
+            value: this.state.types[i].id
+          }, this.state.types[i].name));
+        } else {
+          options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            name: this.state.types[i].id,
+            key: i,
+            value: this.state.types[i].id
+          }, this.state.types[i].name));
+        }
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item-form-admin form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        name: "type_id",
-        id: "types-room",
-        className: "form-control",
-        onChange: this.inputOnChange
-      }, options));
+      return options;
     }
   }, {
     key: "getTypes",
@@ -36329,14 +36536,14 @@ function (_React$Component) {
           _this2.setState({
             types: response.data
           }, function () {
-            _this2.setState({
-              room: _objectSpread({}, _this2.state.room, {
-                type_id: _this2.state.types[0]['id']
-              })
-            });
+            if (!_this2.props.match.params.id) {
+              _this2.setState({
+                room: _objectSpread({}, _this2.state.room, {
+                  type_id: _this2.state.types[0]['id']
+                })
+              });
+            }
           });
-
-          console.log(_this2.state.types[0]['id']);
         } else {
           return "Типов номеров нет";
         }
@@ -36359,20 +36566,48 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "createRoom",
-    value: function createRoom(e) {
+    key: "submitRoom",
+    value: function submitRoom(e) {
       e.preventDefault();
       var formData = this.state.room;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/rooms/create', formData).then(function (response) {
+      var url, textResponse;
+
+      if (this.props.match.params.id) {
+        url = '/public/api/admin/rooms/update/' + this.props.match.params.id;
+        textResponse = "Номер обновлен";
+      } else {
+        url = '/public/api/admin/rooms/create';
+        textResponse = 'Номер добавлен';
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, formData).then(function (response) {
         //console.log(response);
-        alert('Номер добавлен');
+        alert(textResponse);
         document.location.href = '/public/admin/rooms';
       }).catch(function (error) {});
+    }
+  }, {
+    key: "fillFormUpdate",
+    value: function fillFormUpdate() {
+      var _this3 = this;
+
+      if (this.props.match.params.id) {
+        var url = '/public/api/room/' + this.props.match.params.id;
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
+          _this3.setState({
+            room: response.data
+          }, function () {
+            _this3.getTypes();
+          });
+        }).catch(function (error) {//console.log(error);
+        });
+      }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getTypes();
+      this.fillFormUpdate();
     }
   }, {
     key: "render",
@@ -36386,7 +36621,7 @@ function (_React$Component) {
         className: "row d-flex justify-content-start flex-column align-items-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "text-center"
-      }, "\u0421\u041E\u0417\u0414\u0410\u041D\u0418\u0415 \u041D\u041E\u041C\u0415\u0420\u0410"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }, this.addTitleText()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/public/admin/rooms",
         className: "btn peach-gradient",
         value: ""
@@ -36446,12 +36681,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "beds"
       }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u0440\u043E\u0432\u0430\u0442\u0435\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "beds",
+        name: "number_of_beds",
         type: "number",
         id: "beds",
         className: "form-control",
         max: "5",
-        value: this.state.room.beds,
+        value: this.state.room.number_of_beds,
         onChange: this.inputOnChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group"
@@ -36467,8 +36702,14 @@ function (_React$Component) {
         required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group form"
-      }, this.showTypes()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.createRoom,
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.inputOnChange,
+        value: this.state.room.type_id || '',
+        name: "type_id",
+        id: "types-room",
+        className: "form-control"
+      }, this.showTypes())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.submitRoom,
         className: "btn btn-primary",
         type: "submit"
       }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C")))));
@@ -37109,7 +37350,7 @@ if (document.getElementById('root')) {
     component: _admin_rooms_RoomsCreate__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/rooms/update/:id",
-    component: _admin_rooms_RoomsUpdate__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _admin_rooms_RoomsCreate__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/rooms/types",
     exact: true,

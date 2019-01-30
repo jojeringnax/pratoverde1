@@ -4,6 +4,9 @@ $mainFontSize: 16px;
   font-size: $mainFontSize;
   color: $mainColorText;
 }
+body {
+  padding-bottom: 120px;
+}
 
 .container-content-admin {
   margin-top: 70px;

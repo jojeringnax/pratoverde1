@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import SubProblem from "./SubProblem";
 
 class ProblemForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            room_id: '3',
             problem: {
                 room_id: '',
                 title: '',
@@ -18,6 +20,15 @@ class ProblemForm extends React.Component {
         this.inputOnChange = this.inputOnChange.bind(this);
         this.createProblem = this.createProblem.bind(this);
         this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this);
+        this.textButton = this.textButton.bind(this);
+    }
+
+    textButton() {
+        if(this.props.match.params.id) {
+            return "Обновить проблему";
+        } else {
+            return "Создать проблему";
+        }
     }
 
     inputOnChange(e) {
@@ -31,12 +42,13 @@ class ProblemForm extends React.Component {
         })
     }
 
+
     createProblem(e) {
         e.preventDefault();
         let formData = this.state.problem;
         let url;
         if(this.props.match.params.id){
-            url = '/public/api/admin/problems/update' + this.props.match.params.id;
+            url = '/public/api/admin/problems/update/' + this.props.match.params.id;
         } else {
             url = '/public/api/admin/problems/create';
         }
@@ -61,11 +73,10 @@ class ProblemForm extends React.Component {
             //console.log(url)
             axios.get(url)
                 .then(response => {
-                    console.log(response.data)
-                    this.setState({
-                        problem: response.data
-                    }, () => {
-                        //console.log(response);
+                    //console.log(response.data)
+                    let nextState = Object.assign({}, this.state, {room_id: response.data.room_id, problem: response.data});
+                    this.setState(nextState, () => {
+                        console.log(this.state);
                     });
                 })
                 .catch(error => {
@@ -79,6 +90,7 @@ class ProblemForm extends React.Component {
     componentDidMount() {
         //console.log(this.props.match.params.status)
         this.fillFormUpdateProblem();
+        console.log('parent',this.state.room_id);
     }
 
     render() {
@@ -158,10 +170,15 @@ class ProblemForm extends React.Component {
                                     onChange={this.inputOnChange}
                                     value={this.state.problem.category_id || ''}
                                 />
+
                             </div>
-                            <button type="submit" className="btn btn-outline-primary">Создать проблему</button>
+                            <div className="d-flex justify-content-between">
+                                <button type="submit" className="btn btn-outline-primary">{this.textButton()}</button>
+                                <button type="button" className="btn btn-outline-secondary">Создать подпроблему</button>
+                            </div>
                         </form>
-                        <button type="button" className="btn btn-outline-secondary">Создать подпроблему</button>
+                        {console.log('room_id',this.state.room_id)}
+                        <SubProblem room_id={this.state.room_id} />
                     </div>
                 </div>
             </div>
