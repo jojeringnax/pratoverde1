@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
-import { MdDeleteForever, MdModeEdit } from "react-icons/md";
+import ActionTable from '../../ActionTable';
+
 class ProblemsCategory extends React.Component {
     constructor(props) {
         super(props);
@@ -52,11 +53,15 @@ class ProblemsCategory extends React.Component {
             for(let key in this.state.categories[i]) {
                 row.push(<td key={this.state.categories[i][key]}>{this.state.categories[i][key]}</td>);
             }
-            row.push(<td width="10%" className="actions" key="actions">
-                <Link to={urlUpdate + this.state.categories[i]['id']}><MdModeEdit className="icons"/></Link>
-                <Link onClick={this.deleteRow} data-delete={this.state.categories[i]['name']} to={urlDelete + this.state.categories[i]['id']}><MdDeleteForever className="icons"/></Link>
-            </td>);
-            table.push(<tr id={this.state.categories[i]['name']} key={i}>{row}</tr>);
+            row.push(
+                <ActionTable
+                    key="action"
+                    id={this.state.categories[i]['id']}
+                    updateUrl={urlUpdate + this.state.categories[i]['id']}
+                    deleteUrl={urlDelete + this.state.categories[i]['id']}
+                />
+            );
+            table.push(<tr id={this.state.categories[i]['id']} key={i}>{row}</tr>);
         }
         return table;
     }

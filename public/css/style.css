@@ -188,6 +188,15 @@ nav .navbar-collapse ul li a {
   background-position: center center;
 }
 
+.action-link svg {
+  width: 25px;
+  height: 25px;
+  fill: #ce0004;
+}
+.action-link:hover svg {
+  fill: #ff0004;
+}
+
 #eat {
   background-image: url("../img/slide-eat.png");
   background-size: 170%;

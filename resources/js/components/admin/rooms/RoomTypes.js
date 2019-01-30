@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import ActionTable from '../ActionTable';
 
 let types = [];
 class RoomTypes extends React.Component {
@@ -54,11 +55,15 @@ class RoomTypes extends React.Component {
             for(let key in types[i]) {
                 row.push(<td id={types[i][key]} key={key}>{types[i][key]}</td>);
             }
-            row.push(<td key="action">
-                    <Link to={urlUpdate + types[i]['id']}>Update</Link>
-                    <Link id={types[i]['id']} onClick={this.deleteTypes} to={urlDelete + types[i]['id']}>Delete</Link>
-                    </td>);
-            table.push(<tr key={i}>{row}</tr>);
+            row.push(
+                <ActionTable
+                    key="action"
+                    id={types[i]['id']}
+                    updateUrl={urlUpdate + types[i]['id']}
+                    deleteUrl={urlDelete + types[i]['id']}
+                />
+            );
+            table.push(<tr id={types[i]['id']} key={i}>{row}</tr>);
         }
         return table;
     }
