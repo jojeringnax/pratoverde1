@@ -16,10 +16,16 @@ class SubProblem extends React.Component {
             }
         };
         this.inputOnChange = this.inputOnChange.bind(this);
+        this.submitSubForm = this.submitSubForm.bind(this);
     }
 
-    inputOnChange() {
-        console.log('kuku');
+    inputOnChange(e) {
+        this.setState({
+           subproblem: {
+               ...this.state.subproblem,
+               [e.target.name]: e.target.value
+           }
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -36,10 +42,24 @@ class SubProblem extends React.Component {
         }
     }
 
+    submitSubForm(e) {
+        e.preventDefault();
+        let url = '/public/api/admin/problems/create';
+        axios.post(url, this.state.subproblem)
+            .then(res => {
+                console.log(res);
+                document.location.href = '/public/admin/problems';
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     render() {
         return(
-            <div className="form-subProblem col-12 d-flex justify-content-center">
-                <form className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+            <div className="hide form-subProblem d-flex justify-content-center">
+                <form onSubmit={this.submitSubForm} className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+                    <h2 className="text-center">Родительская проблема: <em><b><h2>{this.props.title}</h2></b></em></h2>
                     <div className="item-form-admin form-group">
                         <label htmlFor="room_id">room_id</label>
                         <input
@@ -86,30 +106,29 @@ class SubProblem extends React.Component {
                                 value={this.state.subproblem.status || ''}
                             />
                         </div>
-                        <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="parent_id">parent_id</label>
+
+                        <div className="item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                            <label htmlFor="category_id">category_id</label>
                             <input
                                 type="number"
                                 className="form-control"
-                                id="parent_id"
-                                name="parent_id"
+                                id="category_id"
+                                name="category_id"
                                 onChange={this.inputOnChange}
-                                value={this.props.room_id || ''}
+                                value={this.state.subproblem.category_id || ''}
                             />
                         </div>
-                    </div>
-
-                    <div className="item-form-admin form-group">
-                        <label htmlFor="category_id">category_id</label>
                         <input
-                            type="number"
+                            type="hidden"
                             className="form-control"
-                            id="category_id"
-                            name="category_id"
+                            id="parent_id"
+                            name="parent_id"
                             onChange={this.inputOnChange}
-                            value={this.state.subproblem.category_id || ''}
+                            value={this.props.room_id || ''}
                         />
                     </div>
+
+                    <button type="submit" className="btn btn-outline-secondary">СОЗДАТЬ ПОДПРОБЛЕМУ</button>
                 </form>
             </div>
         )

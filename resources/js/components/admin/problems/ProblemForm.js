@@ -7,8 +7,8 @@ class ProblemForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            room_id: '3',
             problem: {
+                id: '',
                 room_id: '',
                 title: '',
                 content: '',
@@ -21,6 +21,7 @@ class ProblemForm extends React.Component {
         this.createProblem = this.createProblem.bind(this);
         this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this);
         this.textButton = this.textButton.bind(this);
+        this.showSubProblemForm = this.showSubProblemForm.bind(this);
     }
 
     textButton() {
@@ -67,30 +68,26 @@ class ProblemForm extends React.Component {
     }
     fillFormUpdateProblem() {
         let url;
-        //console.log(this.props.match);
         if(this.props.match.params.id){
             url = '/public/api/problem/' + this.props.match.params.id;
-            //console.log(url)
             axios.get(url)
                 .then(response => {
                     //console.log(response.data)
-                    let nextState = Object.assign({}, this.state, {room_id: response.data.room_id, problem: response.data});
-                    this.setState(nextState, () => {
-                        console.log(this.state);
-                    });
+                    let nextState = Object.assign({}, this.state, {problem: response.data});
+                    this.setState(nextState);
                 })
                 .catch(error => {
                     //console.log(error);
-                    //alert(codes[error.response.data.code])
                 });
         }
+    }
 
+    showSubProblemForm() {
+        document.querySelector('.form-subProblem').classList.remove('hide')
     }
 
     componentDidMount() {
-        //console.log(this.props.match.params.status)
         this.fillFormUpdateProblem();
-        console.log('parent',this.state.room_id);
     }
 
     render() {
@@ -174,11 +171,10 @@ class ProblemForm extends React.Component {
                             </div>
                             <div className="d-flex justify-content-between">
                                 <button type="submit" className="btn btn-outline-primary">{this.textButton()}</button>
-                                <button type="button" className="btn btn-outline-secondary">Создать подпроблему</button>
+                                <button onClick={this.showSubProblemForm} type="button" className="btn btn-outline-secondary">Создать подпроблему</button>
                             </div>
                         </form>
-                        {console.log('room_id',this.state.room_id)}
-                        <SubProblem room_id={this.state.room_id} />
+                        <SubProblem title={this.state.problem.title} room_id={this.state.problem.id} />
                     </div>
                 </div>
             </div>

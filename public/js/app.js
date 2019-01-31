@@ -34798,8 +34798,7 @@ function (_React$Component) {
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log(this.props);
+    value: function componentDidMount() {//console.log(this.props);
     }
   }, {
     key: "render",
@@ -35168,8 +35167,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProblemForm).call(this, props));
     _this.state = {
-      room_id: '3',
       problem: {
+        id: '',
         room_id: '',
         title: '',
         content: '',
@@ -35182,6 +35181,7 @@ function (_React$Component) {
     _this.createProblem = _this.createProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.fillFormUpdateProblem = _this.fillFormUpdateProblem.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.textButton = _this.textButton.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.showSubProblemForm = _this.showSubProblemForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -35229,32 +35229,30 @@ function (_React$Component) {
     value: function fillFormUpdateProblem() {
       var _this2 = this;
 
-      var url; //console.log(this.props.match);
+      var url;
 
       if (this.props.match.params.id) {
-        url = '/public/api/problem/' + this.props.match.params.id; //console.log(url)
-
+        url = '/public/api/problem/' + this.props.match.params.id;
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).then(function (response) {
           //console.log(response.data)
           var nextState = Object.assign({}, _this2.state, {
-            room_id: response.data.room_id,
             problem: response.data
           });
 
-          _this2.setState(nextState, function () {
-            console.log(_this2.state);
-          });
+          _this2.setState(nextState);
         }).catch(function (error) {//console.log(error);
-          //alert(codes[error.response.data.code])
         });
       }
     }
   }, {
+    key: "showSubProblemForm",
+    value: function showSubProblemForm() {
+      document.querySelector('.form-subProblem').classList.remove('hide');
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      //console.log(this.props.match.params.status)
       this.fillFormUpdateProblem();
-      console.log('parent', this.state.room_id);
     }
   }, {
     key: "render",
@@ -35351,10 +35349,12 @@ function (_React$Component) {
         type: "submit",
         className: "btn btn-outline-primary"
       }, this.textButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.showSubProblemForm,
         type: "button",
         className: "btn btn-outline-secondary"
-      }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0434\u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443"))), console.log('room_id', this.state.room_id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubProblem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        room_id: this.state.room_id
+      }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0434\u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubProblem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        title: this.state.problem.title,
+        room_id: this.state.problem.id
       }))));
     }
   }]);
@@ -35430,17 +35430,13 @@ function (_React$Component) {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/public/api/admin/problems").then(function (response) {
-        console.log('axios-get', response.data);
+        //console.log('axios-get', response.data);
         problems = response.data;
 
         _this2.setState({
           data: true
-        }, function () {
-          console.log(_this2.state.data);
-        }); //this.createTable();
-        //
-        // console.log(problems.length)
-
+        }, function () {//console.log(this.state.data);
+        });
       }).catch(function (error) {
         console.log(error);
       });
@@ -35452,7 +35448,7 @@ function (_React$Component) {
       var urlUpdate = '';
       var urlDelete = '';
       var child = [];
-      console.log('pizda', problems.length);
+      var newTable; //console.log('pizda',  problems);
 
       for (var i = 0; i < problems.length; i++) {
         //console.log(problems[i]);
@@ -35460,10 +35456,12 @@ function (_React$Component) {
 
         for (var key in problems[i]) {
           child.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+            id: "",
             className: "text-center",
             key: key
           }, problems[i][key]));
-        }
+        } //console.log(i, problems[i]['parent_id'])
+
 
         urlUpdate = '/public/admin/problems/update/' + problems[i]['id'];
         urlDelete = '/public/api/admin/problems/delete/' + problems[i]['id'];
@@ -35473,13 +35471,35 @@ function (_React$Component) {
           updateUrl: urlUpdate,
           deleteUrl: urlDelete
         }));
-        table.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          id: problems[i]['id'],
-          key: i + 1
-        }, child));
-      }
+        console.log(problems[i]['parent_id'], table[i + 1]);
 
-      console.log('table', table);
+        if (problems[i]['parent_id'] === null) {
+          //console.log(table[i], problems[i]['parent_id']);
+          table.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+            id: problems[i]['id'],
+            key: i + 1
+          }, child));
+          table.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+            id: "hr/" + problems[i]['id'],
+            key: "hr" + problems[i]['id']
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)));
+        } else {
+          for (var j = 0; j < table.length; j++) {
+            if (table[j].props['id'] === problems[i]['parent_id']) {
+              newTable = table.slice(0, j + 1);
+              newTable.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+                "data-parent_id": problems[i]['id'],
+                id: problems[i]['id'],
+                key: i + 1
+              }, child));
+              newTable = newTable.concat(table.slice(j + 1));
+              table = newTable;
+            }
+          }
+        }
+      } // console.log('table',table);
+
+
       return table;
     }
   }, {
@@ -35615,13 +35635,16 @@ function (_React$Component) {
       }
     };
     _this.inputOnChange = _this.inputOnChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.submitSubForm = _this.submitSubForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(SubProblem, [{
     key: "inputOnChange",
-    value: function inputOnChange() {
-      console.log('kuku');
+    value: function inputOnChange(e) {
+      this.setState({
+        subproblem: _objectSpread({}, this.state.subproblem, _defineProperty({}, e.target.name, e.target.value))
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -35638,13 +35661,28 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "submitSubForm",
+    value: function submitSubForm(e) {
+      e.preventDefault();
+      var url = '/public/api/admin/problems/create';
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, this.state.subproblem).then(function (res) {
+        console.log(res);
+        document.location.href = '/public/admin/problems';
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-subProblem col-12 d-flex justify-content-center"
+        className: "hide form-subProblem d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.submitSubForm,
         className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "text-center"
+      }, "\u0420\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0430\u044F \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0430: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.title)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-form-admin form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "room_id"
@@ -35693,19 +35731,7 @@ function (_React$Component) {
         onChange: this.inputOnChange,
         value: this.state.subproblem.status || ''
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "parent_id",
-        className: "inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "parent_id"
-      }, "parent_id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "number",
-        className: "form-control",
-        id: "parent_id",
-        name: "parent_id",
-        onChange: this.inputOnChange,
-        value: this.props.room_id || ''
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item-form-admin form-group"
+        className: "item-form-admin form-group col-xl-6 col-lg-6 col-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "category_id"
       }, "category_id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -35715,7 +35741,17 @@ function (_React$Component) {
         name: "category_id",
         onChange: this.inputOnChange,
         value: this.state.subproblem.category_id || ''
-      }))));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        className: "form-control",
+        id: "parent_id",
+        name: "parent_id",
+        onChange: this.inputOnChange,
+        value: this.props.room_id || ''
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-outline-secondary"
+      }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C \u041F\u041E\u0414\u041F\u0420\u041E\u0411\u041B\u0415\u041C\u0423")));
     }
   }]);
 

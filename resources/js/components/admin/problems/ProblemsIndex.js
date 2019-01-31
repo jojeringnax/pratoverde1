@@ -17,16 +17,13 @@ class ProblemsIndex extends React.Component {
     getProblems() {
         axios.get("/public/api/admin/problems")
             .then(response => {
-                console.log('axios-get', response.data);
+                //console.log('axios-get', response.data);
                 problems = response.data;
                 this.setState({
                     data: true
                 },() => {
-                    console.log(this.state.data);
+                    //console.log(this.state.data);
                 });
-                //this.createTable();
-                //
-               // console.log(problems.length)
             })
             .catch( error => {
                 console.log(error);
@@ -38,21 +35,56 @@ class ProblemsIndex extends React.Component {
         let urlUpdate = '';
         let urlDelete = '';
         let child =[];
-        console.log('pizda',  problems.length);
+        let newTable;
+        //console.log('pizda',  problems);
         for(let i=0; i < problems.length; i++) {
             //console.log(problems[i]);
             child =[];
             for(let key in problems[i]) {
-                child.push(<td className="text-center" key={key}>{problems[i][key]}</td>)
+                child.push(<td id="" className="text-center" key={key}>{problems[i][key]}</td>);
             }
+            //console.log(i, problems[i]['parent_id'])
             urlUpdate = '/public/admin/problems/update/' + problems[i]['id'];
             urlDelete = '/public/api/admin/problems/delete/' + problems[i]['id'];
             child.push(
                 <ActionTable  key="action" id={problems[i]['id']} updateUrl={urlUpdate} deleteUrl={urlDelete}/>
                );
-            table.push(<tr id={problems[i]['id']} key={i+1}>{child}</tr>);
+
+            console.log(problems[i]['parent_id'], table[i+1]);
+            if(problems[i]['parent_id'] === null) {
+                //console.log(table[i], problems[i]['parent_id']);
+                table.push(
+                    <tr id={problems[i]['id']} key={i+1}>{child}</tr>
+                );
+                table.push(
+                    <tr id={"hr/"+problems[i]['id']} key={"hr"+problems[i]['id']}>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                );
+            } else {
+                for(let j=0; j < table.length; j++) {
+                    if(table[j].props['id'] === problems[i]['parent_id']) {
+                        newTable = table.slice(0, j+1);
+                        newTable.push(
+                            <tr data-parent_id={problems[i]['id']} id={problems[i]['id']} key={i+1}>{child}</tr>
+                        );
+                        newTable =  newTable.concat(table.slice(j+1));
+                        table = newTable
+                    }
+                }
+            }
+
         }
-        console.log('table',table);
+       // console.log('table',table);
         return table;
     }
 
