@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class ProblemController extends Controller
 {
     /**
-     * @var string
+     * @var Problem | string
      */
     private $modelName = Problem::class;
 

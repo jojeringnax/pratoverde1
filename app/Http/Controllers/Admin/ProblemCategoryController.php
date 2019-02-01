@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class ProblemCategoryController extends Controller
 {
     /**
-     * @var string
+     * @var ProblemCategory | string
      */
     private $modelName = ProblemCategory::class;
 

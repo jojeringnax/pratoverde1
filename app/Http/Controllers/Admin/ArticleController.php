@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Customer;
+use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerController extends Controller
+class ArticleController extends Controller
 {
     /**
-     * @var Customer | string
+     * @var Article | string
      */
-    private $modelName = Customer::class;
+    private $modelName = Article::class;
 
     /**
      * @return string
@@ -23,17 +23,17 @@ class CustomerController extends Controller
 
     /**
      * @param Request $request
-     * @param Customer $customer
+     * @param Article $article
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|string
      */
-    public function store(Request $request, Customer $customer)
+    public function store(Request $request, Article $article)
     {
-        if ($customer === null) {
-            return response(json_encode(['category' => 'customers', 'id' => null, 'message' => 'Customer not found', 'code' => 1]), 500);
+        if ($article === null) {
+            return response(json_encode(['category' => 'bookings', 'id' => null, 'message' => 'Booking not found', 'code' => 1]), 500);
         }
-        $customer->fill($request->post());
-        $customer->save();
-        return $customer->toJson();
+        $article->fill($request->post());
+        $article->save();
+        return $article->toJson();
     }
 
     /**
@@ -42,8 +42,8 @@ class CustomerController extends Controller
      */
     public function create(Request $request)
     {
-        $customer = new $this->modelName();
-        return $this->store($request, $customer);
+        $article = new $this->modelName();
+        return $this->store($request, $article);
     }
 
     /**
@@ -53,13 +53,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customer = $this->modelName::findOrFail($id);
-        return $this->store($request, $customer);
+        $article = $this->modelName::findOrFail($id);
+        return $this->store($request, $article);
     }
 
     /**
      * @param $id
-     * @return string
+     * @return boolean
      */
     public function delete($id)
     {

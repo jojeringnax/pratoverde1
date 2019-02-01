@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class FacilityController extends Controller
 {
     /**
-     * @return string
+     * @return Facility | string
      */
     public function index()
     {

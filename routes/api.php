@@ -107,3 +107,27 @@ Route::delete('admin/room_connects/delete/{id}', 'Admin\CustomerController@delet
 Route::get('room_connect/{id}', function($id) {
     return \App\Customer::findOrFail($id)->toJson();
 });
+
+
+/**
+ * Article routes
+ */
+Route::post('admin/articles/create', 'Admin\CustomerController@create');
+Route::post('admin/articles/update/{id}', 'Admin\CustomerController@update');
+Route::delete('admin/articles/delete/{id}', 'Admin\CustomerController@delete');
+
+Route::get('article/{id}', function($id) {
+    return \App\Article::findOrFail($id)->toJson();
+});
+
+
+
+/**
+ * Files routes
+ */
+Route::post('admin/files/create', 'Admin\FileController@create');
+Route::delete('admin/files/delete/{id}', 'Admin\FileController@delete');
+
+Route::get('file/{id}', function($id) {
+    return \App\File::findOrFail($id)->toJson();
+});

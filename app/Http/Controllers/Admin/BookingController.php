@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class BookingController extends Controller
 {
     /**
-     * @var string
+     * @var Booking | string
      */
     private $modelName = Booking::class;
 

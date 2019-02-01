@@ -16,7 +16,7 @@ class TestController extends Controller
 
     public function index()
     {
-        return Room::find(1)->flushFacilities();
+        return view('test');
     }
 
 }

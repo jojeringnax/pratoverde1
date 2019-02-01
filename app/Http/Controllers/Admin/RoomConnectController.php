@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class RoomConnectController extends Controller
 {
     /**
-     * @var string
+     * @var RoomConnect | string
      */
     private $modelName = RoomConnect::class;
 
