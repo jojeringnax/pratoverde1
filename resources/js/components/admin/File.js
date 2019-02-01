@@ -12,11 +12,11 @@ class File extends React.Component {
 
     sendFile(e) {
         e.preventDefault();
-        var formData = new FormData;
+        // var formData = new FormData;
         let imagefile = document.querySelector('#file');
-        formData.append("image", imagefile.files[0]);
+        // formData.append("image", imagefile.files[0]);
         console.log(imagefile.files[0]);
-        axios.post('/public/api/admin/files/create',formData)
+        axios.post('/public/api/admin/files/create',{file: imagefile.files[0]})
             .then(res => {
                 console.log(res)
             })

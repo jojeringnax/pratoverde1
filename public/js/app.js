@@ -59974,12 +59974,14 @@ function (_React$Component) {
   _createClass(File, [{
     key: "sendFile",
     value: function sendFile(e) {
-      e.preventDefault();
-      var formData = new FormData();
-      var imagefile = document.querySelector('#file');
-      formData.append("image", imagefile.files[0]);
+      e.preventDefault(); // var formData = new FormData;
+
+      var imagefile = document.querySelector('#file'); // formData.append("image", imagefile.files[0]);
+
       console.log(imagefile.files[0]);
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/files/create', formData).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/files/create', {
+        file: imagefile.files[0]
+      }).then(function (res) {
         console.log(res);
       }).catch(function (err) {
         console.log(err);
@@ -60369,17 +60371,8 @@ function (_React$Component) {
 /*!*********************************************************!*\
   !*** ./resources/js/components/admin/news/NewsIndex.js ***!
   \*********************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
+/*! no static exports found */
+/***/ (function(module, exports) {
 
 
 
@@ -62691,6 +62684,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_booking_BookUpdate__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../admin/booking/BookUpdate */ "./resources/js/components/admin/booking/BookUpdate.js");
 /* harmony import */ var _admin_news_NewsForm__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../admin/news/NewsForm */ "./resources/js/components/admin/news/NewsForm.js");
 /* harmony import */ var _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../admin/news/NewsIndex */ "./resources/js/components/admin/news/NewsIndex.js");
+/* harmony import */ var _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21__);
 /* harmony import */ var _admin_File__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../admin/File */ "./resources/js/components/admin/File.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -62845,7 +62839,7 @@ if (document.getElementById('root')) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/news",
     exact: true,
-    component: _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21__["default"]
+    component: _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21___default.a
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/news/create",
     component: _admin_news_NewsForm__WEBPACK_IMPORTED_MODULE_20__["default"]
