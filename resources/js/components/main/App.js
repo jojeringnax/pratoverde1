@@ -26,6 +26,7 @@ import BookUpdate from "../admin/booking/BookUpdate";
 {/*ADMIN-BOOKING IMPORT*/}
 import NewsForm from "../admin/news/NewsForm";
 import NewsIndex from '../admin/news/NewsIndex';
+import File from '../admin/File';
 
 
 export default class App extends React.Component {
@@ -74,6 +75,7 @@ if (document.getElementById('root')) {
                 <Route path="/public/admin/news/create" component={NewsForm}/>
                 <Route path="/public/admin/news/update/:id" component={NewsForm}/>
 
+                <Route path="/public/admin/file" component={File}/>
                 <Route render={() => (<div>Sorry</div>)}/>
             </Switch>
         </Router>,

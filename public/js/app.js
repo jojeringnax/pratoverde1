@@ -59919,6 +59919,100 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/File.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/admin/File.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var File =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(File, _React$Component);
+
+  function File(props) {
+    var _this;
+
+    _classCallCheck(this, File);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(File).call(this, props));
+    _this.state = {
+      file: ''
+    };
+    _this.sendFile = _this.sendFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(File, [{
+    key: "sendFile",
+    value: function sendFile(e) {
+      e.preventDefault();
+      var formData = new FormData();
+      var imagefile = document.querySelector('#file');
+      formData.append("image", imagefile.files[0]);
+      console.log(imagefile.files[0]);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/files/create', formData).then(function (res) {
+        console.log(res);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex justify-content-center flex-column align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.sendFile,
+        className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        id: "file",
+        name: "file",
+        className: "form-control"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, "Submit"))));
+    }
+  }]);
+
+  return File;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (File);
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/booking/BookCreate.js":
 /*!*************************************************************!*\
   !*** ./resources/js/components/admin/booking/BookCreate.js ***!
@@ -60275,8 +60369,17 @@ function (_React$Component) {
 /*!*********************************************************!*\
   !*** ./resources/js/components/admin/news/NewsIndex.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 
 
 
@@ -62588,7 +62691,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_booking_BookUpdate__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../admin/booking/BookUpdate */ "./resources/js/components/admin/booking/BookUpdate.js");
 /* harmony import */ var _admin_news_NewsForm__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../admin/news/NewsForm */ "./resources/js/components/admin/news/NewsForm.js");
 /* harmony import */ var _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../admin/news/NewsIndex */ "./resources/js/components/admin/news/NewsIndex.js");
-/* harmony import */ var _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _admin_File__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../admin/File */ "./resources/js/components/admin/File.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62645,6 +62748,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 {
   /*ADMIN-BOOKING IMPORT*/
 }
+
 
 
 
@@ -62741,13 +62845,16 @@ if (document.getElementById('root')) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/news",
     exact: true,
-    component: _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21___default.a
+    component: _admin_news_NewsIndex__WEBPACK_IMPORTED_MODULE_21__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/news/create",
     component: _admin_news_NewsForm__WEBPACK_IMPORTED_MODULE_20__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/public/admin/news/update/:id",
     component: _admin_news_NewsForm__WEBPACK_IMPORTED_MODULE_20__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/public/admin/file",
+    component: _admin_File__WEBPACK_IMPORTED_MODULE_22__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sorry");
