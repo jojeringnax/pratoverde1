@@ -24,7 +24,7 @@ class FileController extends Controller
 
     public function create(Request $request)
     {
-        return $this->store($request, new File);
+        return var_dump($request->file());
     }
 
     public function delete($id)

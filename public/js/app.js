@@ -59974,14 +59974,11 @@ function (_React$Component) {
   _createClass(File, [{
     key: "sendFile",
     value: function sendFile(e) {
-      e.preventDefault(); // var formData = new FormData;
-
-      var imagefile = document.querySelector('#file'); // formData.append("image", imagefile.files[0]);
-
-      console.log(imagefile.files[0]);
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/files/create', {
-        file: imagefile.files[0]
-      }).then(function (res) {
+      e.preventDefault();
+      var formData = new FormData();
+      var imagefile = document.querySelector('#file');
+      formData.append("image", imagefile.files[0], 'lol');
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/files/create', formData).then(function (res) {
         console.log(res);
       }).catch(function (err) {
         console.log(err);
@@ -63741,8 +63738,8 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\server\data\htdocs\pratoverde1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\server\data\htdocs\pratoverde1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\pratoverde1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\pratoverde1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
