@@ -13,14 +13,9 @@ class File extends React.Component {
     sendFile(e) {
         e.preventDefault();
         const formData = new FormData;
-        let imagefile;
-        if (e.target.childNodes[0].name === "multiple") {
-            imagefile = e.target.childNodes[0].files;
-        } else {
-            imagefile = e.target.childNodes[0].files[0];
-        }
-        formData.append("image", imagefile);
-        console.log(imagefile);
+        Object.entries(e.target.childNodes[0].files).forEach(
+            ([key, val]) => formData.append(key, val)
+        );
         axios.post('/public/api/admin/files/create', formData)
             .then(res => {
                 console.log(res)
