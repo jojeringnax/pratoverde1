@@ -18,6 +18,7 @@ class NewsForm extends React.Component {
         this.inputOnchange = this.inputOnchange.bind(this);
         this.editorOnchange = this.editorOnchange.bind(this);
     }
+
     modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
