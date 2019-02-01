@@ -112,9 +112,9 @@ Route::get('room_connect/{id}', function($id) {
 /**
  * Article routes
  */
-Route::post('admin/articles/create', 'Admin\CustomerController@create');
-Route::post('admin/articles/update/{id}', 'Admin\CustomerController@update');
-Route::delete('admin/articles/delete/{id}', 'Admin\CustomerController@delete');
+Route::post('admin/articles/create', 'Admin\ArticleController@create');
+Route::post('admin/articles/update/{id}', 'Admin\ArticleController@update');
+Route::delete('admin/articles/delete/{id}', 'Admin\ArticleController@delete');
 
 Route::get('article/{id}', function($id) {
     return \App\Article::findOrFail($id)->toJson();
