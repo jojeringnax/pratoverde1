@@ -59976,8 +59976,16 @@ function (_React$Component) {
     value: function sendFile(e) {
       e.preventDefault();
       var formData = new FormData();
-      var imagefile = document.querySelector('#file');
-      formData.append("image", imagefile.files[0], 'lol');
+      var imagefile;
+
+      if (e.target.childNodes[0].name === "multiple") {
+        imagefile = e.target.childNodes[0].files;
+      } else {
+        imagefile = e.target.childNodes[0].files[0];
+      }
+
+      formData.append("image", imagefile);
+      console.log(imagefile);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/public/api/admin/files/create', formData).then(function (res) {
         console.log(res);
       }).catch(function (err) {
@@ -59999,6 +60007,27 @@ function (_React$Component) {
         id: "file",
         name: "file",
         className: "form-control"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.sendFile,
+        className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        id: "one",
+        name: "one",
+        className: "form-control"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.sendFile,
+        className: "border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        id: "multiple",
+        name: "multiple",
+        className: "form-control",
+        multiple: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit"
       }, "Submit"))));
@@ -63738,8 +63767,8 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\pratoverde1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\pratoverde1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\server\data\htdocs\pratoverde1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\server\data\htdocs\pratoverde1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

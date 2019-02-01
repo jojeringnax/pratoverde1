@@ -13,8 +13,14 @@ class File extends React.Component {
     sendFile(e) {
         e.preventDefault();
         const formData = new FormData;
-        let imagefile = document.querySelector('#file');
-        formData.append("image", imagefile.files[0], 'lol');
+        let imagefile;
+        if (e.target.childNodes[0].name === "multiple") {
+            imagefile = e.target.childNodes[0].files;
+        } else {
+            imagefile = e.target.childNodes[0].files[0];
+        }
+        formData.append("image", imagefile);
+        console.log(imagefile);
         axios.post('/public/api/admin/files/create', formData)
             .then(res => {
                 console.log(res)
@@ -34,6 +40,25 @@ class File extends React.Component {
                         id="file"
                         name="file"
                         className="form-control"
+                        />
+                        <button type="submit">Submit</button>
+                    </form>
+                    <form onSubmit={this.sendFile}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+                        <input
+                            type="file"
+                            id="one"
+                            name="one"
+                            className="form-control"
+                        />
+                        <button type="submit">Submit</button>
+                    </form>
+                    <form onSubmit={this.sendFile}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+                        <input
+                            type="file"
+                            id="multiple"
+                            name="multiple"
+                            className="form-control"
+                            multiple
                         />
                         <button type="submit">Submit</button>
                     </form>
