@@ -23,6 +23,9 @@ import ProblemsCategoryForm from '../admin/problems/categories/ProblemsCategoryF
 import BookIndex from "../admin/booking/BookIndex";
 import BookCreate from "../admin/booking/BookCreate";
 import BookUpdate from "../admin/booking/BookUpdate";
+{/*ADMIN-BOOKING IMPORT*/}
+import NewsForm from "../admin/news/NewsForm";
+import NewsIndex from '../admin/news/NewsIndex';
 
 
 export default class App extends React.Component {
@@ -64,7 +67,12 @@ if (document.getElementById('root')) {
                 {/*ADMIN-BOOKING ROUTE*/}
                 <Route path="/public/admin/booking" exact component={BookIndex}/>
                 <Route path="/public/admin/booking/create" component={BookCreate}/>
-                <Route path="/public/admin/booking/update" component={BookUpdate}/>
+                <Route path="/public/admin/booking/update/:id" component={BookUpdate}/>
+
+                {/*ADMIN-NEWS ROUTE*/}
+                <Route path="/public/admin/news" exact component={NewsIndex}/>
+                <Route path="/public/admin/news/create" component={NewsForm}/>
+                <Route path="/public/admin/news/update/:id" component={NewsForm}/>
 
                 <Route render={() => (<div>Sorry</div>)}/>
             </Switch>

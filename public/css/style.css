@@ -197,6 +197,20 @@ nav .navbar-collapse ul li a {
   fill: #ff0004;
 }
 
+.toggle {
+  cursor: pointer;
+}
+.toggle:hover {
+  background-color: #0b51c5 !important;
+  color: white !important;
+}
+.toggle:hover td {
+  color: white !important;
+}
+.toggle:hover td.actions a svg {
+  fill: white;
+}
+
 #eat {
   background-image: url("../img/slide-eat.png");
   background-size: 170%;
@@ -452,11 +466,20 @@ nav .navbar-collapse ul li a {
   width: 100%;
 }
 
+.toggle {
+  transition: height 300ms;
+}
+
+.collapss {
+  transition: height 300ms;
+}
+
 @media screen and (max-width: 992px) {
   nav .navbar-collapse ul li {
     margin: 0 !important;
     text-align: center;
   }
 }
+/*==================ANIMATE=====================*/
 
 /*# sourceMappingURL=style.css.map */

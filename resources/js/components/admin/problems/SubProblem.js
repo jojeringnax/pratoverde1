@@ -29,7 +29,7 @@ class SubProblem extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('prev', prevProps, prevState, this.props.room_id);
+        //console.log('prev', prevProps, prevState, this.props.room_id);
         if (prevProps.room_id !== this.props.room_id) {
             this.setState({
                 subproblem: {

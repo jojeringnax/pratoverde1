@@ -8,7 +8,6 @@ class ProblemForm extends React.Component {
         super(props);
         this.state = {
             problem: {
-                id: '',
                 room_id: '',
                 title: '',
                 content: '',
@@ -47,6 +46,7 @@ class ProblemForm extends React.Component {
     createProblem(e) {
         e.preventDefault();
         let formData = this.state.problem;
+        console.log(formData);
         let url;
         if(this.props.match.params.id){
             url = '/public/api/admin/problems/update/' + this.props.match.params.id;
@@ -60,8 +60,8 @@ class ProblemForm extends React.Component {
                 document.location.href = '/public/admin/problems';
             })
             .catch(error => {
-                //console.log(error.response.data.code);
-                alert(codes[error.response.data.code])
+                console.log(error);
+                //alert(codes[error.response.data.code])
 
             });
 
