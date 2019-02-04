@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
-class NewsIndex extends React.Component {
+class CustomersIndex extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <div>
-                NewsIndex
+            <div className="customer-admin-index">
+                CustomersIndex
             </div>
         )
     }
 }
 
-export default NewsIndex;
+export default CustomersIndex;

@@ -7,10 +7,9 @@ class File extends React.Component {
         this.state = {
             file: ''
         };
-        this.sendFile = this.sendFile.bind(this);
     }
 
-    sendFile(e) {
+    sendFile = (e) => {
         e.preventDefault();
         const formData = new FormData;
         Object.entries(e.target.childNodes[0].files).forEach(
@@ -23,7 +22,7 @@ class File extends React.Component {
             .catch(err => {
                 console.log(err)
             });
-    }
+    };
 
     render() {
         return (
@@ -31,10 +30,10 @@ class File extends React.Component {
                 <div className="row d-flex justify-content-center flex-column align-items-center">
                     <form onSubmit={this.sendFile}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                         <input
-                        type="file"
-                        id="file"
-                        name="file"
-                        className="form-control"
+                            type="file"
+                            id="file"
+                            name="file"
+                            className="form-control"
                         />
                         <button type="submit">Submit</button>
                     </form>

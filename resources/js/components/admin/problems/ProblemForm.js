@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import SubProblem from "./SubProblem";
-
+import Select from 'react-select';
+let options = [];
 class ProblemForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            getOptions: [],
+            selectedOption: '',
             problem: {
                 room_id: '',
                 title: '',
@@ -16,22 +19,18 @@ class ProblemForm extends React.Component {
                 category_id: ''
             }
         };
-        this.inputOnChange = this.inputOnChange.bind(this);
-        this.createProblem = this.createProblem.bind(this);
-        this.fillFormUpdateProblem = this.fillFormUpdateProblem.bind(this);
-        this.textButton = this.textButton.bind(this);
-        this.showSubProblemForm = this.showSubProblemForm.bind(this);
     }
 
-    textButton() {
+
+    textButton = () => {
         if(this.props.match.params.id) {
             return "Обновить проблему";
         } else {
             return "Создать проблему";
         }
-    }
+    };
 
-    inputOnChange(e) {
+    inputOnChange = (e) => {
         this.setState({
             problem : {
                 ...this.state.problem,
@@ -40,10 +39,9 @@ class ProblemForm extends React.Component {
         }, () => {
             //console.log(this.state.problem)
         })
-    }
+    };
 
-
-    createProblem(e) {
+    createProblem = (e) => {
         e.preventDefault();
         let formData = this.state.problem;
         console.log(formData);
@@ -56,7 +54,7 @@ class ProblemForm extends React.Component {
         axios.post(url, formData)
             .then(function (response) {
                 //console.log(response);
-                alert('Проблема создана добавлен');
+                alert('Проблема создана');
                 document.location.href = '/public/admin/problems';
             })
             .catch(error => {
@@ -65,8 +63,25 @@ class ProblemForm extends React.Component {
 
             });
 
-    }
-    fillFormUpdateProblem() {
+    };
+
+    getProblems = () => {
+        axios.get('/public/api/admin/problems')
+            .then(res => {
+                //console.log(res.data);
+                for(let i=0; i < res.data.length; i++) {
+                    options.push({value: res.data[i]['id'], label: res.data[i]['title']});
+                }
+                options.unshift({value: null, label: "Выберите род. проблему"});
+                this.setState({getOptions: options});
+                //console.log(options);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    };
+
+    fillFormUpdateProblem = () => {
         let url;
         if(this.props.match.params.id){
             url = '/public/api/problem/' + this.props.match.params.id;
@@ -80,17 +95,34 @@ class ProblemForm extends React.Component {
                     //console.log(error);
                 });
         }
-    }
+    };
 
-    showSubProblemForm() {
+    showSubProblemForm = () => {
         document.querySelector('.form-subProblem').classList.remove('hide')
-    }
+    };
+
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption }, () => {
+            console.log(`Option selected:`, selectedOption.value);
+            this.setState({
+                problem : {
+                    ...this.state.problem,
+                    parent_id: selectedOption.value
+                }
+            }, () => {
+                console.log(selectedOption.value, this.state.problem)
+            })
+        });
+
+    };
 
     componentDidMount() {
+        this.getProblems();
         this.fillFormUpdateProblem();
     }
 
     render() {
+        const { selectedOption } = this.state.selectedOption;
         return (
             <div id="problems-page" className="section container-content-admin">
                 <div className="container">
@@ -146,8 +178,14 @@ class ProblemForm extends React.Component {
                                 </div>
                                 <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
                                     <label htmlFor="parent_id">parent_id</label>
+                                    <Select
+                                        placeholder="ВЫБЕРИТЕ РОД. ПРОБЛЕМУ"
+                                        value={selectedOption}
+                                        onChange={this.handleChange}
+                                        options={this.state.getOptions}
+                                    />
                                     <input
-                                        type="number"
+                                        type="hidden"
                                         className="form-control"
                                         id="parent_id"
                                         name="parent_id"

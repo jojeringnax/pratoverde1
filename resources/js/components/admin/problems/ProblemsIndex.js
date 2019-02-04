@@ -11,14 +11,10 @@ class ProblemsIndex extends React.Component {
             data: false,
             problems: {}
         };
-        this.getProblems = this.getProblems.bind(this);
-        this.createTable = this.createTable.bind(this);
-        this.toggleTableClick = this.toggleTableClick.bind(this);
     }
 
-    toggleTableClick(e) {
+    toggleTableClick = (e) => {
         let id = e.currentTarget.id;
-       // console.log(this.state.problems[id]['visible'])
         if (this.state.problems[id]['visible'] === false) {
             this.setState({
                 problems: Object.assign({}, this.state.problems, {[id]:{visible: true}})
@@ -34,11 +30,9 @@ class ProblemsIndex extends React.Component {
                 document.querySelectorAll('tr[data-parent_id="'+e.currentTarget.id+'"]')[i].classList.add('hide')
             }
         }
+    };
 
-        console.log(document.querySelector('.toggle').clientHeight);
-    }
-
-    getProblems() {
+    getProblems = () => {
         axios.get("/public/api/admin/problems")
             .then(response => {
                 //console.log('axios-get', response.data);
@@ -53,23 +47,20 @@ class ProblemsIndex extends React.Component {
                 }
                 this.setState({
                    problems: problemsVisible
-                },() => {
-                    //console.log(this.state.problems)
                 });
 
             })
             .catch( error => {
                 console.log(error);
             });
-    }
+    };
 
-    createTable() {
+    createTable = () => {
         let table = [];
         let urlUpdate = '';
         let urlDelete = '';
         let child =[];
-        let newTable, td;
-        //console.log('pizda',  problems);
+        let newTable;
         for(let i=0; i < problems.length; i++) {
             //console.log(problems[i]);
             child =[];
@@ -81,18 +72,14 @@ class ProblemsIndex extends React.Component {
                 // }
                 child.push(<td id="" className="cursor text-center" key={key}>{problems[i][key]}</td>);
             }
-            //console.log(i, problems[i]['parent_id'])
             urlUpdate = '/public/admin/problems/update/' + problems[i]['id'];
             urlDelete = '/public/api/admin/problems/delete/' + problems[i]['id'];
             child.push(
-                <ActionTable  key="action" id={problems[i]['id']} updateUrl={urlUpdate} deleteUrl={urlDelete}/>
-               );
-
-            //console.log(problems[i]['parent_id'], table[i+1]);
+                <ActionTable  problem={true} key="action" id={problems[i]['id']} updateUrl={urlUpdate} deleteUrl={urlDelete}/>
+            );
             if(problems[i]['parent_id'] === null) {
-                //console.log(table[i], problems[i]['parent_id']);
                 table.push(
-                    <tr onClick={this.toggleTableClick} className="toggle" id={problems[i]['id']} key={i+1}>{child}</tr>
+                    <tr onClick={this.toggleTableClick} className="toggle blue lighten-2" id={problems[i]['id']} key={i+1}>{child}</tr>
                 );
                 table.push(
                     <tr id={"hr/"+problems[i]['id']} key={"hr"+problems[i]['id']}>
@@ -115,7 +102,7 @@ class ProblemsIndex extends React.Component {
                         newTable = table.slice(0, j+1);
                         //console.log('asd',problems[i]['id']);
                         newTable.push(
-                            <tr className="hide collapss" data-parent_id={problems[i]['parent_id']} id={problems[i]['id']} key={i+1}>{child}</tr>
+                            <tr className="hide collapss teal lighten-2" data-parent_id={problems[i]['parent_id']} id={problems[i]['id']} key={i+1}>{child}</tr>
                         );
                         newTable =  newTable.concat(table.slice(j+1));
                         table = newTable
@@ -124,11 +111,9 @@ class ProblemsIndex extends React.Component {
             }
 
         }
-       // console.log('table',table);
         return table;
 
-    }
-
+    };
 
     componentDidMount() {
         this.getProblems();
@@ -140,8 +125,8 @@ class ProblemsIndex extends React.Component {
                 <div className="container">
                     <div className="row">
                         <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
-                        <table className="table table-striped admin-table table-bordered z-depth-1">
-                            <thead className="secondary-color-dark border-secondary">
+                        <table className="table admin-table table-bordered z-depth-1">
+                            <thead className="primary-color-dark border-secondary">
                                 <tr className="">
                                     <th width="5%" scope="col">id</th>
                                     <th width="10%" scope="col">Created_at</th>

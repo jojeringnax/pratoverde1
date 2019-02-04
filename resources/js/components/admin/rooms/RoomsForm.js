@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 
-class RoomsCreate extends React.Component {
+class RoomsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,23 +17,17 @@ class RoomsCreate extends React.Component {
             },
             types: []
         };
-        this.submitRoom = this.submitRoom.bind(this);
-        this.getTypes = this.getTypes.bind(this);
-        this.showTypes = this.showTypes.bind(this);
-        this.inputOnChange = this.inputOnChange.bind(this);
-        this.fillFormUpdate = this.fillFormUpdate.bind(this);
-        this.addTitleText = this.addTitleText.bind(this);
     }
 
-    addTitleText() {
+    addTitleText = () => {
         if(this.props.match.params.id) {
             return "ОБНОВЛЕНИЕ НОМЕРА";
         } else {
             return "СОЗДАНИЕ НОМЕРА";
         }
-    }
+    };
 
-    showTypes() {
+    showTypes = () => {
         if(this.state.types.length === 0) {
             return "Типов пока нет";
         }
@@ -46,16 +40,14 @@ class RoomsCreate extends React.Component {
                 options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
             }
         }
-
         return options;
 
-    }
+    };
 
-    getTypes() {
+    getTypes = () => {
         axios.get("/public/api/admin/room_types")
             .then(response => {
                 if(response.data.length !== 0) {
-                    //console.log(response.data)
                     this.setState({
                         types: response.data
                     }, () => {
@@ -73,34 +65,29 @@ class RoomsCreate extends React.Component {
                 }
             })
             .catch(function(error) {
-                //console.log(error);
             });
 
-    }
+    };
 
-    inputOnChange(e){
+    inputOnChange = (e) =>{
         if (e.target.type === 'checkbox') {
             this.setState({
                 room: {
                     ...this.state.room,
                     [e.target.name]: e.target.checked
                 }
-            }, function(){
-                //console.log('checkbox',this.state.room);
-            })
+            });
         } else {
             this.setState({
                 room: {
                     ...this.state.room,
                     [e.target.name]: e.target.value
                 }
-            }, function(){
-                //console.log(this.state.room);
             });
         }
-    }
+    };
 
-    submitRoom(e) {
+    submitRoom = (e) => {
         e.preventDefault();
         let formData = this.state.room;
         let url, textResponse;
@@ -113,16 +100,13 @@ class RoomsCreate extends React.Component {
         }
         axios.post(url, formData)
         .then(function (response) {
-            //console.log(response);
             alert(textResponse);
             document.location.href = '/public/admin/rooms'
         })
-        .catch(error => {
+        .catch(error => {});
+    };
 
-        });
-    }
-
-    fillFormUpdate() {
+    fillFormUpdate = () => {
         if(this.props.match.params.id) {
             let url = '/public/api/room/'+ this.props.match.params.id;
             axios.get(url)
@@ -143,7 +127,6 @@ class RoomsCreate extends React.Component {
         this.getTypes();
         this.fillFormUpdate();
     }
-
 
     render() {
         return (
@@ -228,7 +211,6 @@ class RoomsCreate extends React.Component {
                                 {this.showTypes()}
                             </select>
                         </div>
-
                             <button onClick={this.submitRoom} className="btn btn-primary" type="submit">Сохранить</button>
                         </form>
                     </div>
@@ -238,4 +220,4 @@ class RoomsCreate extends React.Component {
     }
 }
 
-export default RoomsCreate;
+export default RoomsForm;

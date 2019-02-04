@@ -231,10 +231,19 @@ nav {
     td {
       color: white !important;
       &.actions {
+        .action-link {
+          &:hover {
+            svg {
+              fill: #d3fffc;
+            }
+          }
+        }
+
         a {
           svg {
             fill: white;
           }
+
         }
       }
 
@@ -556,5 +565,7 @@ nav {
     }
   }
 }
-
+.ql-container {
+  height: 250px !important;
+}
 /*==================ANIMATE=====================*/

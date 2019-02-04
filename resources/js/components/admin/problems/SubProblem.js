@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import {Link} from "react-router-dom";
 
 class SubProblem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            title_parent: '',
             subproblem: {
                 room_id: '',
                 title: '',
@@ -15,21 +15,18 @@ class SubProblem extends React.Component {
                 category_id: ''
             }
         };
-        this.inputOnChange = this.inputOnChange.bind(this);
-        this.submitSubForm = this.submitSubForm.bind(this);
     }
 
-    inputOnChange(e) {
+    inputOnChange = (e) => {
         this.setState({
            subproblem: {
                ...this.state.subproblem,
                [e.target.name]: e.target.value
            }
         });
-    }
+    };
 
     componentDidUpdate(prevProps, prevState) {
-        //console.log('prev', prevProps, prevState, this.props.room_id);
         if (prevProps.room_id !== this.props.room_id) {
             this.setState({
                 subproblem: {
@@ -40,26 +37,38 @@ class SubProblem extends React.Component {
                 //console.log('kuku', this.state.subproblem);
             });
         }
+
     }
 
-    submitSubForm(e) {
+    submitSubForm = (e) => {
         e.preventDefault();
         let url = '/public/api/admin/problems/create';
         axios.post(url, this.state.subproblem)
             .then(res => {
-                console.log(res);
                 document.location.href = '/public/admin/problems';
             })
             .catch(err => {
-                console.log(err);
             })
+    };
+
+    componentDidMount() {
+        if (this.props.hasOwnProperty("match")) {
+            document.querySelector('.form-subProblem').classList.remove('hide');
+            let url = "/public/api/problem/" + this.props.match.params.parent_id;
+            axios.get(url)
+                .then(res => {
+                    this.setState({
+                        title_parent: res.data.title
+                    })
+                })
+        }
     }
 
     render() {
         return(
             <div className="hide form-subProblem d-flex justify-content-center">
                 <form onSubmit={this.submitSubForm} className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
-                    <h2 className="text-center">Родительская проблема: <em><b><h2>{this.props.title}</h2></b></em></h2>
+                    <h2 className="text-center">Родительская проблема: <em><b><h2>{this.props.title || this.state.title_parent}</h2></b></em></h2>
                     <div className="item-form-admin form-group">
                         <label htmlFor="room_id">room_id</label>
                         <input
@@ -106,7 +115,6 @@ class SubProblem extends React.Component {
                                 value={this.state.subproblem.status || ''}
                             />
                         </div>
-
                         <div className="item-form-admin form-group col-xl-6 col-lg-6 col-12">
                             <label htmlFor="category_id">category_id</label>
                             <input
@@ -127,7 +135,6 @@ class SubProblem extends React.Component {
                             value={this.props.room_id || ''}
                         />
                     </div>
-
                     <button type="submit" className="btn btn-outline-secondary">СОЗДАТЬ ПОДПРОБЛЕМУ</button>
                 </form>
             </div>

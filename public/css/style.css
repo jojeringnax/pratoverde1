@@ -207,6 +207,9 @@ nav .navbar-collapse ul li a {
 .toggle:hover td {
   color: white !important;
 }
+.toggle:hover td.actions .action-link:hover svg {
+  fill: #d3fffc;
+}
 .toggle:hover td.actions a svg {
   fill: white;
 }
@@ -480,6 +483,10 @@ nav .navbar-collapse ul li a {
     text-align: center;
   }
 }
+.ql-container {
+  height: 250px !important;
+}
+
 /*==================ANIMATE=====================*/
 
 /*# sourceMappingURL=style.css.map */

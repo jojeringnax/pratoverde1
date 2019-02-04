@@ -2,24 +2,21 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import axios from "axios";
 
-class RoomTypesCreate extends React.Component {
+class RoomTypesForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             type: ''
         };
-        this.submitType = this.submitType.bind(this);
-        this.onChangeType = this.onChangeType.bind(this);
-        this.getType = this.getType.bind(this);
     }
 
-    onChangeType(e) {
+    onChangeType = (e) => {
         this.setState({
             type: e.target.value
         });
-    }
+    };
 
-    submitType(e) {
+    submitType = (e) => {
         e.preventDefault();
         let url;
         if(this.props.match.params.status === "update") {
@@ -30,35 +27,30 @@ class RoomTypesCreate extends React.Component {
 
         axios.post(url, {name:this.state.type})
             .then(response => {
-                console.log(response);
                 alert('Тип номера добавлен');
                 document.location.href = "/public/admin/rooms/types";
             })
             .catch(function (error) {
-                console.log(error);
                 alert('Такой номер уже есть');
             });
-    }
+    };
 
-    getType(){
+    getType = () =>{
         let url;
         if(this.props.match.params.status === "update") {
             url = '/public/api/room_type/' + this.props.match.params.id;
             axios.get(url)
                 .then(res => {
-                    //console.log(res);
                     this.setState({
                         type: res.data.name
                     });
                 })
-                .catch(err => {
-
-                });
+                .catch(err => {});
         }
-    }
+    };
 
     componentWillMount() {
-        console.log(this.props.match.params)
+        console.log(this.props.match.params);
         this.getType();
     }
 
@@ -91,4 +83,4 @@ class RoomTypesCreate extends React.Component {
     }
 }
 
-export default RoomTypesCreate;
+export default RoomTypesForm;
