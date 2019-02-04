@@ -15,3 +15,6 @@ yarn-error.log
 /.nano
 /.config
 package-lock.json
+/log
+composer.lock
+/public/js/app.js
