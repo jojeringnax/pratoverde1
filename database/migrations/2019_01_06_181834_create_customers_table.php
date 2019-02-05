@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->timestamps();
             $table->string('surname', 64);
             $table->string('name', 64);
+            $table->string('email', 64);
             $table->unsignedInteger('source_id')->nullable();
             $table->foreign('source_id')->references('id')->on('customer_sources')->onDelete('SET NULL');
             $table->integer('phone_number')->nullable();

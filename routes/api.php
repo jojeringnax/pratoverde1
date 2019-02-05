@@ -33,30 +33,41 @@ Route::get('room/{id}', function ($id) {
    return \App\Room::findOrFail($id)->toJson();
 });
 
-/**
- * RoomType routes
- */
-Route::get('admin/room_types', 'Admin\RoomTypeController@index');
-Route::post('admin/room_types/create', 'Admin\RoomTypeController@create');
-Route::post('admin/room_types/update/{id}', 'Admin\RoomTypeController@update');
-Route::delete('admin/room_types/delete/{id}', 'Admin\RoomTypeController@delete');
+        /**
+         * RoomConnect routes
+         */
+        Route::post('admin/room_connects/create', 'Admin\RoomConnectController@create');
+        Route::post('admin/room_connects/update/{id}', 'Admin\RoomConnectController@update');
+        Route::delete('admin/room_connects/delete/{id}', 'Admin\RoomConnectController@delete');
 
-Route::get('room_type/{id}', function($id) {
-    return \App\RoomType::findOrFail($id)->toJson();
-});
+        Route::get('room_connect/{id}', function($id) {
+            return \App\Customer::findOrFail($id)->toJson();
+        });
+
+        /**
+         * RoomType routes
+         */
+        Route::get('admin/room_types', 'Admin\RoomTypeController@index');
+        Route::post('admin/room_types/create', 'Admin\RoomTypeController@create');
+        Route::post('admin/room_types/update/{id}', 'Admin\RoomTypeController@update');
+        Route::delete('admin/room_types/delete/{id}', 'Admin\RoomTypeController@delete');
+
+        Route::get('room_type/{id}', function($id) {
+            return \App\RoomType::findOrFail($id)->toJson();
+        });
 
 
-/**
- * Facilities routes
- */
-Route::get('admin/facilities', 'Admin\FacilityController@index');
-Route::post('admin/facilities/create', 'Admin\FacilityController@create');
-Route::post('admin/facilities/update/{id}', 'Admin\FacilityController@update');
-Route::delete('admin/facilities/delete/{id}', 'Admin\FacilityController@delete');
+        /**
+         * Facilities routes
+         */
+        Route::get('admin/facilities', 'Admin\FacilityController@index');
+        Route::post('admin/facilities/create', 'Admin\FacilityController@create');
+        Route::post('admin/facilities/update/{id}', 'Admin\FacilityController@update');
+        Route::delete('admin/facilities/delete/{id}', 'Admin\FacilityController@delete');
 
-Route::get('facility/{id}', function($id) {
-    return \App\Facility::findOrFail($id)->toJson();
-});
+        Route::get('facility/{id}', function($id) {
+            return \App\Facility::findOrFail($id)->toJson();
+        });
 
 
 
@@ -71,18 +82,17 @@ Route::delete('admin/problems/delete/{id}', 'Admin\ProblemController@delete');
 Route::get('problem/{id}', function($id) {
     return \App\Problem::findOrFail($id)->toJson();
 });
+        /**
+         * ProblemCategory routes
+         */
+        Route::get('admin/problem_categories', 'Admin\ProblemCategoryController@index');
+        Route::post('admin/problem_categories/create', 'Admin\ProblemCategoryController@create');
+        Route::post('admin/problem_categories/update/{id}', 'Admin\ProblemCategoryController@update');
+        Route::delete('admin/problem_categories/delete/{id}', 'Admin\ProblemCategoryController@delete');
 
-/**
- * ProblemCategory routes
- */
-Route::get('admin/problem_categories', 'Admin\ProblemCategoryController@index');
-Route::post('admin/problem_categories/create', 'Admin\ProblemCategoryController@create');
-Route::post('admin/problem_categories/update/{id}', 'Admin\ProblemCategoryController@update');
-Route::delete('admin/problem_categories/delete/{id}', 'Admin\ProblemCategoryController@delete');
-
-Route::get('problem_category/{id}', function($id) {
-    return \App\ProblemCategory::findOrFail($id)->toJson();
-});
+        Route::get('problem_category/{id}', function($id) {
+            return \App\ProblemCategory::findOrFail($id)->toJson();
+        });
 
 
 /**
@@ -97,16 +107,19 @@ Route::get('customer/{id}', function($id) {
     return \App\Customer::findOrFail($id)->toJson();
 });
 
-/**
- * RoomConnect routes
- */
-Route::post('admin/room_connects/create', 'Admin\CustomerController@create');
-Route::post('admin/room_connects/update/{id}', 'Admin\CustomerController@update');
-Route::delete('admin/room_connects/delete/{id}', 'Admin\CustomerController@delete');
+        /**
+         * CustomerSource routes
+         */
+        Route::get('admin/customer_sources', 'Admin\CustomerSourceController@index');
+        Route::post('admin/customer_sources/create', 'Admin\CustomerSourceController@create');
+        Route::post('admin/customer_sources/update/{id}', 'Admin\CustomerSourceController@update');
+        Route::delete('admin/customer_sources/delete/{id}', 'Admin\CustomerSourceController@delete');
 
-Route::get('room_connect/{id}', function($id) {
-    return \App\Customer::findOrFail($id)->toJson();
-});
+        Route::get('customer_source/{id}', function($id) {
+            return \App\CustomerSource::findOrFail($id)->toJson();
+        });
+
+
 
 
 /**
