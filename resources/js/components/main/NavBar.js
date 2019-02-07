@@ -65,7 +65,7 @@ class Header extends React.Component {
                     <a href="/public/rooms" className="go-rooms-banner">book room</a>
                     <a href="" className="logo"><img src="img/logo.png" alt=""/></a>
                     <div className="img-banner"></div>
-                    <Link to="/public/admin"> </Link>
+                    <Link to="/public/admin">ADMIN</Link>
                 </div>
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
