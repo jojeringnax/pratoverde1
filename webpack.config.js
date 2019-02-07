@@ -7,5 +7,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: "/"
     },
+    performance: {
+        maxEntrypointSize: 2048000,
+        maxAssetSize: 2048000
+    },
     devServer: { historyApiFallback: true, contentBase: './', hot: true }
 };
