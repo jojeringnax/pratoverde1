@@ -11,6 +11,7 @@
         <!-- Material Design Bootstrap -->
         <link href="{{url('')}}/css/mdb.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <script src={{asset('../dist/main.js')}}></script>
         <script>
             let codes = {
                 '2': 'Такой номер уже существует'
