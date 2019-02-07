@@ -7,7 +7,5 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: "/"
     },
-    devServer: {
-        historyApiFallback: true
-    },
+    devServer: { historyApiFallback: true, contentBase: './', hot: true }
 };

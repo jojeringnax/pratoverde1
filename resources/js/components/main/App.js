@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
+import { Switch, Route, BrowserRouter  as Router} from 'react-router-dom';
+
 {/*MAIN PAGE IMPORT*/}
 import NavBar from './NavBar';
 import Main from './Main';
