@@ -1,10 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import {HashRouter, BrowserRouter, Route, Switch } from 'react-router-dom'
-import Main from './Main';
-import Rooms from './Rooms';
 import { Link } from 'react-router-dom'
-import Ristorante from "./Ristorante";
 
 class Header extends React.Component {
     constructor(props) {
@@ -50,7 +46,8 @@ class Header extends React.Component {
                 nav.classList.remove('fixed-nav');
                 document.querySelector('.arr-up').classList.add('hide');
             }
-        }
+        };
+
         document.querySelector('.arr-up').addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -65,9 +62,10 @@ class Header extends React.Component {
         return (
             <section id="banner">
                 <div className="banner">
-                    <a href="rooms" className="go-rooms-banner">book room</a>
+                    <a href="/public/rooms" className="go-rooms-banner">book room</a>
                     <a href="" className="logo"><img src="img/logo.png" alt=""/></a>
                     <div className="img-banner"></div>
+                    <Link to="/public/admin"> </Link>
                 </div>
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

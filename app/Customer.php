@@ -32,7 +32,8 @@ class Customer extends Model
         'surname',
         'name',
         'source_id',
-        'phone_number'
+        'phone_number',
+        'email'
     ];
 
     /**

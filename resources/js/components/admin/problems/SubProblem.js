@@ -27,6 +27,7 @@ class SubProblem extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
+        //console.log(prevProps.match.params.parent_id);
         if (prevProps.room_id !== this.props.room_id) {
             this.setState({
                 subproblem: {
@@ -37,7 +38,6 @@ class SubProblem extends React.Component {
                 //console.log('kuku', this.state.subproblem);
             });
         }
-
     }
 
     submitSubForm = (e) => {
@@ -52,6 +52,16 @@ class SubProblem extends React.Component {
     };
 
     componentDidMount() {
+        console.log(this.props);
+        if(this.props.match) {
+            this.setState({
+                subproblem: {
+                    ...this.state.subproblem,
+                    parent_id: this.props.match.params.parent_id
+                }
+            });
+        }
+
         if (this.props.hasOwnProperty("match")) {
             document.querySelector('.form-subProblem').classList.remove('hide');
             let url = "/public/api/problem/" + this.props.match.params.parent_id;
@@ -132,7 +142,7 @@ class SubProblem extends React.Component {
                             id="parent_id"
                             name="parent_id"
                             onChange={this.inputOnChange}
-                            value={this.props.room_id || ''}
+                            value={this.state.subproblem.parent_id || ''}
                         />
                     </div>
                     <button type="submit" className="btn btn-outline-secondary">СОЗДАТЬ ПОДПРОБЛЕМУ</button>

@@ -483,6 +483,11 @@ nav .navbar-collapse ul li a {
     text-align: center;
   }
 }
+.additional-form-admin {
+  padding: 20px 15px 20px 15px;
+  margin: 20px 0 20px 0;
+}
+
 .ql-container {
   height: 250px !important;
 }

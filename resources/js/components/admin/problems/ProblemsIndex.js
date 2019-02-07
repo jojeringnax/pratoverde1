@@ -15,7 +15,7 @@ class ProblemsIndex extends React.Component {
 
     toggleTableClick = (e) => {
         let id = e.currentTarget.id;
-        if (this.state.problems[id]['visible'] === false) {
+        if (this.state.problems[id] && this.state.problems[id]['visible'] === false) {
             this.setState({
                 problems: Object.assign({}, this.state.problems, {[id]:{visible: true}})
             });
