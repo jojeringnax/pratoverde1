@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
-import ActionTable from "../problems/categories/ProblemsCategory";
-
-let sources = [];
+import ActionTable from '../ActionTable';
 
 class CustomersIndex extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            getSources: false
+            customers: []
         }
     }
 
     getSourceCustomer = () => {
-      axios.get("/public/api/admin/customer")
+      axios.get("/public/api/admin/customers")
           .then(res => {
-              console.log(res);
-              this.setState({getSources: true});
-              sources = res.data;
+              this.setState({customers: res.data});
+
           })
           .catch(err => {
               console.log(err);
@@ -30,21 +27,23 @@ class CustomersIndex extends React.Component {
         let urlUpdate = "/public/admin/customers/update/";
         let table = [];
         let row = [];
-        for(let i=0; i < sources.length; i++) {
+        for(let i=0; i < this.state.customers.length; i++) {
             row = [];
-            for(let key in sources[i]) {
-                row.push(<td key={sources[i][key]}>{sources[i][key]}</td>);
+            for(let key in this.state.customers[i]) {
+                row.push(<td key={key}>{this.state.customers[i][key]}</td>);
             }
             row.push(
                 <ActionTable
                     key="action"
-                    id={sources[i]['id']}
-                    updateUrl={urlUpdate + sources[i]['id']}
-                    deleteUrl={urlDelete + sources[i]['id']}
+                    id={this.state.customers[i]['id']}
+                    updateUrl={urlUpdate + this.state.customers[i]['id']}
+                    deleteUrl={urlDelete + this.state.customers[i]['id']}
                 />
             );
-            table.push(<tr id={sources[i]['id']} key={i}>{row}</tr>);
+            console.log(row);
+            table.push(<tr id={this.state.customers[i]['id']} key={i}>{row}</tr>);
         }
+
         return table;
     };
 
@@ -76,6 +75,7 @@ class CustomersIndex extends React.Component {
                                 {this.createTable()}
                             </tbody>
                         </table>
+                        <Link to="/public/admin/customers/create" className="btn btn-outline-secondary">Создать клиента</Link>
                     </div>
                 </div>
             </div>

@@ -40,6 +40,7 @@ import CustomerForm from '../admin/customers/CustomerForm';
 import SourceCustomerIndex from '../admin/customers/source_customer/SourceCustomerIndex';
 import SourceCustomerForm from "../admin/customers/source_customer/SourceCustomerForm";
 
+
 export default class App extends React.Component {
     render() {
         return (
@@ -76,10 +77,10 @@ if (document.getElementById('root')) {
                 <Route path="/public/admin/rooms/types" exact
                        render={() => <RoomTypes />}
                 />
-                <Route path="/public/admin/rooms/types/:status/:id" exact
+                <Route path="/public/admin/rooms/types/update/:id" exact
                        render={(routeProps) => <RoomTypesForm {...routeProps} />}
                 />
-                <Route path="/public/admin/rooms/types/:status" exact
+                <Route path="/public/admin/rooms/types/create" exact
                        render={(routeProps) => <RoomTypesForm {...routeProps} />}
                 />
 
@@ -113,13 +114,13 @@ if (document.getElementById('root')) {
 
 
                 {/*ADMIN-BOOKING ROUTE*/}
-                <Route path="/public/admin/booking" exact
+                <Route path="/public/admin/bookings" exact
                        render={() => <BookIndex />}
                 />
-                <Route path="/public/admin/booking/create"
+                <Route path="/public/admin/bookings/create"
                        render={(routeProps) => <BookForm {...routeProps} />}
                 />
-                <Route path="/public/admin/booking/update/:id"
+                <Route path="/public/admin/bookings/update/:id"
                        render={(routeProps) => <BookForm {...routeProps} />}
                 />
 
@@ -145,6 +146,7 @@ if (document.getElementById('root')) {
                 <Route path="/public/admin/customers/update/:id"
                        render={(routeProps) => <CustomerForm {...routeProps} />}
                 />
+
 
                 {/*ADMIN-CUSTOMERS-SOURCE ROUTE*/}
                 <Route path="/public/admin/customers" exact

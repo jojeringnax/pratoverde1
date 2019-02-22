@@ -8,26 +8,21 @@ class ActionTable extends React.Component {
         super(props);
     }
 
-    deleteProblem = (e) => {
+    deleteRow = (e) => {
         e.preventDefault();
         let urlDelete = this.props.deleteUrl;
         let id = this.props.id;
         axios.delete(urlDelete)
             .then(response => {
-            let parent = document.querySelector('tbody');
-            let child = document.getElementById(id);
-            parent.removeChild(child);
+                let parent = document.querySelector('tbody');
+                let child = document.getElementById(id);
+                console.log(parent, child, id);
+                parent.removeChild(child);
             })
             .catch(function (error) {
                 //console.log(error)
             });
     };
-
-
-    componentDidMount() {
-        //console.log(this.props);
-
-    }
 
     render() {
         return (
@@ -35,10 +30,10 @@ class ActionTable extends React.Component {
                 <Link key="update"  className="action-link" to={this.props.updateUrl}>
                     <MdModeEdit />
                 </Link>
-                <Link  key="delete" className="action-link"  onClick={this.deleteProblem}  to="">
+                <Link  key="delete" className="action-link"  onClick={this.deleteRow}  to="">
                     <MdDeleteForever />
                 </Link>
-                <Link key="subproblem"  className={(this.props.problem) ? 'action-link' : 'hide'} to={"/public/admin/subproblem/create/" + this.props.id}>
+                <Link key="subproblem" className={(this.props.problem) ? 'action-link' : 'hide'} to={"/public/admin/subproblem/create/" + this.props.id}>
                     <MdAddBox />
                 </Link>
             </td>

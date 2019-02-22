@@ -1,41 +1,26 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import { Switch, Route, BrowserRouter  as Router} from 'react-router-dom';
+
+import DashboardAdmin from './DashboardAdmin';
+import NavBarAdmin from './NavBarAdmin';
 
 class Admin extends React.Component {
     constructor(props) {
         super(props);
     }
 
+
     render() {
         return (
-            <div id="admin-page" className="section container-content-admin">
-                <div className="container">
+            <>
+                <div className="section container-content-admin d-flex">
+                    <NavBarAdmin />
                     <div className="row d-flex justify-content-center col-12">
-                        <div id="" className="col-xl-10 card dashboard-admin-title">
-                            <div className="card-header">
-                                <h3>DASHBOARD</h3>
-                            </div>
-                            <div className="card-body d-flex justify-content-around flex-wrap">
-                                <div className="col-3 ">
-                                    <Link className="btn-admin-section card" to="/public/admin/problems"> PROBLEMS</Link>
-                                </div>
-                                <div className="col-3 ">
-                                    <Link className="btn-admin-section card" to="/public/admin/rooms"> ROOMS</Link>
-                                </div>
-                                <div className="col-3 ">
-                                    <Link className="btn-admin-section card" to="/public/admin/booking">BOOKING</Link>
-                                </div>
-                                <div className="col-3 ">
-                                    <Link className="btn-admin-section card" to="">CUSTOMER</Link>
-                                </div>
-                                <div className="col-3 ">
-                                    <Link className="btn-admin-section card" to="/public/admin/news">NEWS</Link>
-                                </div>
-                            </div>
-                        </div>
+                        <DashboardAdmin />
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

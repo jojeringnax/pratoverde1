@@ -87,9 +87,10 @@ class ProblemForm extends React.Component {
             url = '/public/api/problem/' + this.props.match.params.id;
             axios.get(url)
                 .then(response => {
-                    //console.log(response.data)
+
                     let nextState = Object.assign({}, this.state, {problem: response.data});
                     this.setState(nextState);
+                    console.log(this.state.problem)
                 })
                 .catch(error => {
                     //console.log(error);
@@ -173,7 +174,7 @@ class ProblemForm extends React.Component {
                                         min="0"
                                         max="1"
                                         onChange={this.inputOnChange}
-                                        value={this.state.problem.status || ''}
+                                        value={this.state.problem.status || 0 }
                                     />
                                 </div>
                                 <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">

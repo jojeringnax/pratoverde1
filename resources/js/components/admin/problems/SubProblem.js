@@ -34,8 +34,6 @@ class SubProblem extends React.Component {
                     ...this.state.subproblem,
                     parent_id: this.props.room_id
                 }
-            }, () => {
-                //console.log('kuku', this.state.subproblem);
             });
         }
     }

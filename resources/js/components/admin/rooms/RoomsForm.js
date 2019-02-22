@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import { MdAddBox, MdClose } from "react-icons/md";
+import PopUp from '../popUp/PopUp';
+import SubRoomTypesForm from './SubRoomTypesForm';
+import ClosePopUpBtn from '../popUp/ClosePopUpBtn';
 
 class RoomsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            showFormCreateTypes: false,
             room : {
                 id: '',
                 floor: '',
@@ -15,9 +20,18 @@ class RoomsForm extends React.Component {
                 last_washing_date: '',
                 type_id: ''
             },
-            types: []
+            types: [],
+            countTypes: 0
         };
     }
+
+    textButtonRoomForm = () => {
+        if(this.props.match.params.id) {
+            return "Обновить номер";
+        }else {
+            return "Создать номер";
+        }
+    };
 
     addTitleText = () => {
         if(this.props.match.params.id) {
@@ -34,11 +48,14 @@ class RoomsForm extends React.Component {
         let options = [];
         for(let i=0; i < this.state.types.length; i++) {
             if(this.state.types[i].id === this.state.room.type_id) {
-                console.log('hui', this.state.types[i].id, this.state.room.type_id);
+                //console.log('hui', this.state.types[i].id, this.state.room.type_id);
                 options.unshift(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
             } else {
                 options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
             }
+        }
+        if(this.props.match.params.id) {
+            options.unshift(<option key="choose" value="null">Выберите тип</option>);
         }
         return options;
 
@@ -99,11 +116,11 @@ class RoomsForm extends React.Component {
             textResponse = 'Номер добавлен';
         }
         axios.post(url, formData)
-        .then(function (response) {
+        .then(response => {
             alert(textResponse);
             document.location.href = '/public/admin/rooms'
         })
-        .catch(error => {});
+        .catch(err => {});
     };
 
     fillFormUpdate = () => {
@@ -117,10 +134,26 @@ class RoomsForm extends React.Component {
                         this.getTypes();
                     });
                 })
-                .catch(function (error) {
-                    //console.log(error);
-                });
+                .catch(err =>{});
         }
+    };
+
+    chaneStateFormCreateType = () => {
+        this.setState({
+            showFormCreateTypes: false
+        }, () => {
+            this.getTypes();
+        });
+    };
+
+    chaneStateFormCreateTypeTrue = () => {
+        this.setState({
+            showFormCreateTypes: true
+        });
+    };
+
+    closeModFormBtn = () => {
+        ClosePopUpBtn(this.chaneStateFormCreateType());
     };
 
     componentDidMount() {
@@ -131,6 +164,16 @@ class RoomsForm extends React.Component {
     render() {
         return (
             <div id="create-rooms" className="section container-content-admin">
+                <PopUp
+                    contentPopUp={
+                        <SubRoomTypesForm
+                            updateState={this.getTypes}
+                            closeModWin={this.closeModFormBtn}
+                        /> }
+                    showw={this.state.showFormCreateTypes}
+                    close={this.chaneStateFormCreateType}
+
+                />
                 <div className="container">
                     <div className="row d-flex justify-content-start flex-column align-items-center">
                         <h1 className="text-center">{this.addTitleText()}</h1>
@@ -195,23 +238,29 @@ class RoomsForm extends React.Component {
                                 />
                             </div>
                             <div className="item-form-admin form-group">
-                            <label htmlFor="date-clear">Последняя дата чистки номера</label>
-                            <input
-                                name="last_washing_date"
-                                type="date"
-                                id="last_washing_date"
-                                className="form-control"
-                                value={this.state.room.last_washing_date}
-                                onChange={this.inputOnChange}
-                                required
-                            />
-                        </div>
-                        <div className="item-form-admin form-group form">
-                            <select onChange={this.inputOnChange} value={this.state.room.type_id || ''} name="type_id" id="types-room" className="form-control">
-                                {this.showTypes()}
-                            </select>
-                        </div>
-                            <button onClick={this.submitRoom} className="btn btn-primary" type="submit">Сохранить</button>
+                                <label htmlFor="date-clear">Последняя дата чистки номера</label>
+                                <input
+                                    name="last_washing_date"
+                                    type="date"
+                                    id="last_washing_date"
+                                    className="form-control"
+                                    value={this.state.room.last_washing_date}
+                                    onChange={this.inputOnChange}
+                                    required
+                                />
+                            </div>
+                            <div className="item-form-admin form-group form d-flex flex-column">
+                                <label htmlFor="types-room">Типы номеров</label>
+                                <div className="d-flex align-items-start">
+                                    <select onChange={this.inputOnChange} value={this.state.room.type_id || 'Типов номеров нет'} name="type_id" id="types-room" className="form-control">
+                                        {this.showTypes()}
+                                    </select>
+                                    <a onClick={this.chaneStateFormCreateTypeTrue} className="link-add-types-room">
+                                        <MdAddBox />
+                                    </a>
+                                </div>
+                            </div>
+                            <button onClick={this.submitRoom} className="btn btn-outline-primary" type="submit">{this.textButtonRoomForm()}</button>
                         </form>
                     </div>
                 </div>

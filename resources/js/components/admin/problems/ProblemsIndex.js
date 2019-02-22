@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import ActionTable from '../ActionTable';
+
 let problems = [];
 let problemsVisible = {};
 class ProblemsIndex extends React.Component {
@@ -19,7 +20,7 @@ class ProblemsIndex extends React.Component {
             this.setState({
                 problems: Object.assign({}, this.state.problems, {[id]:{visible: true}})
             });
-            for(let i=0; i< document.querySelectorAll('tr[data-parent_id="'+e.currentTarget.id+'"]').length; i++) {
+            for(let i=0; i < document.querySelectorAll('tr[data-parent_id="'+e.currentTarget.id+'"]').length; i++) {
                 document.querySelectorAll('tr[data-parent_id="'+e.currentTarget.id+'"]')[i].classList.remove('hide')
             }
         } else {
@@ -97,8 +98,10 @@ class ProblemsIndex extends React.Component {
                 );
             } else {
                 for(let j=0; j < table.length; j++) {
+                    //  console.log(table);
                     if(table[j].props['id'] === problems[i]['parent_id']) {
-                        //console.log(table[j], problems[i]['parent_id']);
+                        //
+                        // console.log(table[j], problems[i]['parent_id']);
                         newTable = table.slice(0, j+1);
                         //console.log('asd',problems[i]['id']);
                         newTable.push(

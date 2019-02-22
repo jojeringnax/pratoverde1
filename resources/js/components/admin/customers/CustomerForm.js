@@ -14,7 +14,10 @@ class CustomerForm extends React.Component {
                 link: ''
             },
             getOptions: [],
-            selectedOption: '',
+            selectedOption: {
+                value: '',
+                label: ''
+            },
             customer: {
                 name: '',
                 email: '',
@@ -26,23 +29,39 @@ class CustomerForm extends React.Component {
     }
 
     getSources = () => {
+        axios.get("/public/api/admin/customer_sources")
+            .then(res => {
+                let options = [];
+                res.data.forEach((source) => {
+                    if(source.id === this.state.customer.source_id) {
+                        options.unshift({'value': source.id, label: source.name});
+                        this.setState({
+                            selectedOption: {
+                                value: source.id,
+                                label: source.name
+                            }
+                        })
+                    }else {
+                        options.push({'value': source.id, label: source.name});
+                    }
 
+                });
+                this.setState({
+                    getOptions: options
+                });
+            })
     };
 
     submitCustomer = (e) => {
         e.preventDefault();
         let url;
         let data = this.state.customer;
-        // let phone;
-        // phone = parseInt(this.state.customer.phone_number);
-        // data.phone_number = phone;
         if(this.props.match.params.id) {
             url = "/public/api/admin/customers/update/" + this.props.match.params.id;
+            document.location.href = "public/admin/customers";
         } else {
             url = "/public/api/admin/customers/create";
         }
-
-        console.log(this.state.customer.phone_number);
 
         axios.post(url, data)
             .then(res => {
@@ -72,20 +91,38 @@ class CustomerForm extends React.Component {
 
     };
 
+    textTypeForm = () => {
+        if(this.props.match.params.id) {
+            return "Обновить данные клиента"
+        }else {
+            return "Добавить клиента"
+        }
+    };
 
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption }, () => {
-            console.log(`Option selected:`, selectedOption);
-            // this.setState({
-            //     problem : {
-            //         ...this.state.problem,
-            //         parent_id: selectedOption.value
-            //     }
-            // }, () => {
-            //     console.log(selectedOption.value, this.state.problem)
-            // })
+    fillFormUpdate = () => {
+        let url = "/public/api/customer/" + this.props. match.params.id;
+        axios.get(url)
+            .then(res => {
+                this.setState({
+                    customer: res.data
+                }, () => {
+                    this.getSources();
+                });
+
+            })
+    };
+
+    handleChange = (e) => {
+        this.setState({
+            customer : {
+                ...this.state.customer,
+                source_id: e.value
+            },
+            selectedOption: {
+                value: e.value,
+                label: e.label
+            }
         });
-
     };
 
     submitSource = (e) => {
@@ -98,7 +135,6 @@ class CustomerForm extends React.Component {
             .catch(err => {
                 console.log(err)
             })
-
     };
 
     sourceChange = (e) => {
@@ -111,16 +147,21 @@ class CustomerForm extends React.Component {
     };
 
     componentDidMount() {
+        if(this.props.match.params.id) {
+            this.fillFormUpdate();
+        }else {
+            this.getSources();
+        }
+
 
     }
 
     render() {
-        const { selectedOption } = this.state.selectedOption;
         return (
             <div className="container">
                 <div className="row d-flex justify-content-center flex-column align-items-center">
-                    <h1 className="text-center">ДОБАВЛЕНИЕ КЛИЕНТА</h1>
-                    <Link to="/public/admin" className="btn peach-gradient" value="">Назад</Link>
+                    <h1 className="text-center">{this.textTypeForm()}</h1>
+                    <Link to="/public/admin/customers" className="btn peach-gradient" value="">Назад</Link>
                     <form id="customer-form" onSubmit={this.submitCustomer} className="border form-group col-xl-8 form-admin z-depth-5">
                         <div className="item-form-admin form-group">
                             <label htmlFor="title">Имя</label>
@@ -173,7 +214,7 @@ class CustomerForm extends React.Component {
                             <label htmlFor="title">Откуда пришел клиент</label>
                             <Select
                                 placeholder="Выберите источник"
-                                value={selectedOption}
+                                value={this.state.selectedOption}
                                 onChange={this.handleChange}
                                 options={this.state.getOptions}
                             />
@@ -185,7 +226,7 @@ class CustomerForm extends React.Component {
                                 <input
                                     type="text"
                                     id="sourceChange"
-                                    name="name"
+                                    name="name_source"
                                     className="form-control"
                                     placeholder="Введите наименование источника"
                                     onChange={this.sourceChange}
@@ -207,7 +248,7 @@ class CustomerForm extends React.Component {
                             <button className="btn btn-outline-success" form="source-form" type="submit">Создать источник</button>
                         </div>
 
-                        <button form="customer-form" className="btn btn-outline-primary" type="submit">Создать клиента</button>
+                        <button form="customer-form" className="btn btn-outline-primary" type="submit">{this.textTypeForm()}</button>
                     </form>
                     <form onSubmit={this.submitSource} id="source-form" ></form>
                 </div>

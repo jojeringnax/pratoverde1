@@ -107,6 +107,7 @@ Route::get('customer/{id}', function($id) {
     return \App\Customer::findOrFail($id)->toJson();
 });
 
+
         /**
          * CustomerSource routes
          */
@@ -143,4 +144,16 @@ Route::delete('admin/files/delete/{id}', 'Admin\FileController@delete');
 
 Route::get('file/{id}', function($id) {
     return \App\File::findOrFail($id)->toJson();
+});
+
+/**
+ * Booking routes
+ */
+Route::get('admin/bookings', 'Admin\BookingController@index');
+Route::post('admin/bookings/create', 'Admin\BookingController@create');
+Route::post('admin/bookings/update/{id}', 'Admin\BookingController@update');
+Route::delete('admin/bookings/delete/{id}', 'Admin\BookingController@delete');
+
+Route::get('booking/{id}', function($id) {
+    return \App\Booking::findOrFail($id)->toJson();
 });
