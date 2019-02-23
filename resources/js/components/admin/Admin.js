@@ -33,7 +33,7 @@ import CustomerForm from './customers/CustomerForm';
 
 {/*ADMIN-CUSTOMER-SOURCE IMPORT*/}
 import SourceCustomerIndex from './customers/source_customer/SourceCustomerIndex';
-import SourceCustomerForm from "./customers/source_customer/SourceCustomerForm";
+import SourceCustomerForm from './customers/source_customer/SourceCustomerForm';
 class Admin extends React.Component {
     constructor(props) {
         super(props);
@@ -134,13 +134,13 @@ class Admin extends React.Component {
 
 
                                 {/*ADMIN-CUSTOMERS-SOURCE ROUTE*/}
-                                <Route path="/public/admin/customers" exact
+                                <Route path="/public/admin/customers/source/" exact
                                        render={() => <SourceCustomerIndex />}
                                 />
-                                <Route path="/public/admin/customers/create"
+                                <Route path="/public/admin/customers/source/create"
                                        render={(routeProps) => <SourceCustomerForm {...routeProps} />}
                                 />
-                                <Route path="/public/admin/customers/update/:id"
+                                <Route path="/public/admin/customers/source/update/:id"
                                        render={(routeProps) => <SourceCustomerForm {...routeProps} />}
                                 />
 

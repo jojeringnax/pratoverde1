@@ -103,7 +103,7 @@ class NavBarAdmin extends React.Component {
 
     activeStyles = {
         fontWeight: "bold",
-        color: "red"
+        color: "black"
     };
 
     render() {
@@ -140,29 +140,29 @@ class NavBarAdmin extends React.Component {
                             </li>{/*end problems nav */}
 
                             <li>{/*start bookings nav */}
-                                <NavLink to="/public/admin/bookings">Бронирование номеров</NavLink>
+                                <NavLink activeStyle={this.activeStyles} to="/public/admin/bookings">Бронирование номеров</NavLink>
                                 <ul>
-                                    <li><NavLink to="/public/admin/bookings/create">Забронировать номер</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/bookings/create">Забронировать номер</NavLink></li>
                                 </ul>
                             </li>{/*end bookings nav */}
 
                             <li>{/*start customers nav */}
-                                <NavLink to="/public/admin/customers">Клиенты</NavLink>
+                                <NavLink activeStyle={this.activeStyles} to="/public/admin/customers">Клиенты</NavLink>
                                 <ul>
-                                    <li><NavLink to="/public/admin/customers/create">Создать клиента</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/customers/create">Создать клиента</NavLink></li>
                                     <li>
-                                        <NavLink to="/public/admin/customers/source">Источники</NavLink>
+                                        <NavLink activeStyle={this.activeStyles} to="/public/admin/customers/source">Источники</NavLink>
                                         <ul>
-                                            <li><NavLink to="/public/admin/customers/source/create">Создать источник</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/customers/source/create">Создать источник</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>{/*end bookings nav */}
 
                             <li>{/*start news nav */}
-                                <NavLink to="/public/admin/news">Блог</NavLink>
+                                <NavLink activeStyle={this.activeStyles}  to="/public/admin/news">Блог</NavLink>
                                 <ul>
-                                    <li><NavLink to="/public/admin/news/create">Создать новость</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/news/create">Создать новость</NavLink></li>
                                 </ul>
                             </li>
                         </ul>

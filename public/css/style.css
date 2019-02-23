@@ -579,7 +579,7 @@ nav .navbar-collapse ul li a {
   padding-top: 40px;
 }
 .nav-admin nav ul li a {
-  color: white !important;
+  color: white;
 }
 
 .container-content-admin {
