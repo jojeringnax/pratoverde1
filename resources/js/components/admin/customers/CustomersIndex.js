@@ -53,31 +53,27 @@ class CustomersIndex extends React.Component {
 
     render() {
         return (
-            <div className="customer-admin-index">
-                <div className="container">
-                    <div className="row">
-                        <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
-                        <table className="table admin-table table-bordered z-depth-1">
-                            <thead className="primary-color-dark border-secondary">
-                                <tr className="">
-                                    <th width="" scope="col">id</th>
-                                    <th width="" scope="col">Created_at</th>
-                                    <th width="" scope="col">Updated_at</th>
-                                    <th width="" scope="col">Surname</th>
-                                    <th width="" scope="col">Name</th>
-                                    <th width="" scope="col">Email</th>
-                                    <th width="" scope="col">Source_id</th>
-                                    <th width="" scope="col">Phone_number</th>
-                                    <th width="" scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody className="">
-                                {this.createTable()}
-                            </tbody>
-                        </table>
-                        <Link to="/public/admin/customers/create" className="btn btn-outline-secondary">Создать клиента</Link>
-                    </div>
-                </div>
+            <div className="container-admin">
+                <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                <table className="table admin-table table-bordered z-depth-1">
+                    <thead className="primary-color-dark border-secondary">
+                        <tr className="">
+                            <th width="" scope="col">id</th>
+                            <th width="" scope="col">Created_at</th>
+                            <th width="" scope="col">Updated_at</th>
+                            <th width="" scope="col">Surname</th>
+                            <th width="" scope="col">Name</th>
+                            <th width="" scope="col">Email</th>
+                            <th width="" scope="col">Source_id</th>
+                            <th width="" scope="col">Phone_number</th>
+                            <th width="" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className="">
+                        {this.createTable()}
+                    </tbody>
+                </table>
+                <Link to="/public/admin/customers/create" className="btn btn-outline-secondary">Создать клиента</Link>
             </div>
         )
     }

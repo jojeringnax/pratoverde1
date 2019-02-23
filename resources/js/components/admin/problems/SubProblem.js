@@ -74,7 +74,7 @@ class SubProblem extends React.Component {
 
     render() {
         return(
-            <div className="hide form-subProblem d-flex justify-content-center">
+            <div className="hide container-admin form-subProblem d-flex justify-content-center">
                 <form onSubmit={this.submitSubForm} className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                     <h2 className="text-center">Родительская проблема: <em><b><h2>{this.props.title || this.state.title_parent}</h2></b></em></h2>
                     <div className="item-form-admin form-group">

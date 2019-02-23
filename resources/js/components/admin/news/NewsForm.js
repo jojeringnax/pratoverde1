@@ -87,44 +87,43 @@ class NewsForm extends React.Component {
 
     render() {
         return(
-            <div className="container">
-                <div className="row d-flex justify-content-start flex-column align-items-center">
-                    <div className="title-form"><h1>Опишите проблему</h1></div>
-                    <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
-                    <form onSubmit={this.createNews}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
-                        <div className="item-form-admin form-group">
-                            <label htmlFor="title">Заголовок</label>
-                            <input
-                                type="text"
-                                id="title"
-                                name="title"
-                                className="form-control"
-                                onChange={this.inputOnchange}
-                                value={this.state.title || ''}
-                            />
-                        </div>
-                        <div className="item-form-admin form-group">
-                            <label htmlFor="author">Автор</label>
-                            <input
-                                type="text"
-                                id="author"
-                                name="author"
-                                className="form-control"
-                                onChange={this.inputOnchange}
-                                value={this.state.author  || ''}
-                            />
-                        </div>
-                        <div className="item-form-admin" id="news-content-editor"></div>
-                        {/*<input*/}
-                            {/*type="file"*/}
-                            {/*id="file"*/}
-                            {/*name="file"*/}
-                            {/*onChange={this.sendFile}*/}
-                        {/*/>*/}
-                        <button type="submit" className="btn btn-outline-primary">СОЗДАТЬ НОВОСТЬ</button>
-                    </form>
-                </div>
+            <div className="container-admin d-flex justify-content-start flex-column align-items-center">
+                <div className="title-form"><h1>Опишите проблему</h1></div>
+                <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
+                <form onSubmit={this.createNews}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="title">Заголовок</label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            className="form-control"
+                            onChange={this.inputOnchange}
+                            value={this.state.title || ''}
+                        />
+                    </div>
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="author">Автор</label>
+                        <input
+                            type="text"
+                            id="author"
+                            name="author"
+                            className="form-control"
+                            onChange={this.inputOnchange}
+                            value={this.state.author  || ''}
+                        />
+                    </div>
+                    <div className="item-form-admin" id="news-content-editor"></div>
+                    {/*<input*/}
+                        {/*type="file"*/}
+                        {/*id="file"*/}
+                        {/*name="file"*/}
+                        {/*onChange={this.sendFile}*/}
+                    {/*/>*/}
+                    <button type="submit" className="btn btn-outline-primary">СОЗДАТЬ НОВОСТЬ</button>
+                </form>
             </div>
+
         )
     }
 }

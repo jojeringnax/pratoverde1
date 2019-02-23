@@ -75,7 +75,7 @@ class ProblemsCategoryForm extends React.Component {
 
     render() {
         return (
-            <div id="admin-problemsCategoriesCreate" className="section container-content-admin">
+            <div id="admin-problemsCategoriesCreate" className="section container-content-admin container-admin">
                 <h1 className="text-center">СОЗДАНИЕ КАТЕГОРИИ ПРОБЛЕМ</h1>
                 <div className="container">
                     <div className="row d-flex justify-content-center flex-column align-items-center">

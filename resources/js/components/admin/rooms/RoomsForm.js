@@ -163,7 +163,7 @@ class RoomsForm extends React.Component {
 
     render() {
         return (
-            <div id="create-rooms" className="section container-content-admin">
+            <div id="create-rooms" className="section container-admin">
                 <PopUp
                     contentPopUp={
                         <SubRoomTypesForm

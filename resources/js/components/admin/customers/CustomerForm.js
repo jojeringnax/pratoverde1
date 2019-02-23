@@ -158,100 +158,98 @@ class CustomerForm extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="row d-flex justify-content-center flex-column align-items-center">
-                    <h1 className="text-center">{this.textTypeForm()}</h1>
-                    <Link to="/public/admin/customers" className="btn peach-gradient" value="">Назад</Link>
-                    <form id="customer-form" onSubmit={this.submitCustomer} className="border form-group col-xl-8 form-admin z-depth-5">
+            <div className="container-admin d-flex justify-content-center flex-column align-items-center">
+                <h1 className="text-center">{this.textTypeForm()}</h1>
+                <Link to="/public/admin/customers" className="btn peach-gradient" value="">Назад</Link>
+                <form id="customer-form" onSubmit={this.submitCustomer} className="border form-group col-xl-8 form-admin z-depth-5">
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="title">Имя</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Введите имя"
+                            className="form-control"
+                            value={this.state.customer.name || ''}
+                            onChange={this.inputOnchange}
+                        />
+                    </div>
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="title">Фамилия</label>
+                        <input
+                            type="surname"
+                            id="surname"
+                            name="surname"
+                            placeholder="Введите фамилию"
+                            className="form-control"
+                            value={this.state.customer.surname || ''}
+                            onChange={this.inputOnchange}
+                        />
+                    </div>
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="title">E-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Введите e-mail"
+                            className="form-control"
+                            value={this.state.customer.email || ''}
+                            onChange={this.inputOnchange}
+                        />
+                    </div>
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="title">Телефонный номер</label>
+                        <MaskedInput
+                            id="phone_number"
+                            mask="+1(111)-111-1111"
+                            name="phone_number"
+                            className="form-control"
+                            value={this.state.customer.phone_number || ''}
+                            onChange={this.inputOnchange}
+                        />
+                    </div>
+                    <div className="item-form-admin form-group">
+                        <label htmlFor="title">Откуда пришел клиент</label>
+                        <Select
+                            placeholder="Выберите источник"
+                            value={this.state.selectedOption}
+                            onChange={this.handleChange}
+                            options={this.state.getOptions}
+                        />
+                    </div>
+                    <div className="border-dark rounded z-depth-1-half additional-form-admin">
+                        <h2>Создать источник</h2>
                         <div className="item-form-admin form-group">
-                            <label htmlFor="title">Имя</label>
+                            <label htmlFor="">Наименование источника</label>
                             <input
                                 type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Введите имя"
+                                id="sourceChange"
+                                name="name_source"
                                 className="form-control"
-                                value={this.state.customer.name || ''}
-                                onChange={this.inputOnchange}
+                                placeholder="Введите наименование источника"
+                                onChange={this.sourceChange}
+                                value={this.state.source.name}
                             />
                         </div>
                         <div className="item-form-admin form-group">
-                            <label htmlFor="title">Фамилия</label>
+                            <label htmlFor="">Ссылка на источник</label>
                             <input
-                                type="surname"
-                                id="surname"
-                                name="surname"
-                                placeholder="Введите фамилию"
+                                type="text"
+                                id="sourceChange"
+                                name="link"
                                 className="form-control"
-                                value={this.state.customer.surname || ''}
-                                onChange={this.inputOnchange}
+                                placeholder="Введите ссылку на источник"
+                                onChange={this.sourceChange}
+                                value={this.state.source.link}
                             />
                         </div>
-                        <div className="item-form-admin form-group">
-                            <label htmlFor="title">E-mail</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="Введите e-mail"
-                                className="form-control"
-                                value={this.state.customer.email || ''}
-                                onChange={this.inputOnchange}
-                            />
-                        </div>
-                        <div className="item-form-admin form-group">
-                            <label htmlFor="title">Телефонный номер</label>
-                            <MaskedInput
-                                id="phone_number"
-                                mask="+1(111)-111-1111"
-                                name="phone_number"
-                                className="form-control"
-                                value={this.state.customer.phone_number || ''}
-                                onChange={this.inputOnchange}
-                            />
-                        </div>
-                        <div className="item-form-admin form-group">
-                            <label htmlFor="title">Откуда пришел клиент</label>
-                            <Select
-                                placeholder="Выберите источник"
-                                value={this.state.selectedOption}
-                                onChange={this.handleChange}
-                                options={this.state.getOptions}
-                            />
-                        </div>
-                        <div className="border-dark rounded z-depth-1-half additional-form-admin">
-                            <h2>Создать источник</h2>
-                            <div className="item-form-admin form-group">
-                                <label htmlFor="">Наименование источника</label>
-                                <input
-                                    type="text"
-                                    id="sourceChange"
-                                    name="name_source"
-                                    className="form-control"
-                                    placeholder="Введите наименование источника"
-                                    onChange={this.sourceChange}
-                                    value={this.state.source.name}
-                                />
-                            </div>
-                            <div className="item-form-admin form-group">
-                                <label htmlFor="">Ссылка на источник</label>
-                                <input
-                                    type="text"
-                                    id="sourceChange"
-                                    name="link"
-                                    className="form-control"
-                                    placeholder="Введите ссылку на источник"
-                                    onChange={this.sourceChange}
-                                    value={this.state.source.link}
-                                />
-                            </div>
-                            <button className="btn btn-outline-success" form="source-form" type="submit">Создать источник</button>
-                        </div>
+                        <button className="btn btn-outline-success" form="source-form" type="submit">Создать источник</button>
+                    </div>
 
-                        <button form="customer-form" className="btn btn-outline-primary" type="submit">{this.textTypeForm()}</button>
-                    </form>
-                    <form onSubmit={this.submitSource} id="source-form" ></form>
-                </div>
+                    <button form="customer-form" className="btn btn-outline-primary" type="submit">{this.textTypeForm()}</button>
+                </form>
+                <form onSubmit={this.submitSource} id="source-form" ></form>
             </div>
         )
     }

@@ -115,25 +115,25 @@ class NavBarAdmin extends React.Component {
                             <li>{/*start rooms nav */}
                                 <NavLink activeStyle={this.activeStyles} to="/public/admin/rooms">Номера</NavLink>
                                 <ul>
-                                    <li><NavLink to="/public/admin/rooms/create">Создать номер</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/create">Создать номер</NavLink></li>
                                     <li>
-                                        <NavLink to="/public/admin/rooms/types">Типы номеров</NavLink>
+                                        <NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/types">Типы номеров</NavLink>
                                         <ul>
-                                            <li><NavLink to="/public/admin/rooms/create">Создать тип номера</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/create">Создать тип номера</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>{/*end rooms nav */}
 
                             <li>{/*start problems nav */}
-                                <Link to="/public/admin/problems">Проблемы</Link>
+                                <NavLink activeStyle={this.activeStyles} to="/public/admin/problems">Проблемы</NavLink>
                                 <ul>
-                                    <li><NavLink to="/public/admin/problems/create">Создать проблему</NavLink></li>
-                                    <li><NavLink to="/public/admin/subproblem/create">Создать подпроблему</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/problems/create">Создать проблему</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/subproblem/create">Создать подпроблему</NavLink></li>
                                     <li>
-                                        <NavLink to="/public/admin/problems/categories">Категории проблем</NavLink>
+                                        <NavLink activeStyle={this.activeStyles} to="/public/admin/problems/categories">Категории проблем</NavLink>
                                         <ul>
-                                            <li><NavLink to="/public/admin/problems/categories/create">Создать категорию проблем</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/problems/categories/create">Создать категорию проблем</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>

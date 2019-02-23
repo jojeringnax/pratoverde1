@@ -124,33 +124,29 @@ class ProblemsIndex extends React.Component {
 
     render() {
         return (
-            <div id="problems-page " className="section container-content-admin">
-                <div className="container">
-                    <div className="row">
-                        <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
-                        <table className="table admin-table table-bordered z-depth-1">
-                            <thead className="primary-color-dark border-secondary">
-                                <tr className="">
-                                    <th width="5%" scope="col">id</th>
-                                    <th width="10%" scope="col">Created_at</th>
-                                    <th width="10%" scope="col">Updated_at</th>
-                                    <th width="5%" scope="col">Room_id</th>
-                                    <th width="15%" scope="col">Title</th>
-                                    <th width="25%" scope="col">Content</th>
-                                    <th width="5%" scope="col">Status</th>
-                                    <th width="5%" scope="col">Parent_id</th>
-                                    <th width="5%" scope="col">Category_id</th>
-                                    <th width="5%" scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody className="">
-                                {this.createTable()}
-                            </tbody>
-                        </table>
-                        <Link to="/public/admin/problems/categories" className="btn btn-outline-secondary">КАТЕГОРИИ</Link>
-                        <Link to="/public/admin/problems/create" className="btn btn-outline-secondary">СОЗДАТЬ ПРОБЛЕМУ</Link>
-                    </div>
-                </div>
+            <div className="container-admin">
+                <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                <table className="table admin-table table-bordered z-depth-1">
+                    <thead className="primary-color-dark border-secondary">
+                        <tr className="">
+                            <th width="5%" scope="col">id</th>
+                            <th width="10%" scope="col">Created_at</th>
+                            <th width="10%" scope="col">Updated_at</th>
+                            <th width="5%" scope="col">Room_id</th>
+                            <th width="15%" scope="col">Title</th>
+                            <th width="25%" scope="col">Content</th>
+                            <th width="5%" scope="col">Status</th>
+                            <th width="5%" scope="col">Parent_id</th>
+                            <th width="5%" scope="col">Category_id</th>
+                            <th width="5%" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className="">
+                        {this.createTable()}
+                    </tbody>
+                </table>
+                <Link to="/public/admin/problems/categories" className="btn btn-outline-secondary">КАТЕГОРИИ</Link>
+                <Link to="/public/admin/problems/create" className="btn btn-outline-secondary">СОЗДАТЬ ПРОБЛЕМУ</Link>
             </div>
         );
     }

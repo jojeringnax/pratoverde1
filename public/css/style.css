@@ -565,12 +565,21 @@ nav .navbar-collapse ul li a {
 
 /*=====================NAV_ADMIN=======================*/
 .nav-admin {
-  border: 2px solid black;
+  border: 0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), -23px 0 20px -23px rgba(0, 0, 0, 0.8), 23px 0 20px -23px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  background-color: #aa66cc;
   width: 20%;
   min-height: 100vh;
 }
 .nav-admin nav {
   height: 100%;
+  border: 0 !important;
+  color: white;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+.nav-admin nav ul li a {
+  color: white !important;
 }
 
 .container-content-admin {
@@ -578,6 +587,11 @@ nav .navbar-collapse ul li a {
   min-height: 100vh;
   padding: 0 30px 0 30px;
   width: 80%;
+}
+
+.container-admin {
+  padding-top: 40px;
+  width: 100%;
 }
 
 /*==================ANIMATE=====================*/

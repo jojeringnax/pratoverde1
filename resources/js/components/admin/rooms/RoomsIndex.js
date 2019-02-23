@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import ActionTable from '../ActionTable';
-import NavBarAdmin from '../NavBarAdmin';
 
 export default class RoomsIndex extends React.Component {
     constructor(props) {
@@ -61,32 +60,27 @@ export default class RoomsIndex extends React.Component {
 
     render() {
         return (
-            <div id="admin-rooms" className="section container-fluid">
-                <div className="row d-flex ">
-                    <NavBarAdmin />
-                    <div className="container-content-admin">
-                        <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
-                        <table className="table table-striped admin-table table-bordered">
-                            <thead className="secondary-color-dark border-secondary">
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Floor</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Type_id</th>
-                                <th scope="col">Last_washing_date</th>
-                                <th scope="col">Need_wash</th>
-                                <th scope="col">Number_of_beds</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.createTableRooms()}
-                            </tbody>
-                        </table>
-                        <Link className="btn btn-outline-secondary" to="/public/admin/rooms/types">ТИПЫ КОМНАТ</Link>
-                        <Link className="btn btn-outline-secondary" to="/public/admin/rooms/create">СОЗДАТЬ НОМЕР</Link>
-                    </div>
-                </div>
+            <div className="container-admin">
+                <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                <table className="table table-striped admin-table table-bordered">
+                    <thead className="secondary-color-dark border-secondary">
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Floor</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Type_id</th>
+                        <th scope="col">Last_washing_date</th>
+                        <th scope="col">Need_wash</th>
+                        <th scope="col">Number_of_beds</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.createTableRooms()}
+                    </tbody>
+                </table>
+                <Link className="btn btn-outline-secondary" to="/public/admin/rooms/types">ТИПЫ КОМНАТ</Link>
+                <Link className="btn btn-outline-secondary" to="/public/admin/rooms/create">СОЗДАТЬ НОМЕР</Link>
             </div>
         );
     }

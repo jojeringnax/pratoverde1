@@ -40,7 +40,7 @@ class SubRoomTypesForm extends React.Component {
 
     render () {
         return (
-          <div>
+          <div className="container-admin">
               <form onSubmit={this.submitType} action="" className="card card-type-create">
                   <h2 className="text-center">Создать тип комнаты</h2>
                   <input

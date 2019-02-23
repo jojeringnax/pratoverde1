@@ -72,28 +72,26 @@ class BookIndex extends React.Component {
     render() {
         return (
             <>
-                <div className="container container-content-admin">
-                    <div className="row d-flex justify-content-center col-12">
-                        <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
-                        <table className="table admin-table table-bordered z-depth-1">
-                            <thead className="primary-color-dark border-secondary">
-                            <tr className="">
-                                <th width="" scope="col">id</th>
-                                <th width="" scope="col">ФИО клиента</th>
-                                <th width="" scope="col">Дата заселения</th>
-                                <th width="" scope="col">Дата отправления</th>
-                                <th width="" scope="col">Цена</th>
-                                <th width="" scope="col">Метод оплаты</th>
-                                <th width="" scope="col">Статус</th>
-                                <th width="" scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody className="">
-                                {this.tableBooking()}
-                            </tbody>
-                        </table>
-                        <Link to="/public/admin/bookings/create" className="btn btn-outline-secondary">ЗАБРОНИРОВАТЬ НОМЕР</Link>
-                    </div>
+                <div className="container-admin d-flex justify-content-center col-12">
+                    <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                    <table className="table admin-table table-bordered z-depth-1">
+                        <thead className="primary-color-dark border-secondary">
+                        <tr className="">
+                            <th width="" scope="col">id</th>
+                            <th width="" scope="col">ФИО клиента</th>
+                            <th width="" scope="col">Дата заселения</th>
+                            <th width="" scope="col">Дата отправления</th>
+                            <th width="" scope="col">Цена</th>
+                            <th width="" scope="col">Метод оплаты</th>
+                            <th width="" scope="col">Статус</th>
+                            <th width="" scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody className="">
+                            {this.tableBooking()}
+                        </tbody>
+                    </table>
+                    <Link to="/public/admin/bookings/create" className="btn btn-outline-secondary">ЗАБРОНИРОВАТЬ НОМЕР</Link>
                 </div>
             </>
         );

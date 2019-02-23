@@ -74,26 +74,22 @@ class RoomTypes extends React.Component {
 
     render() {
         return (
-            <div className="container-content-admin" id="section-roomTypes">
-                <div className="container">
-                    <div className="row d-flex justify-content-center align-items-center flex-column">
-                         <h1 className="text-center">ТИПЫ КОМНАТ</h1>
-                         <Link to="/public/admin/rooms" className="btn peach-gradient">Назад</Link>
-                         <table className="table table-striped admin-table table-bordered">
-                         <thead className="secondary-color-dark border-secondary">
-                                <tr>
-                                    <th>id</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.createTable()}
-                            </tbody>
-                        </table>
-                        <Link to="/public/admin/rooms/types/create" className="btn btn-outline-secondary">Добавить Тип Номера</Link>
-                    </div>
-                </div>
+            <div className="container-admin d-flex justify-content-center align-items-center flex-column">
+                 <h1 className="text-center">ТИПЫ КОМНАТ</h1>
+                 <Link to="/public/admin/rooms" className="btn peach-gradient">Назад</Link>
+                 <table className="table table-striped admin-table table-bordered">
+                 <thead className="secondary-color-dark border-secondary">
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.createTable()}
+                    </tbody>
+                </table>
+                <Link to="/public/admin/rooms/types/create" className="btn btn-outline-secondary">Добавить Тип Номера</Link>
             </div>
         )
     }

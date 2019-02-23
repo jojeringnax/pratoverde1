@@ -71,26 +71,22 @@ class ProblemsCategory extends React.Component {
 
     render() {
         return (
-            <div id="admin-page" className="section container-content-admin">
-                <div className="container">
-                    <div className="row">
-                        <h1 className="text-center">КАТЕГОРИИ ПРОБЛЕМ</h1>
-                        <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
-                        <table className="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.createTable()}
-                            </tbody>
-                        </table>
-                        <Link className="btn btn-outline-secondary" to="/public/admin/problems/categories/create">Создать категорию проблемы</Link>
-                    </div>
-                </div>
+            <div className="container-admin">
+                <h1 className="text-center">КАТЕГОРИИ ПРОБЛЕМ</h1>
+                <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
+                <table className="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.createTable()}
+                    </tbody>
+                </table>
+                <Link className="btn btn-outline-secondary" to="/public/admin/problems/categories/create">Создать категорию проблемы</Link>
             </div>
         );
     }
