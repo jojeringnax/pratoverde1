@@ -32,6 +32,7 @@ class ArticleController extends Controller
             return response(json_encode(['category' => 'bookings', 'id' => null, 'message' => 'Booking not found', 'code' => 1]), 500);
         }
         $article->fill($request->post());
+        return var_dump($request->allFiles());
         $article->save();
         return $article->toJson();
     }
@@ -44,6 +45,12 @@ class ArticleController extends Controller
     {
         $article = new $this->modelName();
         return $this->store($request, $article);
+    }
+
+
+    public function uploadPhotos(Request $request)
+    {
+        return var_dump($request->post());
     }
 
     /**
