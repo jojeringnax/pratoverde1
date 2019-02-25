@@ -254,95 +254,99 @@ class BookForm extends React.Component {
         return (
             <>
                 <div className="container-admin d-flex justify-content-center">
-                    <div className="title-form"><h1>{this.textButton()}</h1></div>
-                    <Link to="/public/admin/bookings" className="btn peach-gradient">Назад</Link>
-                    <form onSubmit={this.submitBook} className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1 d-flex flex-wrap">
-                        <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="parent_id">ФИО клиента</label>
-                            <Select
-                                onChange={this.handleChange}
-                                placeholder="Выберите клиента"
-                                classNamePrefix="select"
-                                isSearchable = "true"
-                                value = {this.state.customerOptions[0]}
-                                options={this.state.customerOptions}
-                                name="select_customer"
-                            />
-                        </div>
-                        <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="parent_id">email</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                value={this.state.emailCustomer}
-                                placeholder="Email клиента"
-                                disabled
-                            />
-                        </div>
-                        <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="check_in">Check in</label>
-                            <input
-                                type="date"
-                                id="check_in"
-                                name="check_in"
-                                className="form-control"
-                                value={this.state.book.check_in}
-                                onChange={this.inputOnChange}
-                                placeholder="Дата заселения"
-                            />
-                        </div>
-                        <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="check_out">Check out</label>
-                            <input
-                                type="date"
-                                id="check_out"
-                                name="check_out"
-                                className="form-control"
-                                value={this.state.book.check_out}
-                                onChange={this.inputOnChange}
-                                placeholder="Дата выселения"
-                            />
-                        </div>
-                        <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="price">Price</label>
-                            <input
-                                type="text"
-                                id="price"
-                                name="price"
-                                className="form-control"
-                                value={this.state.book.price}
-                                onChange={this.inputOnChange}
-                                onKeyDown={this.maskPrice}
-                                placeholder="Цена за номер"
-                            />
-                        </div>
-                        <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="pay_methods">Paymethods</label>
-                            <select
-                                id="pay_method"
-                                name="pay_method"
-                                className="form-control"
-                                value={this.state.book.pay_method}
-                                onChange={this.inputOnChange}
-                            >
-                                {this.showPayMethods()}
-                            </select>
-                        </div>
-                        <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
-                            <label htmlFor="status">Status</label>
-                            <select
-                                id="status"
-                                name="status"
-                                className="form-control"
-                                value={this.state.book.status}
-                                onChange={this.inputOnChange}
-                            >
-                                {this.showStatus()}
-                            </select>
-                        </div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="title-form"><h1>{this.textButton()}</h1></div>
+                            <Link to="/public/admin/bookings" className="btn peach-gradient">Назад</Link>
+                            <form onSubmit={this.submitBook} className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1 d-flex flex-wrap">
+                                <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="parent_id">ФИО клиента</label>
+                                    <Select
+                                        onChange={this.handleChange}
+                                        placeholder="Выберите клиента"
+                                        classNamePrefix="select"
+                                        isSearchable = "true"
+                                        value = {this.state.customerOptions[0]}
+                                        options={this.state.customerOptions}
+                                        name="select_customer"
+                                    />
+                                </div>
+                                <div id="parent_id" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="parent_id">email</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        value={this.state.emailCustomer}
+                                        placeholder="Email клиента"
+                                        disabled
+                                    />
+                                </div>
+                                <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="check_in">Check in</label>
+                                    <input
+                                        type="date"
+                                        id="check_in"
+                                        name="check_in"
+                                        className="form-control"
+                                        value={this.state.book.check_in}
+                                        onChange={this.inputOnChange}
+                                        placeholder="Дата заселения"
+                                    />
+                                </div>
+                                <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="check_out">Check out</label>
+                                    <input
+                                        type="date"
+                                        id="check_out"
+                                        name="check_out"
+                                        className="form-control"
+                                        value={this.state.book.check_out}
+                                        onChange={this.inputOnChange}
+                                        placeholder="Дата выселения"
+                                    />
+                                </div>
+                                <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="price">Price</label>
+                                    <input
+                                        type="text"
+                                        id="price"
+                                        name="price"
+                                        className="form-control"
+                                        value={this.state.book.price}
+                                        onChange={this.inputOnChange}
+                                        onKeyDown={this.maskPrice}
+                                        placeholder="Цена за номер"
+                                    />
+                                </div>
+                                <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="pay_methods">Paymethods</label>
+                                    <select
+                                        id="pay_method"
+                                        name="pay_method"
+                                        className="form-control"
+                                        value={this.state.book.pay_method}
+                                        onChange={this.inputOnChange}
+                                    >
+                                        {this.showPayMethods()}
+                                    </select>
+                                </div>
+                                <div id="" className="inp-problem-create item-form-admin form-group col-xl-6 col-lg-6 col-12">
+                                    <label htmlFor="status">Status</label>
+                                    <select
+                                        id="status"
+                                        name="status"
+                                        className="form-control"
+                                        value={this.state.book.status}
+                                        onChange={this.inputOnChange}
+                                    >
+                                        {this.showStatus()}
+                                    </select>
+                                </div>
 
-                        <button type="submit" className="btn btn-outline-success">{this.textButton()}</button>
-                    </form>
+                                <button type="submit" className="btn btn-outline-success">{this.textButton()}</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </>
         );

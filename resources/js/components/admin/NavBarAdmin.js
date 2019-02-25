@@ -119,7 +119,7 @@ class NavBarAdmin extends React.Component {
                                     <li>
                                         <NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/types">Типы номеров</NavLink>
                                         <ul>
-                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/create">Создать тип номера</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/types/create">Создать тип номера</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -129,7 +129,6 @@ class NavBarAdmin extends React.Component {
                                 <NavLink activeStyle={this.activeStyles} to="/public/admin/problems">Проблемы</NavLink>
                                 <ul>
                                     <li><NavLink activeStyle={this.activeStyles} to="/public/admin/problems/create">Создать проблему</NavLink></li>
-                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/subproblem/create">Создать подпроблему</NavLink></li>
                                     <li>
                                         <NavLink activeStyle={this.activeStyles} to="/public/admin/problems/categories">Категории проблем</NavLink>
                                         <ul>

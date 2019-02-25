@@ -1,8 +1,27 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import axios from 'axios';
 
 class Blog extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+
+        }
+    }
+
+    getNewsMainPage = () => {
+        axios.get('/public/api/admin/articles')
+            .then(res => {
+                console.log('---', res.data);
+            })
+            .catch(err => {
+
+            })
+    };
+
+    componentDidMount() {
+        this.getNewsMainPage();
     }
 
     render() {

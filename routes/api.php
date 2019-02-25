@@ -126,6 +126,8 @@ Route::get('customer/{id}', function($id) {
 /**
  * Article routes
  */
+
+Route::get('admin/articles', 'Admin\ArticleController@index');
 Route::post('admin/articles/create', 'Admin\ArticleController@create');
 Route::post('admin/articles/update/{id}', 'Admin\ArticleController@update');
 Route::delete('admin/articles/delete/{id}', 'Admin\ArticleController@delete');
@@ -133,7 +135,6 @@ Route::delete('admin/articles/delete/{id}', 'Admin\ArticleController@delete');
 Route::get('article/{id}', function($id) {
     return \App\Article::findOrFail($id)->toJson();
 });
-
 
 
 /**
@@ -146,9 +147,11 @@ Route::get('file/{id}', function($id) {
     return \App\File::findOrFail($id)->toJson();
 });
 
+
 /**
  * Booking routes
  */
+
 Route::get('admin/bookings', 'Admin\BookingController@index');
 Route::post('admin/bookings/create', 'Admin\BookingController@create');
 Route::post('admin/bookings/update/{id}', 'Admin\BookingController@update');

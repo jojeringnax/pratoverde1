@@ -14,16 +14,40 @@ class NewsForm extends React.Component {
         this.state = {
             title: '',
             content: '',
-            author: ''
+            author: '',
+            mainFiles: []
 
         };
         this.inputOnchange = this.inputOnchange.bind(this);
         this.editorOnchange = this.editorOnchange.bind(this);
     }
 
+    filesCange = (e) => {
+        console.log(e.target.files[0]);
+        // Object.entries(e.target.childNodes[0].files).forEach(
+        //     ([key, val]) => {
+        //         this.setState({
+        //             ...this.state.mainFiles,
+        //             [key]: val
+        //         },() => {
+        //             console.log(this.state.mainFiles);
+        //         })
+        //     }
+        // );
+    };
+
     createNews = (e) => {
         e.preventDefault();
-        let formData = this.state;
+        const formData = new FormData;
+        console.log(e.target.childNodes);
+        formData.append('data',this.state);
+        Object.entries(e.target.childNodes[4].files).forEach(
+            ([key, val]) => formData.append(key, val)
+        );
+        Object.entries(e.target.childNodes[5].files).forEach(
+            ([key, val]) => formData.append(key, val)
+        );
+
         axios.post('/public/api/admin/articles/create',formData)
             .then(res => {
                 console.log(res);
@@ -40,6 +64,7 @@ class NewsForm extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+
     }
 
     editorOnchange(value) {
@@ -114,12 +139,18 @@ class NewsForm extends React.Component {
                         />
                     </div>
                     <div className="item-form-admin" id="news-content-editor"></div>
-                    {/*<input*/}
-                        {/*type="file"*/}
-                        {/*id="file"*/}
-                        {/*name="file"*/}
-                        {/*onChange={this.sendFile}*/}
-                    {/*/>*/}
+                    <input
+                        type="file"
+                        id="file"
+                        name="file"
+                        onChange={this.filesCange}
+                    />
+                    <input
+                        type="file"
+                        id="file"
+                        name="file"
+                        onChange={this.filesCange}
+                    />
                     <button type="submit" className="btn btn-outline-primary">СОЗДАТЬ НОВОСТЬ</button>
                 </form>
             </div>
