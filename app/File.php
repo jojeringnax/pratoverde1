@@ -40,6 +40,11 @@ class File extends Model
      */
     public $timestamps = true;
 
+    const TYPES = [
+        'photo' => 0
+        ];
+
+
     /**
      * File constructor.
      * @param array $attributes

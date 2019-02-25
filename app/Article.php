@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property string $content
  * @property string $author
+ * @property integer $for_index_page_photo_id
+ * @property integer $single_page_photo_id
  *
  */
 class Article extends Model
@@ -30,7 +32,9 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
-        'author'
+        'author',
+        'for_index_page_photo_id',
+        'single_page_photo_id'
     ];
 
     /**
