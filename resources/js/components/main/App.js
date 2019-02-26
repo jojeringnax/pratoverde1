@@ -10,6 +10,7 @@ import RoomMain from '../rooms/RoomMain';
 {/*ADMIN IMPORT*/}
 import Admin from '../admin/Admin';
 
+import NewsPage from '../blog/NewsPage';
 
 export default class App extends React.Component {
     render() {
@@ -28,6 +29,10 @@ if (document.getElementById('root')) {
             <Switch>
                 <Route path="/public" exact render={() => <App />} />
                 <Route path="/public/rooms" render={() => <RoomMain />} />
+                <Route
+                    path="/public/blog/new/:id"
+                    render={(routeProps) => <NewsPage {...routeProps}/>}
+                />
                 <Route component={Admin}/>
                 {/*ADMIN SYSTEM ROUTE*/}
             </Switch>

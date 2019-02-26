@@ -30,33 +30,33 @@ class Contacts extends React.Component {
                             <div className="wrapper-soc-net d-flex justify-content-center col-xl-12">
                                 <div className="social-net d-flex justify-content-around col-xl-7">
                                     <div className="item-soc-icon vk">
-                                        <img src="img/soc-icon/google-plus-main.svg" alt=""/>
+                                        <img src="/public/img/soc-icon/google-plus-main.svg" alt=""/>
                                     </div>
                                     <div className="item-soc-icon google-plus">
-                                        <img src="img/soc-icon/twitter-main.svg" alt=""/>
+                                        <img src="/public/img/soc-icon/twitter-main.svg" alt=""/>
                                     </div>
                                     <div className="item-soc-icon twitter">
-                                        <img src="img/soc-icon/vk-main.svg" alt=""/>
+                                        <img src="/public/img/soc-icon/vk-main.svg" alt=""/>
                                     </div>
                                     <div className="item-soc-icon facebook">
-                                        <img src="img/soc-icon/facebook-main.svg" alt=""/>
+                                        <img src="/public/img/soc-icon/facebook-main.svg" alt=""/>
                                     </div>
                                     <div className="item-soc-icon linked-in">
-                                        <img src="img/soc-icon/vk-main.svg" alt=""/>
+                                        <img src="/public/img/soc-icon/vk-main.svg" alt=""/>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-6 contats-info d-flex flex-column">
                                 <a className="item-cont-info location d-flex">
-                                    <img src="img/soc-icon/map.svg" alt=""/>
+                                    <img src="/public/img/soc-icon/map.svg" alt=""/>
                                     <span>Via dei Friniati, 11, 41040 Polinago MO, Italy</span>
                                 </a>
                                 <a href="tel:+39 350 049 2534" className="item-cont-info number d-flex">
-                                    <img src="img/soc-icon/phone.svg" alt=""/>
+                                    <img src="/public/img/soc-icon/phone.svg" alt=""/>
                                     <span>+7(999)-999-9999</span>
                                 </a>
                                 <a href="mailto: hollow718@gmail.com" className="item-cont-info mail d-flex">
-                                    <img src="img/soc-icon/mail.svg" alt=""/>
+                                    <img src="/public/img/soc-icon/mail.svg" alt=""/>
                                     <span>hollow718@gmail.com</span>
                                 </a>
                             </div>

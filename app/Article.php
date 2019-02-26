@@ -34,7 +34,8 @@ class Article extends Model
         'content',
         'author',
         'for_index_page_photo_id',
-        'single_page_photo_id'
+        'single_page_photo_id',
+        'title_color'
     ];
 
     /**

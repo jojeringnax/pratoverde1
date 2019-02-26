@@ -17,7 +17,7 @@ class File extends React.Component {
         );
         axios.post('/public/api/admin/files/create', formData)
             .then(res => {
-                console.log(res)
+                console.log(res);
             })
             .catch(err => {
                 console.log(err)

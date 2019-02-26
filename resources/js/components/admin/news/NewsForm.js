@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import Quill from 'quill';
 import ImageResize from 'quill-image-resize-module-react';
 import 'quill/dist/quill.snow.css';
+import { SketchPicker } from 'react-color';
+
 Quill.register('modules/imageResize', ImageResize);
 
 
@@ -12,15 +14,34 @@ class NewsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            content: '',
-            author: '',
+            article :{
+                title: '',
+                content: '',
+                author: ''
+            },
+
             mainFiles: []
 
         };
         this.inputOnchange = this.inputOnchange.bind(this);
         this.editorOnchange = this.editorOnchange.bind(this);
     }
+
+    textTitle = () => {
+        if(this.props.match.params.hasOwnProperty('id')) {
+            return 'Обновление новости'
+        }else {
+            return "Создание новости"
+        }
+    };
+
+    textButton = () => {
+        if(this.props.match.params.hasOwnProperty('id')) {
+            return 'Обновить новость'
+        }else {
+            return "Создать новость"
+        }
+    };
 
     filesCange = (e) => {
         console.log(e.target.files[0]);
@@ -39,37 +60,73 @@ class NewsForm extends React.Component {
     createNews = (e) => {
         e.preventDefault();
         const formData = new FormData;
-        Object.entries(this.state).forEach(
+        Object.entries(this.state.article).forEach(
             ([key, val]) => formData.append(key,val)
         );
-        var obj = {
+
+        let obj = {
             file1: e.target.childNodes[4].files[0],
             file2: e.target.childNodes[5].files[0]
         };
+
         Object.entries(obj).forEach(
             ([key, val]) => formData.append(key, val)
         );
+
         axios.post('/public/api/admin/articles/create',formData)
             .then(res => {
                 console.log(res);
+
             })
             .catch(err => {
 
             });
     };
 
+    handleChangeComplete = (color) => {
+        this.setState({
+            article: {
+                ...this.state.article,
+                title_color: color.hex
+            }
+
+        });
+    };
+
     inputOnchange(e) {
         this.setState({
-            [e.target.name]: e.target.value
-        })
+            article: {
+                ...this.state.article,
+                [e.target.name]: e.target.value
+            }
+        });
 
     }
 
     editorOnchange(value) {
         this.setState({
-            content: value
+            article: {
+                ...this.state.article,
+                content: value
+            }
         })
     }
+
+    fillFormUpdate = (id) => {
+        console.log(id);
+        let url = '/public/api/article/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    article: res.data
+                });
+                document.querySelector(".ql-editor").innerHTML = res.data.content
+            })
+            .catch(err => {
+
+            })
+    };
 
     componentDidMount() {
         let editor = document.getElementById('news-content-editor');
@@ -89,6 +146,7 @@ class NewsForm extends React.Component {
             }
         });
 
+
         quill.on('text-change', () => {
             let delta = quill.getContents();
             console.log(delta.ops);
@@ -100,19 +158,26 @@ class NewsForm extends React.Component {
             }
             let html = document.querySelector(".ql-editor").innerHTML;
             this.setState({
-                content: html
+                article: {
+                    ...this.state.article,
+                    content: html
+                }
             }, () => {
                 //console.log(this.state.content)
             });
         });
+
+        if(this.props.match.params.hasOwnProperty('id')) {
+            this.fillFormUpdate(this.props.match.params.id);
+        }
     }
 
     render() {
         return(
             <div className="container-admin d-flex justify-content-start flex-column align-items-center">
-                <div className="title-form"><h1>Опишите проблему</h1></div>
-                <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
-                <form onSubmit={this.createNews}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+                <div className="title-form"><h1>{this.textTitle()}</h1></div>
+                <Link to="/public/admin/news" className="btn peach-gradient">Назад</Link>
+                <form onSubmit={this.createNews}  className="news-create-form border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                     <div className="item-form-admin form-group">
                         <label htmlFor="title">Заголовок</label>
                         <input
@@ -121,7 +186,7 @@ class NewsForm extends React.Component {
                             name="title"
                             className="form-control"
                             onChange={this.inputOnchange}
-                            value={this.state.title || ''}
+                            value={this.state.article.title || ''}
                         />
                     </div>
                     <div className="item-form-admin form-group">
@@ -132,7 +197,7 @@ class NewsForm extends React.Component {
                             name="author"
                             className="form-control"
                             onChange={this.inputOnchange}
-                            value={this.state.author  || ''}
+                            value={this.state.article.author  || ''}
                         />
                     </div>
                     <div className="item-form-admin" id="news-content-editor"></div>
@@ -148,10 +213,13 @@ class NewsForm extends React.Component {
                         name="file2"
                         onChange={this.filesCange}
                     />
-                    <button type="submit" className="btn btn-outline-primary">СОЗДАТЬ НОВОСТЬ</button>
+                    <SketchPicker
+                        color={this.state.article.title_color}
+                        onChangeComplete={ this.handleChangeComplete }
+                    />
+                    <button type="submit" className="btn btn-outline-primary">{this.textButton()}</button>
                 </form>
             </div>
-
         )
     }
 }

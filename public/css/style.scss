@@ -382,6 +382,7 @@ nav {
     align-items: center;
     padding: 30px 30px 0 30px;
     transition: 0.5s;
+    align-self: stretch;
 
     &:hover {
       border: 2px solid white;
@@ -399,9 +400,10 @@ nav {
       width: 100%;
       .title-card-body {
         text-align: center;
+        word-wrap: break-word;
 
         span {
-          font-size: 34px;
+          font-size: 24px;
           font-weight: bold;
         }
       }
@@ -449,7 +451,7 @@ nav {
 }
 
 #contacts {
-  height: 100vh;
+  min-height: 50vh;
   background-color: $mainColorText;
 }
 
@@ -694,130 +696,203 @@ nav {
   width: 100%;
 }
 
+.news-create-form {
+  flex-grow: 1;
+  margin-bottom: 150px;
+}
+
+/*------------------article-page-------------------*/
+
+.banner-article {
+  position: relative;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  .title-article {
+    position: absolute;
+    bottom: 20px;
+    left: 30%;
+    .date-banner-article {
+      display: block;
+      font-size: 28px;
+      font-style: italic;
+    }
+    .title-banner-article {
+      padding-right: 30px;
+      display: block;
+      font-size: 64px;
+      font-weight: bold;
+    }
+  }
+
+}
+
+.article_page {
+  article {
+    min-height: 50vh;
+    text-align: center;
+    justify-content: center;
+    background-color: #ebecec;
+    display: flex;
+    padding-bottom: 100px;
+      .content {
+        margin-top: 100px;
+        text-align: left !important;
+        .title-article-content {
+          color: #2b2a29;
+          h1 {
+            font-weight: bold
+          }
+        }
+        .content-article-content{
+          width: 100%;
+        }
+        .date-article {
+          color: #2b2a29;
+          font-style: italic;
+          font-size: 22px;
+        }
+        .author {
+          font-size: 20px;
+        }
+    }
+
+    .soc-media {
+      .title-soc-media-new-page {
+        font-size: 24px;
+        font-weight: bold;
+
+      }
+    }
+  }
+}
+
+
 /*==================ANIMATE=====================*/
 
 .fade-in {
-  animation: fadein 2.5s;
-  -moz-animation: fadein 2.5s; /* Firefox */
-  -webkit-animation: fadein 2.5s; /* Safari and Chrome */
-  -o-animation: fadein 2.5s; /* Opera */
+animation: fadein 2.5s;
+-moz-animation: fadein 2.5s; /* Firefox */
+-webkit-animation: fadein 2.5s; /* Safari and Chrome */
+-o-animation: fadein 2.5s; /* Opera */
 }
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+from { opacity: 0; }
+to   { opacity: 1; }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+from { opacity: 0; }
+to   { opacity: 1; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+from { opacity: 0; }
+to   { opacity: 1; }
 }
 
 /* Internet Explorer */
 @-ms-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+from { opacity: 0; }
+to   { opacity: 1; }
 }
 
 /*===========================*/
 
 .fadein-layout {
-  animation: fadein-layout 0.4s;
-  -moz-animation: fadein-layout 0.4s; /* Firefox */
-  -webkit-animation: fadein-layout 0.4s; /* Safari and Chrome */
-  -o-animation: fadein-layout 0.4s; /* Opera */
+animation: fadein-layout 0.4s;
+-moz-animation: fadein-layout 0.4s; /* Firefox */
+-webkit-animation: fadein-layout 0.4s; /* Safari and Chrome */
+-o-animation: fadein-layout 0.4s; /* Opera */
 }
 
 @keyframes fadein-layout {
-  from { opacity: 0; }
-  to   { opacity: 0.7; }
+from { opacity: 0; }
+to   { opacity: 0.7; }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadein-layout {
-  from { opacity: 0; }
-  to   { opacity: 0.7; }
+from { opacity: 0; }
+to   { opacity: 0.7; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein-layout {
-  from { opacity: 0; }
-  to   { opacity: 0.7; }
+from { opacity: 0; }
+to   { opacity: 0.7; }
 }
 
 /* Internet Explorer */
 @-ms-keyframes fadein-layout {
-  from { opacity: 0; }
-  to   { opacity: 0.7; }
+from { opacity: 0; }
+to   { opacity: 0.7; }
 }
 
 /*===========================*/
 
 .fadeout {
-  animation: fadeout 1.5s;
-  -moz-animation: fadeout 1.5s; /* Firefox */
-  -webkit-animation: fadeout 1.5s; /* Safari and Chrome */
-  -o-animation: fadeout 1.5s; /* Opera */
+animation: fadeout 1.5s;
+-moz-animation: fadeout 1.5s; /* Firefox */
+-webkit-animation: fadeout 1.5s; /* Safari and Chrome */
+-o-animation: fadeout 1.5s; /* Opera */
 }
 
 @keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+from { opacity: 1; }
+to   { opacity: 0; }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+from { opacity: 1; }
+to   { opacity: 0; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+from { opacity: 1; }
+to   { opacity: 0; }
 }
 
 /* Internet Explorer */
 @-ms-keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+from { opacity: 1; }
+to   { opacity: 0; }
 }
 
 /*===========================*/
 
 .fadeout-layout {
-  animation: fadeout-layout 1.5s;
-  -moz-animation: fadeout-layout 1.5s; /* Firefox */
-  -webkit-animation: fadeout-layout 1.5s; /* Safari and Chrome */
-  -o-animation: fadeout-layout 1.5s; /* Opera */
+animation: fadeout-layout 1.5s;
+-moz-animation: fadeout-layout 1.5s; /* Firefox */
+-webkit-animation: fadeout-layout 1.5s; /* Safari and Chrome */
+-o-animation: fadeout-layout 1.5s; /* Opera */
 }
 
 @keyframes fadeout-layout {
-  from { opacity: 0.7; }
-  to   { opacity: 0; }
+from { opacity: 0.7; }
+to   { opacity: 0; }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadeout-layout {
-  from { opacity: 0.7; }
-  to   { opacity: 0; }
+from { opacity: 0.7; }
+to   { opacity: 0; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadeout-layout {
-  from { opacity: 0.7; }
-  to   { opacity: 0; }
+from { opacity: 0.7; }
+to   { opacity: 0; }
 }
 
 /* Internet Explorer */
 @-ms-keyframes fadeout-layout {
-  from { opacity: 0.7; }
-  to   { opacity: 0; }
+from { opacity: 0.7; }
+to   { opacity: 0; }
 }
