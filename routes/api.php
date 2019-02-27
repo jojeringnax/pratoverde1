@@ -160,3 +160,8 @@ Route::delete('admin/bookings/delete/{id}', 'Admin\BookingController@delete');
 Route::get('booking/{id}', function($id) {
     return \App\Booking::findOrFail($id)->toJson();
 });
+
+
+Route::get('room_type_availability/{room_type_id}/{number_of_rooms}', function ($room_type_id, $number_of_rooms) {
+    return \App\RoomType::checkAvailability($room_type_id, $number_of_rooms);
+});

@@ -31,4 +31,15 @@ class RoomType extends Model
         'name'
     ];
 
+    /**
+     * @param $roomTypeId
+     * @param $numberOfRooms
+     * @return mixed
+     */
+    public static function checkAvailability($roomTypeId, $numberOfRooms)
+    {
+        $numberOfRoomsInDB = Room::where('type_id', $roomTypeId)->andWhere('status', '!=', 1)->count();
+        return $numberOfRoomsInDB - $numberOfRooms;
+    }
+
 }

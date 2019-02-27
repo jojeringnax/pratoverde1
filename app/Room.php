@@ -25,7 +25,7 @@ class Room extends Model
 
     const STATUSES = [
         0 => 'Ready',
-        1 => ''
+        1 => 'Booked'
     ];
 
     /**

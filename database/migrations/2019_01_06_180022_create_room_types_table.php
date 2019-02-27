@@ -16,6 +16,10 @@ class CreateRoomTypesTable extends Migration
         Schema::create('room_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 64);
+            $table->tinyInteger('single_price')->default(30);
+            $table->tinyInteger('two_price')->default(50);
+            $table->tinyInteger('min_capacity')->default(1);
+            $table->tinyInteger('max_capacity')->default(3);
         });
     }
 
