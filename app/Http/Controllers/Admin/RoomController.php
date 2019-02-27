@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\File;
 use App\Http\Controllers\Controller;
 use App\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
@@ -30,6 +32,7 @@ class RoomController extends Controller
             $room->flushFacilities();
             $room->setFacilities($facilities);
         }
+        $this->uploadMainPhotos($request, $room);
         $room->fill($request->post());
         $room->save();
         return $room->toJson();
@@ -57,6 +60,7 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $room = Room::findOrFail($id);
+        $room->deleteMainPhoto();
         return $this->store($request, $room);
     }
 
@@ -67,5 +71,29 @@ class RoomController extends Controller
     public function delete($id)
     {
         return (string) Room::findOrFail($id)->delete();
+    }
+
+    /**
+     * @param Request $request
+     * @param Room $room
+     * @return bool
+     */
+    public function uploadMainPhotos(Request $request, Room $room)
+    {
+        $photo = $request->file('main_photo');
+        if ($photo === null) return false;
+        $path = 'rooms/' . $room->id . '_main.' . $photo->getClientOriginalExtension();
+        Storage::disk('public')->put($path, file_get_contents($photo->getPathname()));
+        $photo = new File();
+        $photo->path = '/storage/' . $path;
+        $photo->size = $photo->getSize();
+        $photo->size_x = getimagesize($photo->getPathname())[0];
+        $photo->size_y = getimagesize($photo->getPathname())[1];
+        $photo->type = File::TYPES['photo'];
+        $photo->save();
+        $room->update([
+            'main_photo_id' => $photo->id,
+        ]);
+        return true;
     }
 }

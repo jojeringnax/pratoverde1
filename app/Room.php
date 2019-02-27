@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $last_washing_date
  * @property bool $need_wash
  * @property integer $number_of_beds
+ * @property integer $main_photo_id
  */
 class Room extends Model
 {
@@ -43,6 +44,7 @@ class Room extends Model
         'last_washing_date',
         'need_wash',
         'number_of_beds',
+        'main_photo_id'
     ];
 
     /**
@@ -116,5 +118,22 @@ class Room extends Model
             'number_of_beds' => 0
         ]);
         return $plug;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|File|null
+     */
+    public function photo()
+    {
+        return $this->hasOne(File::class, 'id', 'main_photo_id');
+    }
+
+    /**
+     * @return bool
+     */
+    public function deleteMainPhoto()
+    {
+        if ($this->main_photo_id !== null) return $this->photo->delete();
+        return false;
     }
 }

@@ -21,6 +21,8 @@ class CreateRoomsTable extends Migration
             $table->date('last_washing_date');
             $table->boolean('need_wash');
             $table->tinyInteger('number_of_beds')->default(2);
+            $table->unsignedInteger('main_photo_id')->nullable();
+            $table->foreign('main_photo_id')->references('id')->on('files')->onDelete('SET NULL');
             $table->foreign('type_id')->references('id')->on('room_types')->onDelete('SET NULL');
             $table->primary('id');
         });
@@ -33,6 +35,10 @@ class CreateRoomsTable extends Migration
      */
     public function down()
     {
+        Schema::table('rooms', function (Blueprint $table) {
+           $table->dropForeign('rooms_main_photo_id_foreign');
+           $table->dropForeign('rooms_type_id_foreign');
+        });
         Schema::dropIfExists('rooms');
     }
 }
