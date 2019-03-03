@@ -28,7 +28,11 @@ class RoomType extends Model
      * @var array
      */
     public $fillable = [
-        'name'
+        'name',
+        'single_price',
+        'two_price',
+        'min_capacity',
+        'max_capacity'
     ];
 
     /**
