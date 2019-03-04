@@ -19,6 +19,8 @@ class CreateRoomConnectsTable extends Migration
             $table->tinyInteger('guests_number')->nullable();
             $table->tinyInteger('children_number')->default(0);
             $table->boolean('with_pets')->default(false);
+            $table->unsignedInteger('room_type_id')->nullable();
+            $table->foreign('room_type_id')->references('id')->on('room_types')->onDelete('SET NULL');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
 

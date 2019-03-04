@@ -24,8 +24,10 @@ class Room extends Model
     const MAXIMUM_FLOOR = 3;
 
     const STATUSES = [
-        0 => 'Ready',
-        1 => 'Booked'
+        0 => 'ready',
+        1 => 'little problematic',
+        2 => 'booked',
+        3 => 'unusable'
     ];
 
     /**
@@ -136,4 +138,13 @@ class Room extends Model
         if ($this->main_photo_id !== null) return $this->photo->delete();
         return false;
     }
+
+    /**
+     * @return Room[]
+     */
+    public static function getUsableRoomsByTypeId($typeId)
+    {
+        return self::where('status', '<=', 2)->where('type_id', $typeId)->get();
+    }
+
 }
