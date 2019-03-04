@@ -33,6 +33,12 @@ Route::get('room/{id}', function ($id) {
    return \App\Room::findOrFail($id)->toJson();
 });
 
+Route::get('rooms/get_usable_rooms', function($type_id) {
+   return \App\Room::getUsableRoomsByTypeId($type_id)->toJson();
+});
+Route::get('rooms/get_statuses', function () {
+    return json_encode(\App\Room::STATUSES);
+});
         /**
          * RoomConnect routes
          */
