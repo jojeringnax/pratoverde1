@@ -60,7 +60,7 @@ class BookForm extends React.Component {
                         book: {
                             ...this.state.book,
                             pay_method: 0,
-                            status: 0,
+                            status: 0
                         }
                     });
                 }

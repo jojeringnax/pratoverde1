@@ -82,6 +82,10 @@ class RoomTypes extends React.Component {
                         <tr>
                             <th>id</th>
                             <th>Name</th>
+                            <th>Цена за одного человека</th>
+                            <th>Цена за двух людей</th>
+                            <th>Минимальная вместимость</th>
+                            <th>Максимальная вместимость</th>
                             <th>Action</th>
                         </tr>
                     </thead>

@@ -72,6 +72,7 @@ export default class RoomsIndex extends React.Component {
                         <th scope="col">Last_washing_date</th>
                         <th scope="col">Need_wash</th>
                         <th scope="col">Number_of_beds</th>
+                        <th scope="col">Photo</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>

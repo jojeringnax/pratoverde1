@@ -11,6 +11,7 @@ import RoomMain from '../rooms/RoomMain';
 import Admin from '../admin/Admin';
 
 import NewsPage from '../blog/NewsPage';
+import BookingsForm from "../booking/BookingsForm";
 
 export default class App extends React.Component {
     render() {
@@ -29,6 +30,7 @@ if (document.getElementById('root')) {
             <Switch>
                 <Route path="/public" exact render={() => <App />} />
                 <Route path="/public/rooms" render={() => <RoomMain />} />
+                <Route path="/public/bookings/form" render={() => <BookingsForm />} />
                 <Route
                     path="/public/blog/new/:id"
                     render={(routeProps) => <NewsPage {...routeProps}/>}

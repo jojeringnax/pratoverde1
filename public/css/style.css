@@ -197,6 +197,28 @@ nav .navbar-collapse ul li a {
   fill: #ff0004;
 }
 
+#wrapper_from {
+  overflow: hidden;
+}
+
+.wrapper-add_types {
+  width: 100%;
+}
+
+.action-link-book-form {
+  display: flex;
+  align-items: center;
+  margin-top: 11px;
+}
+.action-link-book-form svg {
+  width: calc(2.25rem + 2px);
+  height: calc(2.25rem + 2px);
+  fill: #ce0004;
+}
+.action-link-book-form:hover svg {
+  fill: #ff0004;
+}
+
 .toggle {
   cursor: pointer;
 }
@@ -843,6 +865,18 @@ nav .navbar-collapse ul li a {
   to {
     opacity: 0;
   }
+}
+.item-form-admin {
+  margin-top: 2vh;
+}
+
+.wrapper_form_item {
+  width: 100%;
+  padding: 30px 30px 30px 30px;
+}
+
+.slides {
+  -webkit-transition: -webkit-transform 0.75s;
 }
 
 /*# sourceMappingURL=style.css.map */

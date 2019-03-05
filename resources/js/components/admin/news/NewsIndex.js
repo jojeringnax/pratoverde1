@@ -3,6 +3,8 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import ActionTable from '../ActionTable';
 
+let TableStyle = {overflowX: 'auto'};
+
 class NewsIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -58,30 +60,28 @@ class NewsIndex extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="container-admin">
-                    <h1 className="text-center">НОВОСТИ</h1>
-                    <table className="table admin-table table-bordered z-depth-1">
-                        <thead className="primary-color-dark border-secondary">
-                        <tr className="">
-                            <th width="5%" scope="col">id</th>
-                            <th width="10%" scope="col">Created_at</th>
-                            <th width="10%" scope="col">Updated_at</th>
-                            <th width="5%" scope="col">Title</th>
-                            <th width="25%" scope="col">Content</th>
-                            <th width="25%" scope="col">Author</th>
-                            <th width="15%" scope="col">Title_color</th>
-                            <th width="5%" scope="col">for_index_page_photo_id</th>
-                            <th width="5%" scope="col">single_page_photo_id</th>
-                            <th width="5%" scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody className="">
-                            {this.createTable()}
-                        </tbody>
-                    </table>
-                    <Link className="btn btn-outline-secondary" to="/public/admin/news/create">Создать новость</Link>
-                </div>
+            <div className="container-admin" style={TableStyle}>
+                <h1 className="text-center">НОВОСТИ</h1>
+                <table className="table admin-table table-bordered z-depth-1">
+                    <thead className="primary-color-dark border-secondary">
+                    <tr className="">
+                        <th width="5%" scope="col">id</th>
+                        <th width="10%" scope="col">Created_at</th>
+                        <th width="10%" scope="col">Updated_at</th>
+                        <th width="5%" scope="col">Title</th>
+                        <th width="25%" scope="col">Content</th>
+                        <th width="25%" scope="col">Author</th>
+                        <th width="15%" scope="col">Title_color</th>
+                        <th width="5%" scope="col">for_index_page_photo_id</th>
+                        <th width="5%" scope="col">single_page_photo_id</th>
+                        <th width="5%" scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody className="">
+                        {this.createTable()}
+                    </tbody>
+                </table>
+                <Link className="btn btn-outline-secondary" to="/public/admin/news/create">Создать новость</Link>
             </div>
         )
     }
