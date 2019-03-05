@@ -43,7 +43,7 @@ class NewsForm extends React.Component {
         }
     };
 
-    filesCange = (e) => {
+    filesChange = (e) => {
         console.log(e.target.files[0]);
         // Object.entries(e.target.childNodes[0].files).forEach(
         //     ([key, val]) => {
@@ -76,6 +76,8 @@ class NewsForm extends React.Component {
         axios.post('/public/api/admin/articles/create',formData)
             .then(res => {
                 console.log(res);
+                alert("Новость создана");
+                document.location.href = "public/admin";
 
             })
             .catch(err => {
@@ -205,13 +207,13 @@ class NewsForm extends React.Component {
                         type="file"
                         id="file1"
                         name="file1"
-                        onChange={this.filesCange}
+                        onChange={this.filesChange}
                     />
                     <input
                         type="file"
                         id="file2"
                         name="file2"
-                        onChange={this.filesCange}
+                        onChange={this.filesChange}
                     />
                     <SketchPicker
                         color={this.state.article.title_color}
