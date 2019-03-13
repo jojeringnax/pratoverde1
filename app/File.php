@@ -67,14 +67,13 @@ class File extends Model
      */
     public static function uploadPhotoOfArticleContent($photo, $photo_id, $article_id, $extension, $width)
     {
-        $content = base64_decode($photo);
+        $data = explode( ',', $photo );
+        $content = base64_decode($data[1]);
         $path = 'news/photo_'.$article_id.'_'.$photo_id.'.'.$extension;
         Storage::disk('public')->put($path, $content);
         $file = new self();
         $file->size = Storage::disk('public')->size($path);
-        $x_y = getimagesizefromstring($content);
         $file->size_x = $width;
-        $file->size_y = $x_y[0]/$x_y[1]*$width;
         $file->path = '/storage/'.$path;
         $file->type = self::TYPES['photo'];
         $file->save();
@@ -83,7 +82,7 @@ class File extends Model
         $fileConnect->foreign_id = $article_id;
         $fileConnect->type = FileConnect::TYPES['article'];
         $fileConnect->save();
-        return true;
+        return '1';
     }
 
 

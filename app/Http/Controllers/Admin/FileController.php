@@ -41,8 +41,18 @@ class FileController extends Controller
         return (string) File::findOrFail($id)->delete();
     }
 
-    public function uploadPhotosForArticle()
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function uploadPhotosForArticle(Request $request)
     {
-        //
+        return File::uploadPhotoOfArticleContent(
+            $request->post('photo', ''),
+            $request->post('photo_id', 0),
+            $request->post('article_id', 0),
+            $request->post('extension', 'jpg'),
+            $request->post('width', 1)
+        );
     }
 }
