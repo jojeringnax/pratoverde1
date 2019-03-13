@@ -19,8 +19,8 @@ class NewsForm extends React.Component {
                 content: '',
                 author: ''
             },
-
-            mainFiles: []
+            mainFiles: [],
+            photos: []
 
         };
         this.inputOnchange = this.inputOnchange.bind(this);
@@ -72,12 +72,50 @@ class NewsForm extends React.Component {
         Object.entries(obj).forEach(
             ([key, val]) => formData.append(key, val)
         );
+        let images = document.querySelectorAll(".ql-editor > p > img");
+        console.log('---post',this.state.photos);
+        // images.forEach(function(img,index) {
+        //     //'/storage/news/photo_{{articleid}}{{photo_id}}.{{extension}}'
+        //     let photo = {};
+        //     let src = img.getAttribute('src');
+        //     let extension = src.slice(11,src.indexOf(';'));
+        //     let new_url = "/storage/news/photo_" + res.data.id + "_"+ index + "." + extension;
+        //     photo.photo_id= index;
+        //     photo.extension = extension;
+        //     photo.photo = src;
+        //     photo.width = img.clientWidth;
+        //     //photo.height = img.clientHeight;
+        //     //photo.article_id = res.data.id;
+        //     console.log('--- object_photo',photo);
+        // });
 
         axios.post('/public/api/admin/articles/create',formData)
             .then(res => {
-                console.log(res);
+                console.log(res.data.id);
                 alert("Новость создана");
-                document.location.href = "public/admin";
+                images.forEach(function(img,index) {
+                    //'/storage/news/photo_{{articleid}}{{photo_id}}.{{extension}}'
+                    let photo = {};
+                    let src = img.getAttribute('src');
+                    let extension = src.slice(11,src.indexOf(';'));
+                    let new_url = "../storage/news/photo_" + res.data.id + "_"+ index + "." + extension;
+                    photo.photo_id= index;
+                    photo.extension = extension;
+                    photo.photo = src;
+                    photo.width = img.clientWidth;
+                    //photo.height = img.clientHeight;
+                    photo.article_id = res.data.id;
+                        axios.post('/public/api/article/upload_photos',photo)
+                            .then(res => {
+                                console.log(res);
+                                img.setAttribute('src', new_url)
+                            })
+                            .catch({
+
+                            });
+                    console.log('--- object_photo',photo);
+                });
+                //document.location.href = "public/admin";
 
             })
             .catch(err => {
@@ -150,15 +188,26 @@ class NewsForm extends React.Component {
 
 
         quill.on('text-change', () => {
+            let photos = [];
             let delta = quill.getContents();
-            console.log(delta.ops);
+            let index_photo = 0;
             for(let i=0; i < delta.ops.length; i++) {
-                //console.log(delta.ops[i].insert);
+                //console.log(delta.ops);
                 if (delta.ops[i].insert.image) {
-                    //console.log(delta.ops[i].insert);
+                    console.log(i, delta.ops[i].insert);
+                    photos.push({id:index_photo,data: delta.ops[i].insert});
+                    index_photo +=1;
+                    //delta.ops[i].insert.image = '';
                 }
             }
+            this.setState({
+                photos: photos
+            }, () => {
+              //console.log('---photo_state',this.state.photos);
+            });
             let html = document.querySelector(".ql-editor").innerHTML;
+
+
             this.setState({
                 article: {
                     ...this.state.article,

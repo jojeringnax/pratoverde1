@@ -18,11 +18,6 @@ class Description extends React.Component {
                         <div className="col-10 description">
                             <div className="text-description">
                                 <span className="text-center">
-                                    {console.log('gg',this.state.data)}
-                                    {this.state.data.map(function (item) {
-                                        return <h4 key={item.id}>{item.last_washing_date}</h4>
-                                    })
-                                    }
                                 </span>
                             </div>
                             <div className="pic-description">

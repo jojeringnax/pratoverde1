@@ -3,6 +3,7 @@ import {MdAddBox} from "react-icons/md";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import MaskedInput from 'react-maskedinput'
+import AddTypeRoom from './AddTypeRoom';
 
 let delPadding = {padding: '0'};
 
@@ -78,41 +79,42 @@ class BookingsForm extends React.Component{
         }
     };
 
-    typeInputOnChange = (e) => {
-        console.log(e.target.value, e.target.name, this.state.types);
-        let elem_types = {};
-        let value = e.target.value;
-        this.state.types.forEach(function(type){
-            //console.log('----',type, type.id, value)
-            if(type.id === parseInt(value)) {
-                console.log(type);
-                elem_types = {
-                    id: type.id,
-                    name: type.name,
-                    number: '',
-                    capacity: ''
-                };
-            }
-        });
 
-        let number = e.target.id.substr(e.target.id.length-1,e.target.id.length);
-        console.log('---number', number)
-
-        this.setState({
-            room_types: {
-                ...this.state.room_types,
-                [parseInt(number) + 1]: elem_types
-            }
-        }, () => {
-            console.log(this.state.room_types)
-        })
-        // this.setState({
-        //     booking: {
-        //         ...this.state.booking,
-        //         [e.target.name]:e.target.value
-        //     }
-        // });
-    };
+    // typeInputOnChange = (e) => {
+    //     console.log(e.target.value, e.target.name, this.state.types);
+    //     let elem_types = {};
+    //     let value = e.target.value;
+    //     this.state.types.forEach(function(type){
+    //         //console.log('----',type, type.id, value)
+    //         if(type.id === parseInt(value)) {
+    //             console.log(type);
+    //             elem_types = {
+    //                 id: type.id,
+    //                 name: type.name,
+    //                 number: '',
+    //                 capacity: ''
+    //             };
+    //         }
+    //     });
+    //
+    //     let number = e.target.id.substr(e.target.id.length-1,e.target.id.length);
+    //     console.log('---number', number)
+    //
+    //     this.setState({
+    //         room_types: {
+    //             ...this.state.room_types,
+    //             [parseInt(number) + 1]: elem_types
+    //         }
+    //     }, () => {
+    //        // console.log(this.state.room_types)
+    //     })
+    //     // this.setState({
+    //     //     booking: {
+    //     //         ...this.state.booking,
+    //     //         [e.target.name]:e.target.value
+    //     //     }
+    //     // });
+    // };
 
     showPayMethods = () => {
         let options = [];
@@ -122,48 +124,6 @@ class BookingsForm extends React.Component{
         return options;
     };
 
-    showTypes = () => {
-        if(this.state.types.length === 0) {
-            return "Типов пока нет";
-        }
-        let options = [];
-        for(let i=0; i < this.state.types.length; i++) {
-            // if(this.state.types[i].id === this.state.room.type_id) {
-            //     //console.log('hui', this.state.types[i].id, this.state.room.type_id);
-            //     options.unshift(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
-            // } else {
-                options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
-            // }
-        }
-        options.unshift(<option key="choose" value="null">Выберите тип</option>);
-        console.log(this.props);
-        // if(this.props.match.hasOwnProperty('params')) {
-        //
-        // }
-        return options;
-
-    };
-
-    getTypes = () => {
-        axios.get("/public/api/admin/room_types")
-            .then(response => {
-                if(response.data.length !== 0) {
-                    this.setState({
-                        types: response.data
-                    }, () => {
-                        console.log(this.state)
-                    });
-                } else {
-                    return "Типов номеров нет"
-                }
-            })
-            .catch(function(error) {
-            });
-    };
-
-    addType = (e) => {
-        e.preventDefault();
-    };
 
     createCustomer = (e) => {
         e.preventDefault();
@@ -211,7 +171,6 @@ class BookingsForm extends React.Component{
     };
 
     componentDidMount() {
-        this.getTypes();
 
         let widthWrapper = window.innerWidth* 0.6;
         document.getElementById('wrapper_from').style.width = widthWrapper + 'px';
@@ -372,31 +331,33 @@ class BookingsForm extends React.Component{
                       <div data-id="3" id="third" className="wrapper_form_item slide-in">
                           <div className="flex flex-wrap">
                               <div className="wrapper-add_types d-flex">
-                                <div className="item-form-admin form-group form d-flex flex-column col-xl-6">
-                                    <label htmlFor="types-room">Типы номеров</label>
-                                    <div className="d-flex align-items-start">
-                                        <select onChange={this.typeInputOnChange} value={'Типов номеров нет'} name="type_id" id="type_0" className="form-control">
-                                            {this.showTypes()}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-xl-6 col-lg-6 col-12 d-flex">
-                                    <div id="" className="inp-booking item-form-admin form-group col-xl-10" style={delPadding}>
-                                        <label htmlFor="rooms_number">Количество номеров</label>
-                                        <input
-                                            type="number"
-                                            id={"rooms_number_" + this.state.room_types.length}
-                                            name={"rooms_number_" + this.state.room_types.length}
-                                            className="form-control rooms_number"
-                                            value={this.state.room_types[0].number_of_rooms}
-                                            onChange={this.typeInputOnChange}
-                                            placeholder="Количество номеров"
-                                        />
-                                    </div>
-                                    <Link style={delPadding} onClick={this.addType} key="add_types" className={'action-link-book-form col-xl-2 justify-content-center'} to="">
-                                        <MdAddBox />
-                                    </Link>
-                                </div>
+                                {/*<div className="item-form-admin form-group form d-flex flex-column col-xl-6">*/}
+                                    {/*<label htmlFor="types-room">Типы номеров</label>*/}
+                                    {/*<div className="d-flex align-items-start">*/}
+                                        {/*<select onChange={this.typeInputOnChange} value={'Типов номеров нет'} name="type_id" id="type_0" className="form-control">*/}
+                                            {/*{this.showTypes()}*/}
+                                        {/*</select>*/}
+                                    {/*</div>*/}
+                                {/*</div>*/}
+                                {/*<div className="col-xl-6 col-lg-6 col-12 d-flex">*/}
+                                    {/*<div id="" className="inp-booking item-form-admin form-group col-xl-10" style={delPadding}>*/}
+                                        {/*<label htmlFor="rooms_number">Количество номеров</label>*/}
+                                        {/*<input*/}
+                                            {/*type="number"*/}
+                                            {/*id={"rooms_number_" + this.state.room_types.length}*/}
+                                            {/*name={"rooms_number_" + this.state.room_types.length}*/}
+                                            {/*className="form-control rooms_number"*/}
+                                            {/*value={this.state.room_types[0].number_of_rooms}*/}
+                                            {/*onChange={this.typeInputOnChange}*/}
+                                            {/*placeholder="Количество номеров"*/}
+                                        {/*/>*/}
+                                    {/*</div>*/}
+                                    {/*<Link style={delPadding} onClick={this.addType} key="add_types" className={'action-link-book-form col-xl-2 justify-content-center'} to="">*/}
+                                        {/*<MdAddBox />*/}
+                                    {/*</Link>*/}
+                                {/*</div>*/}
+                                <AddTypeRoom id={this.state.room_types.length} />
+
                             </div>
                             <div id="" className="inp-problem-create item-form-admin form-group col-xl-12 col-lg-12 col-12">
                                 <label htmlFor="comment">Оставьте сообщение</label>
