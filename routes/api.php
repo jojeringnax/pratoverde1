@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -141,6 +141,8 @@ Route::delete('admin/articles/delete/{id}', 'Admin\ArticleController@delete');
 Route::get('article/{id}', function($id) {
     return \App\Article::findOrFail($id)->toJson();
 });
+
+Route::post('article/upload_photos', 'Admin\FileController@uploadPhotosForArticle');
 
 
 /**

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class File
@@ -46,11 +47,45 @@ class File extends Model
 
 
     /**
-     * File constructor.
-     * @param array $attributes
+     * @return bool|null
+     * @throws \Exception
      */
-    public function __construct(array $attributes = [])
+    public function delete()
     {
-        parent::__construct($attributes);
+        $path = substr($this->path, 9);
+        Storage::disk('public')->delete($path);
+        return parent::delete();
     }
+
+    /**
+     * @param $photo
+     * @param $photo_id
+     * @param $article_id
+     * @param $extension
+     * @param $width
+     * @return bool
+     */
+    public static function uploadPhotoOfArticleContent($photo, $photo_id, $article_id, $extension, $width)
+    {
+        $content = base64_decode($photo);
+        $path = 'news/photo_'.$article_id.'_'.$photo_id.'.'.$extension;
+        Storage::disk('public')->put($path, $content);
+        $file = new self();
+        $file->size = Storage::disk('public')->size($path);
+        $x_y = getimagesizefromstring($content);
+        $file->size_x = $width;
+        $file->size_y = $x_y[0]/$x_y[1]*$width;
+        $file->path = '/storage/'.$path;
+        $file->type = self::TYPES['photo'];
+        $file->save();
+        $fileConnect = new FileConnect();
+        $fileConnect->file_id = $file->id;
+        $fileConnect->foreign_id = $article_id;
+        $fileConnect->type = FileConnect::TYPES['article'];
+        $fileConnect->save();
+        return true;
+    }
+
+
+
 }

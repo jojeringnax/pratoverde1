@@ -1,4 +1,4 @@
-{{  Form::open(['action' => 'Admin\FileController@create', 'files' => true]) }}
-{{ Form::file('photo') }}
-{{ Form::submit() }}
-{{ Form::close() }}
+<pre>
+@php
+    return var_dump(\App\Article::where('id', 2)->first()->delete(), true);
+@endphp

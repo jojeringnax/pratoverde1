@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+ini_set('upload_max_filesize', '10000000');
 use App\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,13 +22,27 @@ class FileController extends Controller
         return $file->toJson();
     }
 
+    /**
+     * Test
+     * Test
+     * @param Request $request
+     */
     public function create(Request $request)
     {
         return var_dump($request->allFiles());
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function delete($id)
     {
         return (string) File::findOrFail($id)->delete();
+    }
+
+    public function uploadPhotosForArticle()
+    {
+        //
     }
 }
