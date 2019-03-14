@@ -13,10 +13,10 @@ class BookIndex extends React.Component {
 
     getBookings = () => {
         booking = [];
-        axios.get("/public/api/admin/bookings")
+        axios.get("/api/admin/bookings")
             .then(res => {
                 booking =  booking.concat(res.data);
-                axios.get("/public/api/admin/customers")
+                axios.get("/api/admin/customers")
                     .then(ress => {
                         let customers = [];
                         customers = customers.concat(ress.data);
@@ -55,8 +55,8 @@ class BookIndex extends React.Component {
                     }
                 }
             }
-            urlUpdate = '/public/admin/bookings/update/' + booking[i]['id'];
-            urlDelete = '/public/api/admin/bookings/delete/' + booking[i]['id'];
+            urlUpdate = '/admin/bookings/update/' + booking[i]['id'];
+            urlDelete = '/api/admin/bookings/delete/' + booking[i]['id'];
             child.push(
                 <ActionTable key="action" id={booking[i]['id']} updateUrl={urlUpdate} deleteUrl={urlDelete}/>
             );
@@ -75,7 +75,7 @@ class BookIndex extends React.Component {
                 <div className="container-admin d-flex justify-content-center col-12">
                     <div className="container-fluid">
                         <div className="row">
-                            <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                            <Link to="/admin" className="btn peach-gradient">Назад</Link>
                             <table className="table admin-table table-bordered z-depth-1">
                                 <thead className="primary-color-dark border-secondary">
                                 <tr className="">
@@ -93,7 +93,7 @@ class BookIndex extends React.Component {
                                 {this.tableBooking()}
                                 </tbody>
                             </table>
-                            <Link to="/public/admin/bookings/create" className="btn btn-outline-secondary">ЗАБРОНИРОВАТЬ НОМЕР</Link>
+                            <Link to="/admin/bookings/create" className="btn btn-outline-secondary">ЗАБРОНИРОВАТЬ НОМЕР</Link>
                         </div>
                     </div>
                 </div>

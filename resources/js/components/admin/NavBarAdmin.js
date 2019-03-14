@@ -113,55 +113,55 @@ class NavBarAdmin extends React.Component {
                     <nav id="navAdmin" className="navbar navbar-expand-lg">
                         <ul>
                             <li>{/*start rooms nav */}
-                                <NavLink activeStyle={this.activeStyles} to="/public/admin/rooms">Номера</NavLink>
+                                <NavLink activeStyle={this.activeStyles} to="/admin/rooms">Номера</NavLink>
                                 <ul>
-                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/create">Создать номер</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/admin/rooms/create">Создать номер</NavLink></li>
                                     <li>
-                                        <NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/types">Типы номеров</NavLink>
+                                        <NavLink activeStyle={this.activeStyles} to="/admin/rooms/types">Типы номеров</NavLink>
                                         <ul>
-                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/rooms/types/create">Создать тип номера</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/admin/rooms/types/create">Создать тип номера</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>{/*end rooms nav */}
 
                             <li>{/*start problems nav */}
-                                <NavLink activeStyle={this.activeStyles} to="/public/admin/problems">Проблемы</NavLink>
+                                <NavLink activeStyle={this.activeStyles} to="/admin/problems">Проблемы</NavLink>
                                 <ul>
-                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/problems/create">Создать проблему</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/admin/problems/create">Создать проблему</NavLink></li>
                                     <li>
-                                        <NavLink activeStyle={this.activeStyles} to="/public/admin/problems/categories">Категории проблем</NavLink>
+                                        <NavLink activeStyle={this.activeStyles} to="/admin/problems/categories">Категории проблем</NavLink>
                                         <ul>
-                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/problems/categories/create">Создать категорию проблем</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/admin/problems/categories/create">Создать категорию проблем</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>{/*end problems nav */}
 
                             <li>{/*start bookings nav */}
-                                <NavLink activeStyle={this.activeStyles} to="/public/admin/bookings">Бронирование номеров</NavLink>
+                                <NavLink activeStyle={this.activeStyles} to="/admin/bookings">Бронирование номеров</NavLink>
                                 <ul>
-                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/bookings/create">Забронировать номер</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/admin/bookings/create">Забронировать номер</NavLink></li>
                                 </ul>
                             </li>{/*end bookings nav */}
 
                             <li>{/*start customers nav */}
-                                <NavLink activeStyle={this.activeStyles} to="/public/admin/customers">Клиенты</NavLink>
+                                <NavLink activeStyle={this.activeStyles} to="/admin/customers">Клиенты</NavLink>
                                 <ul>
-                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/customers/create">Создать клиента</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/admin/customers/create">Создать клиента</NavLink></li>
                                     <li>
-                                        <NavLink activeStyle={this.activeStyles} to="/public/admin/customers/source">Источники</NavLink>
+                                        <NavLink activeStyle={this.activeStyles} to="/admin/customers/source">Источники</NavLink>
                                         <ul>
-                                            <li><NavLink activeStyle={this.activeStyles} to="/public/admin/customers/source/create">Создать источник</NavLink></li>
+                                            <li><NavLink activeStyle={this.activeStyles} to="/admin/customers/source/create">Создать источник</NavLink></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>{/*end bookings nav */}
 
                             <li>{/*start news nav */}
-                                <NavLink activeStyle={this.activeStyles}  to="/public/admin/news">Блог</NavLink>
+                                <NavLink activeStyle={this.activeStyles}  to="/admin/news">Блог</NavLink>
                                 <ul>
-                                    <li><NavLink activeStyle={this.activeStyles} to="/public/admin/news/create">Создать новость</NavLink></li>
+                                    <li><NavLink activeStyle={this.activeStyles} to="/admin/news/create">Создать новость</NavLink></li>
                                 </ul>
                             </li>
                         </ul>

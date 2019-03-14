@@ -38,7 +38,7 @@ class BookForm extends React.Component {
     };
 
     getCustomers = () => {
-        axios.get("/public/api/admin/customers")
+        axios.get("/api/admin/customers")
             .then(res => {
                 let name;
                 table = res.data;
@@ -167,9 +167,9 @@ class BookForm extends React.Component {
         e.preventDefault();
         let url;
         if(this.props.match.params.id) {
-            url = "/public/api/admin/bookings/update/" + this.props.match.params.id;
+            url = "/api/admin/bookings/update/" + this.props.match.params.id;
         } else {
-            url = "/public/api/admin/bookings/create";
+            url = "/api/admin/bookings/create";
         }
         let data = Object.assign({}, this.state.book);
         let cent = data.price.slice(-2, data.price.length);

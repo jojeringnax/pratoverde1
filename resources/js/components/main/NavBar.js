@@ -62,10 +62,10 @@ class Header extends React.Component {
         return (
             <section id="banner">
                 <div className="banner">
-                    <a href="/public/rooms" className="go-rooms-banner">book room</a>
+                    <a href="/rooms" className="go-rooms-banner">book room</a>
                     <a href="" className="logo"><img src="img/logo.png" alt=""/></a>
                     <div className="img-banner"></div>
-                    <Link to="/public/admin">ADMIN</Link>
+                    <Link to="/admin">ADMIN</Link>
                 </div>
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -14,7 +14,7 @@ class NewsIndex extends React.Component {
     }
 
     getNews = () => {
-        let url = '/public/api/admin/articles';
+        let url = '/api/admin/articles';
         axios.get(url)
             .then(res => {
                 this.setState({news: res.data});
@@ -23,8 +23,8 @@ class NewsIndex extends React.Component {
     };
 
     createTable = () => {
-        let urlDelete = "/public/api/admin/articles/delete/";
-        let urlUpdate = "/public/admin/news/update/";
+        let urlDelete = "/api/admin/articles/delete/";
+        let urlUpdate = "/admin/news/update/";
         let table = [];
         let row = [];
         for(let i=0; i < this.state.news.length; i++) {
@@ -81,7 +81,7 @@ class NewsIndex extends React.Component {
                         {this.createTable()}
                     </tbody>
                 </table>
-                <Link className="btn btn-outline-secondary" to="/public/admin/news/create">Создать новость</Link>
+                <Link className="btn btn-outline-secondary" to="/admin/news/create">Создать новость</Link>
             </div>
         )
     }

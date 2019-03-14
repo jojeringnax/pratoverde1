@@ -14,7 +14,7 @@ class ProblemsCategory extends React.Component {
         this.deleteRow = this.deleteRow.bind(this);
     }
     getCategoies() {
-        let url = '/public/api/admin/problem_categories';
+        let url = '/api/admin/problem_categories';
         axios.get(url)
             .then(res => {
                 console.log(res.data);
@@ -44,8 +44,8 @@ class ProblemsCategory extends React.Component {
             });
     }
     createTable() {
-        let urlDelete = "/public/api/admin/problem_categories/delete/";
-        let urlUpdate = "/public/admin/problems/categories/update/";
+        let urlDelete = "/api/admin/problem_categories/delete/";
+        let urlUpdate = "/admin/problems/categories/update/";
         let table = [];
         let row = [];
         for(let i=0; i < this.state.categories.length; i++) {
@@ -73,7 +73,7 @@ class ProblemsCategory extends React.Component {
         return (
             <div className="container-admin">
                 <h1 className="text-center">КАТЕГОРИИ ПРОБЛЕМ</h1>
-                <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
+                <Link to="/admin/problems" className="btn peach-gradient">Назад</Link>
                 <table className="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -86,7 +86,7 @@ class ProblemsCategory extends React.Component {
                         {this.createTable()}
                     </tbody>
                 </table>
-                <Link className="btn btn-outline-secondary" to="/public/admin/problems/categories/create">Создать категорию проблемы</Link>
+                <Link className="btn btn-outline-secondary" to="/admin/problems/categories/create">Создать категорию проблемы</Link>
             </div>
         );
     }

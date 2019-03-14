@@ -31,12 +31,12 @@ class NewsPage extends React.Component{
     }
 
     getArticle = () => {
-        let url = '/public/api/article/' + this.props.match.params.id;
+        let url = '/api/article/' + this.props.match.params.id;
         axios.get(url)
             .then(res => {
                console.log(res.data);
-                let url_file_single = '/public/api/file/'+ res.data['single_page_photo_id'];
-                let url_file_index = '/public/api/file/'+ res.data['for_index_page_photo_id'];
+                let url_file_single = '/api/file/'+ res.data['single_page_photo_id'];
+                let url_file_index = '/api/file/'+ res.data['for_index_page_photo_id'];
                 this.setState({
                     article: res.data
                 },() => {
@@ -51,7 +51,7 @@ class NewsPage extends React.Component{
                     .then(res => {
                         //console.log('--- file = ', res.data.path);
                         divStyle = {
-                            backgroundImage: 'url(/public'+  res.data.path +')'
+                            backgroundImage: 'url('+  res.data.path +')'
                         };
                         this.setState({
                             single_page_photo_id: res.data.path

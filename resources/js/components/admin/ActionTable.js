@@ -33,7 +33,7 @@ class ActionTable extends React.Component {
                 <Link  key="delete" className="action-link"  onClick={this.deleteRow}  to="">
                     <MdDeleteForever />
                 </Link>
-                <Link key="subproblem" className={(this.props.problem) ? 'action-link' : 'hide'} to={"/public/admin/subproblem/create/" + this.props.id}>
+                <Link key="subproblem" className={(this.props.problem) ? 'action-link' : 'hide'} to={"/admin/subproblem/create/" + this.props.id}>
                     <MdAddBox />
                 </Link>
             </td>

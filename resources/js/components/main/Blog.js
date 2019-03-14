@@ -14,9 +14,10 @@ class Blog extends React.Component {
     }
 
     getNewsMainPage = () => {
-        axios.get('/public/api/admin/articles')
+        //console.log('asd')
+        axios.get('/api/admin/articles')
             .then(res => {
-                //console.log('---', res.data);
+                console.log('---', res.data);
                 this.setState({
                     articles: res.data
                 }, () => {
@@ -31,7 +32,7 @@ class Blog extends React.Component {
     getPhoto = () => {
         this.state.articles.forEach((article, index) => {
             if(index <3) {
-                let url_file_index = '/public/api/file/' + article['for_index_page_photo_id'];
+                let url_file_index = '/api/file/' + article['for_index_page_photo_id'];
                 axios.get(url_file_index)
                     .then(res => {
                         this.setState({
@@ -59,10 +60,10 @@ class Blog extends React.Component {
                 if(index >= this.state.articles.length - 3) {
                     if(this.state.pic[index] !== undefined) {
                         picPath = {
-                            backgroundImage: 'url(/public'+  this.state.pic[index] +')'
+                            backgroundImage: 'url('+  this.state.pic[index] +')'
                         };
                     }
-                    id = "/public/blog/new/" + article.id;
+                    id = "/blog/new/" + article.id;
                     article_item = <Link key={id} to={id} className="col-xl-3 card-item">
                         <div style={picPath} id="card-1" className="card-top">
                         </div>

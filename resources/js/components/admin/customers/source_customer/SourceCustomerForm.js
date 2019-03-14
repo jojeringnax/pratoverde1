@@ -31,7 +31,7 @@ class SourceCustomerForm extends React.Component {
     };
 
     fillSourceCustomers = (id) => {
-        let url = "/public/api/customer_source/" + id;
+        let url = "/api/customer_source/" + id;
         console.log(url);
         axios.get(url)
             .then(res => {
@@ -57,7 +57,7 @@ class SourceCustomerForm extends React.Component {
     submitSource = (e) => {
         e.preventDefault();
         let data = this.state.source;
-        axios.post("/public/api/admin/customer_sources/create",data)
+        axios.post("/api/admin/customer_sources/create",data)
             .then(res => {
                 console.log(res)
             })

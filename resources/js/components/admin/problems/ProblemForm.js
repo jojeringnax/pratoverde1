@@ -47,15 +47,15 @@ class ProblemForm extends React.Component {
         console.log(formData);
         let url;
         if(this.props.match.params.id){
-            url = '/public/api/admin/problems/update/' + this.props.match.params.id;
+            url = '/api/admin/problems/update/' + this.props.match.params.id;
         } else {
-            url = '/public/api/admin/problems/create';
+            url = '/api/admin/problems/create';
         }
         axios.post(url, formData)
             .then(function (response) {
                 //console.log(response);
                 alert('Проблема создана');
-                document.location.href = '/public/admin/problems';
+                document.location.href = '/admin/problems';
             })
             .catch(error => {
                 console.log(error);
@@ -66,7 +66,7 @@ class ProblemForm extends React.Component {
     };
 
     getProblems = () => {
-        axios.get('/public/api/admin/problems')
+        axios.get('/api/admin/problems')
             .then(res => {
                 //console.log(res.data);
                 for(let i=0; i < res.data.length; i++) {
@@ -84,7 +84,7 @@ class ProblemForm extends React.Component {
     fillFormUpdateProblem = () => {
         let url;
         if(this.props.match.params.id){
-            url = '/public/api/problem/' + this.props.match.params.id;
+            url = '/api/problem/' + this.props.match.params.id;
             axios.get(url)
                 .then(response => {
 
@@ -127,7 +127,7 @@ class ProblemForm extends React.Component {
         return (
             <div className="container-admin d-flex justify-content-start flex-column align-items-center">
                 <div className="title-form"><h1>Опишите проблему</h1></div>
-                <Link to="/public/admin/problems" className="btn peach-gradient">Назад</Link>
+                <Link to="/admin/problems" className="btn peach-gradient">Назад</Link>
                 <form onSubmit={this.createProblem}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                     <div className="item-form-admin form-group">
                         <label htmlFor="room_id">room_id</label>

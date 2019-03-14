@@ -15,7 +15,7 @@ class File extends React.Component {
         Object.entries(e.target.childNodes[0].files).forEach(
             ([key, val]) => formData.append(key, val)
         );
-        axios.post('/public/api/admin/files/create', formData)
+        axios.post('/api/admin/files/create', formData)
             .then(res => {
                 console.log(res);
             })

@@ -12,7 +12,7 @@ class CustomersIndex extends React.Component {
     }
 
     getSourceCustomer = () => {
-      axios.get("/public/api/admin/customers")
+      axios.get("/api/admin/customers")
           .then(res => {
               this.setState({customers: res.data});
 
@@ -23,8 +23,8 @@ class CustomersIndex extends React.Component {
     };
 
     createTable = () => {
-        let urlDelete = "/public/api/admin/customers/delete/";
-        let urlUpdate = "/public/admin/customers/update/";
+        let urlDelete = "/api/admin/customers/delete/";
+        let urlUpdate = "/admin/customers/update/";
         let table = [];
         let row = [];
         for(let i=0; i < this.state.customers.length; i++) {
@@ -54,7 +54,7 @@ class CustomersIndex extends React.Component {
     render() {
         return (
             <div className="container-admin">
-                <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                <Link to="/admin" className="btn peach-gradient">Назад</Link>
                 <table className="table admin-table table-bordered z-depth-1">
                     <thead className="primary-color-dark border-secondary">
                         <tr className="">
@@ -73,7 +73,7 @@ class CustomersIndex extends React.Component {
                         {this.createTable()}
                     </tbody>
                 </table>
-                <Link to="/public/admin/customers/create" className="btn btn-outline-secondary">Создать клиента</Link>
+                <Link to="/admin/customers/create" className="btn btn-outline-secondary">Создать клиента</Link>
             </div>
         )
     }

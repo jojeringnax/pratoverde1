@@ -57,11 +57,11 @@ const Root = ({store}) => {
         <Provider store={store}>
             <Router>
                 <Switch>
-                    <Route path="/public" exact component={AppC} />
-                    <Route path="/public/rooms" render={() => <RoomMain />} />
-                    <Route path="/public/bookings/form" render={() => <BookingsForm />} />
+                    <Route path="/" exact component={AppC} />
+                    <Route path="/rooms" render={() => <RoomMain />} />
+                    <Route path="/bookings/form" render={() => <BookingsForm />} />
                     <Route
-                        path="/public/blog/new/:id"
+                        path="/blog/new/:id"
                         render={(routeProps) => <NewsPage {...routeProps}/>}
                     />
                     <Route component={Admin}/>

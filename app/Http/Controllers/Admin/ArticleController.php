@@ -7,6 +7,7 @@ use App\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use function MongoDB\BSON\toJSON;
 
 class ArticleController extends Controller
 {
@@ -35,7 +36,7 @@ class ArticleController extends Controller
         }
         $article->fill($request->post());
         $article->save();
-        $this->uploadMainPhotos($request, $article);
+
         return $article->toJson();
     }
 
@@ -46,7 +47,9 @@ class ArticleController extends Controller
     public function create(Request $request)
     {
         $article = new $this->modelName();
-        return $this->store($request, $article);
+        $this->store($request, $article);
+        $this->uploadMainPhotos($request, $article);
+        return $article->toJSON();
     }
 
     /**

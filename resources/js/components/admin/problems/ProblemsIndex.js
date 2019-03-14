@@ -34,7 +34,7 @@ class ProblemsIndex extends React.Component {
     };
 
     getProblems = () => {
-        axios.get("/public/api/admin/problems")
+        axios.get("/api/admin/problems")
             .then(response => {
                 //console.log('axios-get', response.data);
                 problems = response.data;
@@ -73,8 +73,8 @@ class ProblemsIndex extends React.Component {
                 // }
                 child.push(<td id="" className="cursor text-center" key={key}>{problems[i][key]}</td>);
             }
-            urlUpdate = '/public/admin/problems/update/' + problems[i]['id'];
-            urlDelete = '/public/api/admin/problems/delete/' + problems[i]['id'];
+            urlUpdate = '/admin/problems/update/' + problems[i]['id'];
+            urlDelete = '/api/admin/problems/delete/' + problems[i]['id'];
             child.push(
                 <ActionTable  problem={true} key="action" id={problems[i]['id']} updateUrl={urlUpdate} deleteUrl={urlDelete}/>
             );
@@ -125,7 +125,7 @@ class ProblemsIndex extends React.Component {
     render() {
         return (
             <div className="container-admin">
-                <Link to="/public/admin" className="btn peach-gradient">Назад</Link>
+                <Link to="/admin" className="btn peach-gradient">Назад</Link>
                 <table className="table admin-table table-bordered z-depth-1">
                     <thead className="primary-color-dark border-secondary">
                         <tr className="">
@@ -145,8 +145,8 @@ class ProblemsIndex extends React.Component {
                         {this.createTable()}
                     </tbody>
                 </table>
-                <Link to="/public/admin/problems/categories" className="btn btn-outline-secondary">КАТЕГОРИИ</Link>
-                <Link to="/public/admin/problems/create" className="btn btn-outline-secondary">СОЗДАТЬ ПРОБЛЕМУ</Link>
+                <Link to="/admin/problems/categories" className="btn btn-outline-secondary">КАТЕГОРИИ</Link>
+                <Link to="/admin/problems/create" className="btn btn-outline-secondary">СОЗДАТЬ ПРОБЛЕМУ</Link>
             </div>
         );
     }

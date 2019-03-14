@@ -40,10 +40,10 @@ class SubProblem extends React.Component {
 
     submitSubForm = (e) => {
         e.preventDefault();
-        let url = '/public/api/admin/problems/create';
+        let url = '/api/admin/problems/create';
         axios.post(url, this.state.subproblem)
             .then(res => {
-                document.location.href = '/public/admin/problems';
+                document.location.href = '/admin/problems';
             })
             .catch(err => {
             })
@@ -62,7 +62,7 @@ class SubProblem extends React.Component {
 
         if (this.props.hasOwnProperty("match")) {
             document.querySelector('.form-subProblem').classList.remove('hide');
-            let url = "/public/api/problem/" + this.props.match.params.parent_id;
+            let url = "/api/problem/" + this.props.match.params.parent_id;
             axios.get(url)
                 .then(res => {
                     this.setState({

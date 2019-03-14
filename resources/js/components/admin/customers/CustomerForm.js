@@ -32,7 +32,7 @@ class CustomerForm extends React.Component {
     }
 
     getSources = () => {
-        axios.get("/public/api/admin/customer_sources")
+        axios.get("/api/admin/customer_sources")
             .then(res => {
                 let options = [];
                 res.data.forEach((source) => {
@@ -60,10 +60,10 @@ class CustomerForm extends React.Component {
         let url;
         let data = this.state.customer;
         if(this.props.match.params.id) {
-            url = "/public/api/admin/customers/update/" + this.props.match.params.id;
+            url = "/api/admin/customers/update/" + this.props.match.params.id;
             document.location.href = "public/admin/customers";
         } else {
-            url = "/public/api/admin/customers/create";
+            url = "/api/admin/customers/create";
         }
 
         axios.post(url, data)
@@ -103,7 +103,7 @@ class CustomerForm extends React.Component {
     };
 
     fillFormUpdate = () => {
-        let url = "/public/api/customer/" + this.props. match.params.id;
+        let url = "/api/customer/" + this.props. match.params.id;
         axios.get(url)
             .then(res => {
                 this.setState({
@@ -131,7 +131,7 @@ class CustomerForm extends React.Component {
     submitSource = (e) => {
         e.preventDefault();
         let data = this.state.source;
-        axios.post("/public/api/admin/customer_sources/create",data)
+        axios.post("/api/admin/customer_sources/create",data)
             .then(res => {
                 console.log(res)
             })
@@ -176,7 +176,7 @@ class CustomerForm extends React.Component {
                 <div className="container">
                     <div className="row d-flex justify-content-center flex-column align-items-center">
                         <h1 className="text-center">{this.textTypeForm()}</h1>
-                        <Link to="/public/admin/customers" className="btn peach-gradient" value="">Назад</Link>
+                        <Link to="/admin/customers" className="btn peach-gradient" value="">Назад</Link>
                         <form id="customer-form" onSubmit={this.submitCustomer} className="border form-group col-xl-8 form-admin z-depth-5">
                             <div className="item-form-admin form-group">
                                 <label htmlFor="title">Имя</label>

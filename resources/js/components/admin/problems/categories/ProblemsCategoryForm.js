@@ -20,7 +20,7 @@ class ProblemsCategoryForm extends React.Component {
 
     getCategory() {
         if(this.props.match.params.id) {
-            let url = '/public/api/problem_category/' + this.props.match.params.id;
+            let url = '/api/problem_category/' + this.props.match.params.id;
             axios.get(url)
                 .then(res => {
                     this.setState({
@@ -53,16 +53,16 @@ class ProblemsCategoryForm extends React.Component {
         let url;
         let textSuccess;
         if(this.props.match.params.id) {
-            url = '/public/api/admin/problem_categories/update/' + this.props.match.params.id;
+            url = '/api/admin/problem_categories/update/' + this.props.match.params.id;
             textSuccess = "Категория проблем обновлена";
         } else {
-            url = '/public/api/admin/problem_categories/create';
+            url = '/api/admin/problem_categories/create';
             textSuccess = "Категория проблем создана";
         }
         axios.post(url, {name: this.state.category.name})
             .then(res => {
                 alert(textSuccess);
-                document.location.href = '/public/admin/problems/categories';
+                document.location.href = '/admin/problems/categories';
             })
             .catch(err => {
 
