@@ -21,6 +21,19 @@
         </script>
     </head>
     <body>
+        <div id="cube-loader" class="hide">
+            <div class="layout-loader">
+
+            </div>
+            <div class="caption">
+                <div class="cube-loader">
+                    <div class="cube loader-1"></div>
+                    <div class="cube loader-2"></div>
+                    <div class="cube loader-4"></div>
+                    <div class="cube loader-3"></div>
+                </div>
+            </div>
+        </div>
         <div id="root"></div>
         <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
     </body>

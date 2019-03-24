@@ -82,7 +82,7 @@ class File extends Model
         $fileConnect->foreign_id = $article_id;
         $fileConnect->type = FileConnect::TYPES['article'];
         $fileConnect->save();
-        return '1';
+        return $file->toJson();
     }
 
 

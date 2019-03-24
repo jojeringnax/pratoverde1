@@ -103,7 +103,8 @@ class NavBarAdmin extends React.Component {
 
     activeStyles = {
         fontWeight: "bold",
-        color: "black"
+        color: "white",
+        opacity: "1"
     };
 
     render() {

@@ -34,7 +34,7 @@ class NewsPage extends React.Component{
         let url = '/api/article/' + this.props.match.params.id;
         axios.get(url)
             .then(res => {
-               console.log(res.data);
+               console.log('---res.data',res.data);
                 let url_file_single = '/api/file/'+ res.data['single_page_photo_id'];
                 let url_file_index = '/api/file/'+ res.data['for_index_page_photo_id'];
                 this.setState({

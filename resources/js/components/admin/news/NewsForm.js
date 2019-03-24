@@ -44,6 +44,7 @@ class NewsForm extends React.Component {
 
     createNews = async (e) => {
         e.preventDefault();
+        document.getElementById('cube-loader').classList.remove('hide');
         const formData = new FormData;
         Object.entries(this.state.article).forEach(
             ([key, val]) => formData.append(key,val)
@@ -85,7 +86,9 @@ class NewsForm extends React.Component {
                         //console.log('---image',index,image, photo);
                         await axios.post('/api/article/upload_photos',photo)
                             .then( function(res) {
+                                console.log('--- image-res',res.data);
                                 image.setAttribute('src', new_url);
+                                image.style.width = "100%";
                                 html = document.querySelector(".ql-editor");
                             })
                     }
@@ -97,6 +100,8 @@ class NewsForm extends React.Component {
                 axios.post(url_update, article)
                     .then(res => {
                         console.log('---change-content-suc',res);
+                        document.getElementById('cube-loader').classList.add('hide');
+                        document.location.href = "/admin/news";
                     })
                     .catch(err => {
                         console.log('---change-content-err',err);
@@ -168,8 +173,13 @@ class NewsForm extends React.Component {
             let photos = [];
             let delta = quill.getContents();
             let index_photo = 0;
+            let images = document.querySelectorAll(".ql-editor > p > img");
             for(let i=0; i < delta.ops.length; i++) {
                 if (delta.ops[i].insert.image) {
+                    for (let image of images) {
+                        image.style.width = "100%";
+                    }
+                    console.log('--- images',delta.ops[i].insert);
                     photos.push({id:index_photo,data: delta.ops[i].insert});
                     index_photo +=1;
                 }
@@ -187,10 +197,12 @@ class NewsForm extends React.Component {
 
     render() {
         return(
-            <div className="container-admin d-flex justify-content-start flex-column align-items-center">
-                <div className="title-form"><h1>{this.textTitle()}</h1></div>
-                <Link to="/admin/news" className="btn peach-gradient">Назад</Link>
-                <form onSubmit={this.createNews}  className="news-create-form border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+            <div className="container-admin d-flex justify-content-start flex-column align-items-center card">
+                <div className="card-header">
+                    <Link to="/admin/news" className="btn peach-gradient btn-back-admin">Назад</Link>
+                    <div className="title-form"><h1>{this.textTitle()}</h1></div>
+                </div>
+                <form onSubmit={this.createNews}  className="news-create-form border rounded form-admin col-xl-8 col-lg-8 col-12">
                     <div className="item-form-admin form-group">
                         <label htmlFor="title">Заголовок</label>
                         <input
