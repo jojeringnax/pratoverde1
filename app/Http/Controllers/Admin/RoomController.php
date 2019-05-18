@@ -35,6 +35,10 @@ class RoomController extends Controller
         $this->uploadMainPhotos($request, $room);
         $room->fill($request->post());
         $room->save();
+        $files = $request->post('files');
+        foreach ($files as $index => $file) {
+            File::savePhotoInStorageFromBase64($file, $index, $room->id);
+        }
         return $room->toJson();
     }
 

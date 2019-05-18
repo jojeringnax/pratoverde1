@@ -58,6 +58,31 @@ class File extends Model
     }
 
     /**
+     * @param $base64Data
+     * @param $photoIndex
+     * @param $roomID
+     */
+    public static function savePhotoInStorageFromBase64($base64Data, $photoIndex, $id, $type="rooms")
+    {
+        $storage = Storage::disk('public');
+        $data = explode( ',', $base64Data);
+        $content = base64_decode($data[1]);
+        $dataMimeType = explode(';', $data[0])[0];
+        $mimeType = explode(':', $dataMimeType)[1];
+        $extension = explode('/', $mimeType)[1];
+        $imageSize = getimagesizefromstring($content);
+        $path = "$type/$id/$photoIndex.$extension";
+        $storage->put($path, $content);
+        $file = new self();
+        $file->size = $storage->size($path);
+        $file->size_x = $imageSize[0];
+        $file->size_y = $imageSize[1];
+        $file->path = '/storage/'.$path;
+        $file->type = self::TYPES['photo'];
+        $file->save();
+    }
+
+    /**
      * @param $photo
      * @param $photo_id
      * @param $article_id
