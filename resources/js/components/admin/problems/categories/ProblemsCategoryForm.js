@@ -79,7 +79,7 @@ class ProblemsCategoryForm extends React.Component {
                 <h1 className="text-center">СОЗДАНИЕ КАТЕГОРИИ ПРОБЛЕМ</h1>
                 <div className="container">
                     <div className="row d-flex justify-content-center flex-column align-items-center">
-                        <Link className="btn peach-gradient" to="/public/admin/problems/categories">Назад</Link>
+                        <Link className="btn peach-gradient" to="/admin/problems/categories">Назад</Link>
                         <form onSubmit={this.submitProblemsCategory} className="border form-group col-xl-8 form-admin z-depth-5">
                             <label htmlFor="name">Название категории</label>
                             <input

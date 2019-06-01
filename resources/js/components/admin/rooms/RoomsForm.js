@@ -5,6 +5,7 @@ import { MdAddBox, MdClose } from "react-icons/md";
 import PopUp from '../popUp/PopUp';
 import SubRoomTypesForm from './SubRoomTypesForm';
 import ClosePopUpBtn from '../popUp/ClosePopUpBtn';
+import UploadFileInput from "../../services/UploadFileInput";
 
 class RoomsForm extends React.Component {
     constructor(props) {
@@ -18,28 +19,14 @@ class RoomsForm extends React.Component {
                 need_wash: '',
                 number_of_beds: '',
                 last_washing_date: '',
-                type_id: ''
+                type_id: '',
+                photo: ''
             },
             types: [],
-            countTypes: 0
+            countTypes: 0,
+            files: []
         };
     }
-
-    textButtonRoomForm = () => {
-        if(this.props.match.params.id) {
-            return "Обновить номер";
-        }else {
-            return "Создать номер";
-        }
-    };
-
-    addTitleText = () => {
-        if(this.props.match.params.id) {
-            return "ОБНОВЛЕНИЕ НОМЕРА";
-        } else {
-            return "СОЗДАНИЕ НОМЕРА";
-        }
-    };
 
     showTypes = () => {
         if(this.state.types.length === 0) {
@@ -48,7 +35,6 @@ class RoomsForm extends React.Component {
         let options = [];
         for(let i=0; i < this.state.types.length; i++) {
             if(this.state.types[i].id === this.state.room.type_id) {
-                //console.log('hui', this.state.types[i].id, this.state.room.type_id);
                 options.unshift(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
             } else {
                 options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
@@ -58,11 +44,16 @@ class RoomsForm extends React.Component {
             options.unshift(<option key="choose" value="null">Выберите тип</option>);
         }
         return options;
+    };
 
+    getFiles = (arr) => {
+        this.setState({
+            files: arr
+        })
     };
 
     getTypes = () => {
-        axios.get("/public/api/admin/room_types")
+        axios.get("/api/admin/room_types")
             .then(response => {
                 if(response.data.length !== 0) {
                     this.setState({
@@ -83,7 +74,6 @@ class RoomsForm extends React.Component {
             })
             .catch(function(error) {
             });
-
     };
 
     inputOnChange = (e) =>{
@@ -107,25 +97,28 @@ class RoomsForm extends React.Component {
     submitRoom = (e) => {
         e.preventDefault();
         let formData = this.state.room;
+        formData.files = this.state.files;
         let url, textResponse;
         if(this.props.match.params.id) {
-            url = '/public/api/admin/rooms/update/' + this.props.match.params.id;
+            url = '/api/admin/rooms/update/' + this.props.match.params.id;
             textResponse = "Номер обновлен";
         } else {
-            url = '/public/api/admin/rooms/create';
+            url = '/api/admin/rooms/create';
             textResponse = 'Номер добавлен';
         }
         axios.post(url, formData)
-        .then(response => {
+        .then(res => {
+            console.log(res)
             alert(textResponse);
-            document.location.href = '/public/admin/rooms'
+            //document.location.href = '/admin/rooms'
         })
         .catch(err => {});
     };
 
+
     fillFormUpdate = () => {
         if(this.props.match.params.id) {
-            let url = '/public/api/room/'+ this.props.match.params.id;
+            let url = '/api/room/'+ this.props.match.params.id;
             axios.get(url)
                 .then(response => {
                     this.setState({
@@ -138,7 +131,7 @@ class RoomsForm extends React.Component {
         }
     };
 
-    chaneStateFormCreateType = () => {
+    changeStateFormCreateType = () => {
         this.setState({
             showFormCreateTypes: false
         }, () => {
@@ -146,14 +139,14 @@ class RoomsForm extends React.Component {
         });
     };
 
-    chaneStateFormCreateTypeTrue = () => {
+    changeStateFormCreateTypeTrue = () => {
         this.setState({
             showFormCreateTypes: true
         });
     };
 
     closeModFormBtn = () => {
-        ClosePopUpBtn(this.chaneStateFormCreateType());
+        ClosePopUpBtn(this.changeStateFormCreateType());
     };
 
     componentDidMount() {
@@ -171,14 +164,14 @@ class RoomsForm extends React.Component {
                             closeModWin={this.closeModFormBtn}
                         /> }
                     showw={this.state.showFormCreateTypes}
-                    close={this.chaneStateFormCreateType}
+                    close={this.changeStateFormCreateType}
 
                 />
                 <div className="container">
                     <div className="row d-flex justify-content-start flex-column align-items-center">
-                        <h1 className="text-center">{this.addTitleText()}</h1>
-                        <Link to="/public/admin/rooms" className="btn peach-gradient" value="">Назад</Link>
-                        <form name="room" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
+                        <h1 className="text-center">{this.props.match.params.id ? "ОБНОВЛЕНИЕ НОМЕРА" : "СОЗДАНИЕ НОМЕРА"}</h1>
+                        <Link to="/admin/rooms" className="btn peach-gradient" value="">Назад</Link>
+                        <form onSubmit={this.submitRoom} name="room" className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                             <div className="item-form-admin">
                                 <label htmlFor="id">Номер</label>
                                 <input
@@ -249,18 +242,19 @@ class RoomsForm extends React.Component {
                                     required
                                 />
                             </div>
+                            <UploadFileInput setFiles={this.getFiles}/>
                             <div className="item-form-admin form-group form d-flex flex-column">
                                 <label htmlFor="types-room">Типы номеров</label>
                                 <div className="d-flex align-items-start">
                                     <select onChange={this.inputOnChange} value={this.state.room.type_id || 'Типов номеров нет'} name="type_id" id="types-room" className="form-control">
                                         {this.showTypes()}
                                     </select>
-                                    <a onClick={this.chaneStateFormCreateTypeTrue} className="link-add-types-room">
+                                    <a onClick={this.changeStateFormCreateTypeTrue} className="link-add-types-room">
                                         <MdAddBox />
                                     </a>
                                 </div>
                             </div>
-                            <button onClick={this.submitRoom} className="btn btn-outline-primary" type="submit">{this.textButtonRoomForm()}</button>
+                            <button className="btn btn-outline-primary" type="submit">{this.props.match.params.id ? "Обновить номер": "Создать номер"}</button>
                         </form>
                     </div>
                 </div>

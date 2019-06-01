@@ -592,9 +592,10 @@ nav .navbar-collapse ul li a {
 .nav-admin {
   border: 0 !important;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), -23px 0 20px -23px rgba(0, 0, 0, 0.8), 23px 0 20px -23px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  background-color: #212529;
-  width: 15%;
+  background-color: #3E3E3E;
+  width: 20%;
   min-height: 100vh;
+  padding: 0 20px 0 20px;
 }
 .nav-admin nav {
   height: 100%;
@@ -928,7 +929,6 @@ nav .navbar-collapse ul li a {
   width: 73px;
   height: 73px;
   margin: 0 auto;
-  margin-top: 49px;
   position: relative;
   transform: rotateZ(45deg);
 }
@@ -983,6 +983,73 @@ nav .navbar-collapse ul li a {
     transform: perspective(136px) rotateY(180deg);
     opacity: 0;
   }
+}
+.img-wrap .img-file-preview {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  margin: 10px 10px 0 0;
+}
+.img-wrap .img-file-preview img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.img-wrap .img-file-preview .close-icon-file {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  width: 30px;
+}
+.img-wrap .img-file-preview .close-icon-file:hover {
+  color: #ff3f57;
+}
+
+.row-problem {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 30px;
+  -webkit-box-shadow: 7px 5px 10px -2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 7px 5px 10px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: 7px 5px 10px -2px rgba(0, 0, 0, 0.1);
+  padding: 25px 25px 25px 5px;
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  align-items: center;
+}
+.row-problem .item-row-problem {
+  display: flex;
+  justify-content: center;
+}
+.row-problem .item-row-problem#id {
+  width: 5%;
+}
+.row-problem .item-row-problem#created_at {
+  width: 10%;
+}
+.row-problem .item-row-problem#updated_at {
+  width: 10%;
+}
+.row-problem .item-row-problem#room_id {
+  width: 5%;
+}
+.row-problem .item-row-problem#title {
+  width: 10%;
+  justify-content: flex-start !important;
+}
+.row-problem .item-row-problem#content {
+  width: 40%;
+  justify-content: flex-start !important;
+}
+.row-problem .item-row-problem#status {
+  width: 5%;
+}
+.row-problem .item-row-problem#parent_id {
+  width: 5%;
+}
+.row-problem .item-row-problem#category_id {
+  width: 5%;
 }
 
 /*# sourceMappingURL=style.css.map */

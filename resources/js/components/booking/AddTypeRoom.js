@@ -22,8 +22,6 @@ class AddTypeRoom extends React.Component{
             options.push(<option name={this.state.types[i].id} key={i} value={this.state.types[i].id}>{this.state.types[i].name}</option>);
         }
         options.unshift(<option key="choose" value="null">Выберите тип</option>);
-        console.log(this.props);
-
         return options;
 
     };
@@ -34,14 +32,13 @@ class AddTypeRoom extends React.Component{
                 if(response.data.length !== 0) {
                     this.setState({
                         types: response.data
-                    }, () => {
-                        console.log(this.state)
                     });
                 } else {
                     return "Типов номеров нет"
                 }
             })
             .catch(function(error) {
+
             });
     };
 

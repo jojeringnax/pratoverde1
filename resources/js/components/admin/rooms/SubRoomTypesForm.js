@@ -14,7 +14,7 @@ class SubRoomTypesForm extends React.Component {
     submitType = (e) => {
         e.preventDefault();
         let data = {name: this.state.roomType.name};
-        axios.post('/public/api/admin/room_types/create',data)
+        axios.post('/api/admin/room_types/create',data)
             .then(res => {
                 alert("Тип комнаты создан");
                 this.props.closeModWin();

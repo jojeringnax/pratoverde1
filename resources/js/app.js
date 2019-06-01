@@ -11,4 +11,3 @@
  */
 
 require('./components/main/App');
-require('./components/admin/Admin');

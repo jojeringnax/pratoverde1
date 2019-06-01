@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import {Link, NavLink} from "react-router-dom";
+import React from 'react';
 import { Switch, Route, BrowserRouter  as Router} from 'react-router-dom';
 
 import DashboardAdmin from './DashboardAdmin';
@@ -35,11 +34,6 @@ import CustomerForm from './customers/CustomerForm';
 import SourceCustomerIndex from './customers/source_customer/SourceCustomerIndex';
 import SourceCustomerForm from './customers/source_customer/SourceCustomerForm';
 class Admin extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-
     render() {
         return (
             <>
@@ -150,11 +144,6 @@ class Admin extends React.Component {
                                 <Route
                                     render={() => (<div>Sorry</div>)}
                                 />
-                                {/*ADMIN-ROOMS ROUTE*/}
-
-                                {/*<Route path="/public/admin/rooms/create"*/}
-                                       {/*render={(routeProps) => <RoomsForm {...routeProps} />}*/}
-                                {/*/>*/}
                             </Switch>
                     </div>
                 </div>

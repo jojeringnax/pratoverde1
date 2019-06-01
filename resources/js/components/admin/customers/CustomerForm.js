@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Select from 'react-select';
 import MaskedInput from 'react-maskedinput'
-let options = [];
 
 class CustomerForm extends React.Component {
     constructor(props) {
@@ -152,11 +151,9 @@ class CustomerForm extends React.Component {
     visibleSource = (e) => {
         e.preventDefault();
         if(this.state.sourceVisible === true) {
-            //console.log('--- true', document.getElementById('sourceFormCreate'))
             this.setState({sourceVisible: false});
             document.getElementById('sourceFormCreate').classList.add('hide');
         } else {
-            //console.log('--- false', document.getElementById('sourceFormCreate'))
             this.setState({sourceVisible: true});
             document.getElementById('sourceFormCreate').classList.remove('hide');
         }

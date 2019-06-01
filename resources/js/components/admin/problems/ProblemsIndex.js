@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
-import ActionTable from '../ActionTable';
+import {setProblemsArray, axiosRequest} from "../../../helpers/helpers";
+import { MdDeleteForever, MdModeEdit, MdAddBox } from "react-icons/md";
 
-let problems = [];
-let problemsVisible = {};
 class ProblemsIndex extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: false,
-            problems: {}
-        };
+            problems: []
+        }
     }
+
+    deleteRowProblem = (e) => {
+
+        e.preventDefault();
+        let deleteArr = [];
+        deleteArr.push(document.getElementById('id_' + e.currentTarget.getAttribute('data-deleteid')));
+        let parent_id = e.currentTarget.getAttribute('data-deleteid');
+        let children = [];
+        document.querySelectorAll('.row-problem').forEach(el => {
+            if(el.getAttribute('data-parentid') === parent_id) {
+                children.push(el);
+                parent_id = el.getAttribute('data-id');
+            }
+        });
+
+        deleteArr = deleteArr.concat(children);
+        deleteArr.forEach(row => {
+            let url_delete = '/api/admin/problems/delete/'+ row.getAttribute('data-id');
+            console.log(row);
+            axiosRequest(url_delete, {}, "delete")
+                .then(res => {
+                    row.remove();
+                    console.log(res.data)
+                })
+        })
+
+
+    };
 
     toggleTableClick = (e) => {
         let id = e.currentTarget.id;
@@ -37,85 +63,72 @@ class ProblemsIndex extends React.Component {
         axios.get("/api/admin/problems")
             .then(response => {
                 //console.log('axios-get', response.data);
-                problems = response.data;
-                this.setState({data: true});
-                for(let i = 0; i < response.data.length; i++) {
-                    //console.log(response.data[i]);
-                    if(response.data[i]['parent_id'] != null) {
-                        problemsVisible[response.data[i]['parent_id']] = {visible:false};
-                    }
-
-                }
-                this.setState({
-                   problems: problemsVisible
-                });
-
+                this.setState({problems: response.data});
             })
             .catch( error => {
                 console.log(error);
             });
     };
 
-    createTable = () => {
-        let table = [];
-        let urlUpdate = '';
-        let urlDelete = '';
-        let child =[];
-        let newTable;
-        for(let i=0; i < problems.length; i++) {
-            //console.log(problems[i]);
-            child =[];
-            for(let key in problems[i]) {
-                // if(problems[i]['parent_id'] === null){
-                //     td =  <td id="" className="cursor text-center" key={key}>{problems[i][key]}</td>;
-                // } else {
-                //     td =  <td id="" className="text-center" key={key}>{problems[i][key]}</td>
-                // }
-                child.push(<td id="" className="cursor text-center" key={key}>{problems[i][key]}</td>);
-            }
-            urlUpdate = '/admin/problems/update/' + problems[i]['id'];
-            urlDelete = '/api/admin/problems/delete/' + problems[i]['id'];
-            child.push(
-                <ActionTable  problem={true} key="action" id={problems[i]['id']} updateUrl={urlUpdate} deleteUrl={urlDelete}/>
-            );
-            if(problems[i]['parent_id'] === null) {
-                table.push(
-                    <tr onClick={this.toggleTableClick} className="toggle blue lighten-2" id={problems[i]['id']} key={i+1}>{child}</tr>
-                );
-                table.push(
-                    <tr id={"hr/"+problems[i]['id']} key={"hr"+problems[i]['id']}>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                );
-            } else {
-                for(let j=0; j < table.length; j++) {
-                    //  console.log(table);
-                    if(table[j].props['id'] === problems[i]['parent_id']) {
-                        //
-                        // console.log(table[j], problems[i]['parent_id']);
-                        newTable = table.slice(0, j+1);
-                        //console.log('asd',problems[i]['id']);
-                        newTable.push(
-                            <tr className="hide collapss teal lighten-2" data-parent_id={problems[i]['parent_id']} id={problems[i]['id']} key={i+1}>{child}</tr>
-                        );
-                        newTable =  newTable.concat(table.slice(j+1));
-                        table = newTable
-                    }
-                }
-            }
-
+    renderProblem = (obj, level=0) =>{
+        if(obj === []){
+            return false;
         }
-        return table;
+        let result = [];
+        result.push(
+            <div data-id = {obj.problem.id} data-parentid={obj.problem.parent_id} id={"id_"+obj.problem.id} key={"idd_" + obj.problem.id} className="d-flex flex-row row-problem">
+                <div id="id" className="item-row-problem" key="id">
+                    {obj.problem.id}
+                </div>
+                <div id="created_at" className="item-row-problem" key="created_at">
+                    {obj.problem.created_at}
+                </div>
+                <div id="updated_at" className="item-row-problem" key="updated_at">
+                    {obj.problem.updated_at}
+                </div>
+                <div id="room_id" className="item-row-problem" key="room_id">
+                    {obj.problem.room_id}
+                </div>
+                <div id="title" className="item-row-problem" key="title">
+                    {obj.problem.title}
+                </div>
+                <div id="content" className="item-row-problem" key="content">
+                    {obj.problem.content}
+                </div>
+                <div id="status" className="item-row-problem" key="status">
+                    {obj.problem.status}
+                </div>
+                <div id="parent_id" className="item-row-problem" key="parent_id">
+                    {obj.problem.parent_id}
+                </div>
+                <div id="category_id" className="item-row-problem" key="category_id">
+                    {obj.problem.category_id}
+                </div>
+                <div id="actions" className="item-row-problem" key="actions">
+                    <Link key="update"  className="action-link" to={"/admin/problems/update/" + obj.problem.id}>
+                        <MdModeEdit />
+                    </Link>
+                    <Link  data-deleteid={obj.problem.id} key="delete" className="action-link"  onClick={this.deleteRowProblem}  to="">
+                        <MdDeleteForever />
+                    </Link>
+                    <Link key="subproblem" className={'action-link'} to={"/admin/subproblem/create/" + obj.problem.id}>
+                        <MdAddBox />
+                    </Link>
+                </div>
+            </div>
+            );
 
+
+        level++;
+        Object.keys(obj.children).map(key => {
+            result.push(
+                <div key={"child_" + obj.problem.id} id="children" style={{marginLeft:level*30}}>
+                    {this.renderProblem(obj.children[key], level)}
+                </div>
+            );
+        });
+
+        return result;
     };
 
     componentDidMount() {
@@ -123,28 +136,19 @@ class ProblemsIndex extends React.Component {
     }
 
     render() {
+        const problems = setProblemsArray(this.state.problems);
+        console.log(problems);
         return (
             <div className="container-admin">
                 <Link to="/admin" className="btn peach-gradient">Назад</Link>
-                <table className="table admin-table table-bordered z-depth-1">
-                    <thead className="primary-color-dark border-secondary">
-                        <tr className="">
-                            <th width="5%" scope="col">id</th>
-                            <th width="10%" scope="col">Created_at</th>
-                            <th width="10%" scope="col">Updated_at</th>
-                            <th width="5%" scope="col">Room_id</th>
-                            <th width="15%" scope="col">Title</th>
-                            <th width="25%" scope="col">Content</th>
-                            <th width="5%" scope="col">Status</th>
-                            <th width="5%" scope="col">Parent_id</th>
-                            <th width="5%" scope="col">Category_id</th>
-                            <th width="5%" scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className="">
-                        {this.createTable()}
-                    </tbody>
-                </table>
+                <div className="d-flex flex-column">
+                    {
+                        problems.map(problem => {
+                            return this.renderProblem(problem)
+                        })
+                    }
+
+                </div>
                 <Link to="/admin/problems/categories" className="btn btn-outline-secondary">КАТЕГОРИИ</Link>
                 <Link to="/admin/problems/create" className="btn btn-outline-secondary">СОЗДАТЬ ПРОБЛЕМУ</Link>
             </div>

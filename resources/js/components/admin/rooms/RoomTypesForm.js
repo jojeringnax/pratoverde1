@@ -22,6 +22,7 @@ class RoomTypesForm extends React.Component {
         };
     }
 
+
     onChangeType = (e) => {
         if(e.target.name === 'min_capacity' || e.target.name === 'max_capacity') {
             this.setState({
@@ -78,45 +79,58 @@ class RoomTypesForm extends React.Component {
 
         let url;
         if(this.props.match.params.status === "update") {
-            url = "/public/api/admin/room_types/update/" + this.props.match.params.id;
+            url = "/api/admin/room_types/update/" + this.props.match.params.id;
         } else {
-            url = "/public/api/admin/room_types/create";
+            url = "/api/admin/room_types/create";
         }
-
         axios.post(url, this.state.type)
             .then(response => {
                 alert('Тип номера добавлен');
-                //document.location.href = "/public/admin/rooms/types";
+                document.location.href = "/admin/rooms/types";
             })
             .catch(function (error) {
                 alert('Такой номер уже есть');
             });
     };
 
+
+
     getType = () =>{
         let url;
-        if(this.props.match.params.status === "update") {
-            url = '/public/api/room_type/' + this.props.match.params.id;
+        if(this.props.match.params) {
+            url = '/api/room_type/' + this.props.match.params.id;
             axios.get(url)
                 .then(res => {
                     this.setState({
-                        type: res.data.name
+                        type: res.data
+                    },() => {
+                        console.log(this.state.single_price)
+                        this.setState({
+                            price: {
+                                ...this.state.price,
+                                single_price_euro: parseInt(this.state.type.single_price) / 100,
+                                single_price_cent: parseInt(this.state.type.single_price) % 100,
+                                two_price_euro: parseInt(this.state.type.two_price) / 100,
+                                two_price_cent: parseInt(this.state.type.two_price) % 100
+                            }
+                        }, () => {
+                            console.log(this.state)
+                        })
                     });
                 })
                 .catch(err => {});
         }
     };
 
-    componentWillMount() {
-        console.log(this.props.match.params);
+    componentDidMount() {
         this.getType();
     }
 
     render() {
         return (
             <div className="container-admin d-flex justify-content-center flex-column align-items-center">
-                <h1 className="text-center">СОЗДАНИЕ ТИПА НОМЕРА</h1>
-                <Link to="/public/admin/rooms/types" className="btn peach-gradient" value="">Назад</Link>
+                <h1 className="text-center">{this.props.match.params.id ? "Обновить тип номера" : "Добавить тип номера"}</h1>
+                <Link to="/admin/rooms/types" className="btn peach-gradient" value="">Назад</Link>
                 <form onSubmit={this.submitType} className="border form-group item-form-admin col-xl-8 form-admin z-depth-5 d-flex flex-wrap align-items-start">
                     <div className="d-flex flex-wrap justify-content-center">
                         <div id="inp-nameType" className="col-12">
@@ -173,6 +187,7 @@ class RoomTypesForm extends React.Component {
                             />
                         </div>
                         <div id="" className="item-form-admin col-xl-6 col-lg-6 col-12">
+                            <label htmlFor="" className="col-12">Минимальная вместимость</label>
                             <input
                                 name="min_capacity"
                                 type="number"
@@ -184,6 +199,7 @@ class RoomTypesForm extends React.Component {
                             />
                         </div>
                         <div id="" className="item-form-admin col-xl-6 col-lg-6 col-12">
+                            <label htmlFor="" className="col-12">Максимальная вместимость</label>
                             <input
                                 name="max_capacity"
                                 type="number"
@@ -195,7 +211,7 @@ class RoomTypesForm extends React.Component {
                             />
                         </div>
 
-                        <button className="btn btn-success" type="submit">Добавить тип номера</button>
+                        <button className="btn btn-success" type="submit">{this.props.match.params.id ? "Обновить тип номера" : "Добавить тип номера"}</button>
                     </div>
                 </form>
             </div>
