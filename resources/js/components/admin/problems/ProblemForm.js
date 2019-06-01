@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import SubProblem from "./SubProblem";
 import Select from 'react-select';
 let options = [];
+
 class ProblemForm extends React.Component {
     constructor(props) {
         super(props);
@@ -20,15 +21,6 @@ class ProblemForm extends React.Component {
             }
         };
     }
-
-
-    textButton = () => {
-        if(this.props.match.params.id) {
-            return "Обновить проблему";
-        } else {
-            return "Создать проблему";
-        }
-    };
 
     inputOnChange = (e) => {
         this.setState({
@@ -125,8 +117,8 @@ class ProblemForm extends React.Component {
     render() {
         const { selectedOption } = this.state.selectedOption;
         return (
-            <div className="container-admin d-flex justify-content-start flex-column align-items-center">
-                <div className="title-form"><h1>Опишите проблему</h1></div>
+            <div className="container-admin">
+                <div className="title-form"><h1>{this.props.match.params.id ? 'ОБНОВИТЬ ПРОБЛЕМУ' : "СОЗДАТЬ ПРОБЛЕМУ"}</h1></div>
                 <Link to="/admin/problems" className="btn peach-gradient">Назад</Link>
                 <form onSubmit={this.createProblem}  className="border rounded form-admin col-xl-8 col-lg-8 col-12 z-depth-1">
                     <div className="item-form-admin form-group">
@@ -207,7 +199,7 @@ class ProblemForm extends React.Component {
 
                     </div>
                     <div className="d-flex justify-content-between">
-                        <button type="submit" className="btn btn-outline-primary">{this.textButton()}</button>
+                        <button type="submit" className="btn btn-outline-primary">{this.props.match.params.id ? "Обновить проблему" : "Создать проблему"}</button>
                         <button onClick={this.showSubProblemForm} type="button" className="btn btn-outline-secondary">Создать подпроблему</button>
                     </div>
                 </form>

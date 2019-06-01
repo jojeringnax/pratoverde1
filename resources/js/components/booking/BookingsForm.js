@@ -43,9 +43,8 @@ class BookingsForm extends React.Component{
     }
 
     customerChangeInput = (e) => {
-        let value;
+        let value,phone_number;
         let reg = /\d/g;
-        let phone_number;
         if(e.target.name === "phone_number" && e.target.value !== "") {
             phone_number = e.target.value;
             value = parseInt(phone_number.match(reg).join(''));

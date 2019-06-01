@@ -9,11 +9,8 @@ class ProblemsCategory extends React.Component {
         this.state = {
             categories: []
         };
-        this.getCategoies = this.getCategoies.bind(this);
-        this.createTable = this.createTable.bind(this);
-        this.deleteRow = this.deleteRow.bind(this);
     }
-    getCategoies() {
+    getCategories = () => {
         let url = '/api/admin/problem_categories';
         axios.get(url)
             .then(res => {
@@ -27,23 +24,9 @@ class ProblemsCategory extends React.Component {
             .catch(err => {
 
             })
-    }
-    deleteRow(e) {
-        e.preventDefault();
-        let urlDelete = e.target.getAttribute('href');
-        let dataDelete = e.target.getAttribute('data-delete');
-        let elem = document.querySelector('#'+dataDelete)
-        //console.log(dataDelete, document.querySelector('#'+dataDelete))
+    };
 
-        axios.delete(urlDelete)
-            .then(res => {
-                elem.remove();
-            })
-            .catch(err => {
-
-            });
-    }
-    createTable() {
+    createTable = () => {
         let urlDelete = "/api/admin/problem_categories/delete/";
         let urlUpdate = "/admin/problems/categories/update/";
         let table = [];
@@ -64,9 +47,10 @@ class ProblemsCategory extends React.Component {
             table.push(<tr id={this.state.categories[i]['id']} key={i}>{row}</tr>);
         }
         return table;
-    }
+    };
+
     componentDidMount() {
-        this.getCategoies();
+        this.getCategories();
     }
 
     render() {
@@ -83,7 +67,22 @@ class ProblemsCategory extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.createTable()}
+                        {
+                            this.state.categories.map((category, index) => {
+                                return(
+                                  <tr key={index}>
+                                      <td key="id">{category.id}</td>
+                                      <td key="name">{category.name}</td>
+                                      <ActionTable
+                                          key="action"
+                                          id={category.id}
+                                          updateUrl={"/api/admin/problem_categories/delete/" + category.id}
+                                          deleteUrl={"/admin/problems/categories/update/" + category.id}
+                                      />
+                                  </tr>
+                                );
+                            })
+                        }
                     </tbody>
                 </table>
                 <Link className="btn btn-outline-secondary" to="/admin/problems/categories/create">Создать категорию проблемы</Link>

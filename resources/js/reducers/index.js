@@ -4,6 +4,6 @@ import { getRooms } from "./rooms";
 
 
 export const rootReducer =  combineReducers({
-    roomTypes: getRoomTypes,
-    rooms: getRooms
+    getRoomTypes,
+    getRooms
 });
